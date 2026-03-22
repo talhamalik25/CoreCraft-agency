@@ -34,8 +34,8 @@ const Contact = () => {
     <div className="bg-black pt-20">
       <ContactHero fadeUp={fadeUp} />
       
-      <section className="px-6 md:px-20 pb-40">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20">
+      <section className="px-4 sm:px-6 md:px-20 pb-20 md:pb-40">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20">
           <ContactForm fadeUp={fadeUp} />
           <ContactInfo fadeUp={fadeUp} infoCards={infoCards} />
         </div>

@@ -5,9 +5,9 @@ import { ArrowUpRight } from 'lucide-react';
 
 const ProjectsGrid = ({ filteredProjects }) => {
   return (
-    <section className="px-6 md:px-20 pb-40">
+    <section className="px-4 sm:px-6 md:px-20 pb-20 md:pb-40">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           <AnimatePresence mode='popLayout'>
             {filteredProjects.map((project, i) => (
               <motion.div
@@ -32,18 +32,18 @@ const ProjectsGrid = ({ filteredProjects }) => {
                     </div>
 
                     {/* Content */}
-                    <div className="p-10 md:p-14 flex flex-col justify-center">
+                    <div className="p-6 sm:p-10 md:p-14 flex flex-col justify-center">
                       {project.tag && (
                         <div className="text-teal text-[10px] uppercase tracking-[0.3em] font-dm mb-6 flex items-center gap-3">
                           <span className="w-8 h-px bg-teal/30" />
                           {project.tag}
                         </div>
                       )}
-                      <div className="flex justify-between items-start mb-6">
-                        <h3 className="text-white font-syne font-bold text-3xl md:text-4xl uppercase group-hover:text-teal transition-colors">
+                      <div className="flex flex-col sm:flex-row justify-between items-start gap-3 sm:gap-0 mb-6">
+                        <h3 className="text-white font-syne font-bold text-2xl sm:text-3xl md:text-4xl uppercase group-hover:text-teal transition-colors">
                           {project.name}
                         </h3>
-                        <span className="px-4 py-1.5 rounded-full border border-white/10 text-teal text-[10px] uppercase tracking-widest font-dm">
+                        <span className="px-4 py-1.5 rounded-full border border-white/10 text-teal text-[9px] sm:text-[10px] uppercase tracking-widest font-dm shrink-0">
                           {project.category}
                         </span>
                       </div>

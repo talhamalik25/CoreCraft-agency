@@ -4,14 +4,14 @@ import { SectionLabel } from '../common/SectionLabel';
 
 const ValuesSection = ({ fadeUp, values }) => {
   return (
-    <section className="py-40 px-6 md:px-20 bg-surface">
+    <section className="py-20 md:py-40 px-4 sm:px-6 md:px-20 bg-surface">
       <div className="max-w-7xl mx-auto">
         <motion.div {...fadeUp} className="mb-20">
           <SectionLabel text="VALUES" />
           <h2 className="text-white font-syne font-extrabold text-4xl md:text-6xl uppercase">WHAT DRIVES US.</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {values.map((value, i) => (
             <motion.div 
               key={i}

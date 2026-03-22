@@ -23,8 +23,8 @@
 }
 
 @layer base {
-  body {
-    @apply bg-black text-white font-dm;
+  html, body {
+    @apply bg-black text-white font-dm overflow-x-hidden;
   }
 }
 

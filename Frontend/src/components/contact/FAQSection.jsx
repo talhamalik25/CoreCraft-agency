@@ -5,7 +5,7 @@ import { SectionLabel } from '../common/SectionLabel';
 
 const FAQSection = ({ fadeUp, faqs, activeFaq, setActiveFaq }) => {
   return (
-    <section className="py-40 px-6 md:px-20 bg-surface">
+    <section className="py-20 md:py-40 px-4 sm:px-6 md:px-20 bg-surface">
       <div className="max-w-4xl mx-auto">
         <motion.div {...fadeUp} className="mb-20 text-center">
           <SectionLabel text="FAQ" />
@@ -24,10 +24,10 @@ const FAQSection = ({ fadeUp, faqs, activeFaq, setActiveFaq }) => {
                 onClick={() => setActiveFaq(activeFaq === i ? null : i)}
                 className="w-full py-8 flex items-center justify-between text-left group"
               >
-                <span className={`font-syne font-bold text-xl uppercase transition-colors ${activeFaq === i ? 'text-teal' : 'text-white group-hover:text-teal'}`}>
+                <span className={`font-syne font-bold text-base sm:text-xl uppercase transition-colors pr-4 ${activeFaq === i ? 'text-teal' : 'text-white group-hover:text-teal'}`}>
                   {faq.q}
                 </span>
-                <div className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all ${activeFaq === i ? 'border-teal bg-teal text-black' : 'border-white/10 text-gray'}`}>
+                <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full border flex items-center justify-center transition-all shrink-0 ${activeFaq === i ? 'border-teal bg-teal text-black' : 'border-white/10 text-gray'}`}>
                   {activeFaq === i ? <Minus size={16} /> : <Plus size={16} />}
                 </div>
               </button>

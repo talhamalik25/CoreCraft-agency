@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const ServiceRows = ({ fadeUp, serviceRows }) => {
   return (
-    <section className="px-6 md:px-20">
+    <section className="px-4 sm:px-6 md:px-20">
       <div className="max-w-7xl mx-auto">
         {serviceRows.map((service, i) => (
           <motion.div 
@@ -15,7 +15,7 @@ const ServiceRows = ({ fadeUp, serviceRows }) => {
               {service.num}
             </div>
             <div className="lg:col-span-5">
-              <h2 className="text-white font-syne font-bold text-3xl md:text-4xl lg:text-5xl uppercase mb-4 md:mb-6 group-hover:translate-x-2 md:group-hover:translate-x-4 transition-transform duration-500">
+              <h2 className="text-white font-syne font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase mb-4 md:mb-6 group-hover:translate-x-2 md:group-hover:translate-x-4 transition-transform duration-500">
                 {service.name}
               </h2>
             </div>

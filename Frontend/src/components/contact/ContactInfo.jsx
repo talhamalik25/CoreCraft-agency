@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const ContactInfo = ({ fadeUp, infoCards }) => {
   return (
-    <div className="lg:col-span-5 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6">
+    <div className="lg:col-span-5 grid grid-cols-2 gap-4 md:gap-6">
       {infoCards.map((card, i) => (
         <motion.div 
           key={i}

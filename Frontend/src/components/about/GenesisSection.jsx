@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 
 const GenesisSection = ({ fadeUp, milestones }) => {
   return (
-    <section className="py-40 px-6 md:px-20">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
+    <section className="py-20 md:py-40 px-4 sm:px-6 md:px-20">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20">
         <motion.div {...fadeUp}>
-          <h2 className="text-white font-syne font-extrabold text-4xl md:text-5xl uppercase mb-8">THE GENESIS.</h2>
+          <h2 className="text-white font-syne font-extrabold text-3xl sm:text-4xl md:text-5xl uppercase mb-8">THE GENESIS.</h2>
           <div className="space-y-6 text-gray text-lg font-dm leading-relaxed">
             <p>
               Founded in the bustling creative landscape of Karachi, CoreCraft Studio was born from a simple observation: most digital experiences lack soul. We set out to redefine the standard by infusing architectural precision into every pixel we touch.

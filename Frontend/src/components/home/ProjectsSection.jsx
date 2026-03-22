@@ -1,18 +1,59 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { SectionLabel } from '../common/SectionLabel';
 
 const ProjectsSection = ({ fadeUp, projects }) => {
+  const scrollRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollToIndex = (index) => {
+    if (scrollRef.current) {
+      const { clientWidth } = scrollRef.current;
+      const scrollTo = index * (clientWidth + 32); // 32 is the gap (gap-8 = 2rem = 32px)
+      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+      setActiveIndex(index);
+    }
+  };
+
+  const scroll = (direction) => {
+    const nextIndex = direction === 'left' 
+      ? Math.max(0, activeIndex - 1) 
+      : Math.min(projects.length - 1, activeIndex + 1);
+    scrollToIndex(nextIndex);
+  };
+
+  // Update active index on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollRef.current) {
+        const { scrollLeft, clientWidth } = scrollRef.current;
+        const index = Math.round(scrollLeft / (clientWidth + 32));
+        if (index !== activeIndex && index >= 0 && index < projects.length) {
+          setActiveIndex(index);
+        }
+      }
+    };
+
+    const container = scrollRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      return () => container.removeEventListener('scroll', handleScroll);
+    }
+  }, [activeIndex, projects.length]);
+
   return (
-    <section className="py-32 px-6 md:px-20 bg-black">
+    <section className="py-20 md:py-32 px-4 sm:px-6 md:px-20 bg-black">
       <div className="max-w-7xl mx-auto">
         <motion.div {...fadeUp} className="mb-20">
           <SectionLabel text="OUR WORK" />
-          <h2 className="text-white font-syne font-extrabold text-5xl md:text-7xl uppercase">PROJECTS.</h2>
+          <h2 className="text-white font-syne font-extrabold text-4xl sm:text-5xl md:text-7xl uppercase">PROJECTS.</h2>
         </motion.div>
 
-        <div className="flex gap-4 md:gap-8 overflow-x-auto pb-12 no-scrollbar scroll-smooth snap-x snap-mandatory">
+        <div 
+          ref={scrollRef}
+          className="flex gap-8 overflow-x-auto pb-12 no-scrollbar scroll-smooth snap-x snap-mandatory"
+        >
           {projects.map((project, i) => (
             <motion.div 
               key={i}
@@ -32,20 +73,32 @@ const ProjectsSection = ({ fadeUp, projects }) => {
           ))}
         </div>
 
-        <div className="flex items-center justify-between pt-10 border-t border-white/5">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-white/5">
           <div className="flex items-center gap-6 font-syne font-bold text-sm">
-            <span className="text-teal">01</span>
-            <span className="w-8 h-px bg-white/20" />
-            <span className="text-gray-dim">02</span>
-            <span className="text-gray-dim">03</span>
-            <span className="text-gray-dim">04</span>
+            {projects.map((_, i) => (
+              <React.Fragment key={i}>
+                <button 
+                  onClick={() => scrollToIndex(i)}
+                  className={`transition-colors duration-300 ${activeIndex === i ? 'text-teal' : 'text-gray-dim hover:text-white'}`}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </button>
+                {i === 0 && <span className="w-8 h-px bg-white/20" />}
+              </React.Fragment>
+            ))}
           </div>
           <div className="flex gap-4">
-            <button className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-teal hover:text-teal transition-all">
-              <ChevronLeft size={24} />
+            <button 
+              onClick={() => scroll('left')}
+              className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-teal hover:text-teal transition-all"
+            >
+              <ChevronLeft size={20} />
             </button>
-            <button className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-teal hover:text-teal transition-all">
-              <ChevronRight size={24} />
+            <button 
+              onClick={() => scroll('right')}
+              className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-teal hover:text-teal transition-all"
+            >
+              <ChevronRight size={20} />
             </button>
           </div>
         </div>

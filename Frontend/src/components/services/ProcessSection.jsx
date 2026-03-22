@@ -4,7 +4,7 @@ import { SectionLabel } from '../common/SectionLabel';
 
 const ProcessSection = ({ fadeUp, processSteps }) => {
   return (
-    <section className="py-40 px-6 md:px-20 bg-surface">
+    <section className="py-20 md:py-40 px-4 sm:px-6 md:px-20 bg-surface">
       <div className="max-w-7xl mx-auto">
         <motion.div {...fadeUp} className="mb-24">
           <SectionLabel text="HOW WE WORK" />

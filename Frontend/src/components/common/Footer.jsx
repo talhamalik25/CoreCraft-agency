@@ -34,16 +34,16 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-black border-t border-white/5 pt-20 pb-10">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-20">
+    <footer className="bg-black border-t border-white/5 pt-12 md:pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-12 mb-12 md:mb-20">
           {/* Logo Column */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center group mb-8">
+            <Link to="/" className="flex items-center group mb-6 md:mb-8">
               <img 
                 src="/logo.png" 
                 alt="CoreCraft Logo" 
-                className="h-32 md:h-40 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500" 
+                className="h-16 md:h-32 lg:h-40 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500" 
               />
             </Link>
             <p className="text-gray text-sm font-dm leading-relaxed max-w-xs mb-8">

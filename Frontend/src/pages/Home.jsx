@@ -39,7 +39,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="relative" ref={containerRef}>
+    <div className="relative pt-20" ref={containerRef}>
       <HeroSection fadeUp={fadeUp} staggerContainer={staggerContainer} />
       <MarqueeStrip />
       <AboutSection fadeUp={fadeUp} />

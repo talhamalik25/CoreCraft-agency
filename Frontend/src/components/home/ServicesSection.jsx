@@ -6,18 +6,18 @@ import { SectionLabel } from '../common/SectionLabel';
 
 const ServicesSection = ({ fadeUp, services }) => {
   return (
-    <section className="py-32 px-6 md:px-20 bg-surface">
+    <section className="py-20 md:py-32 px-4 sm:px-6 md:px-20 bg-surface">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
           <motion.div {...fadeUp}>
             <SectionLabel text="OUR SERVICES" />
-            <h2 className="text-white font-syne font-extrabold text-5xl md:text-7xl uppercase mb-6">FUTURE-READY.</h2>
+            <h2 className="text-white font-syne font-extrabold text-4xl sm:text-5xl md:text-7xl uppercase mb-6">FUTURE-READY.</h2>
             <p className="text-gray text-lg font-dm max-w-xl">
               Delivering high-performance digital solutions through cutting-edge technologies and precision design.
             </p>
           </motion.div>
           <motion.div {...fadeUp}>
-            <Link to="/contact" className="px-8 py-4 border border-teal rounded-full text-teal font-dm text-xs uppercase tracking-widest flex items-center gap-3 hover:bg-teal hover:text-black transition-all duration-300">
+            <Link to="/contact" className="px-6 sm:px-8 py-3 sm:py-4 border border-teal rounded-full text-teal font-dm text-[10px] sm:text-xs uppercase tracking-widest flex items-center gap-3 hover:bg-teal hover:text-black transition-all duration-300 w-fit">
               Contact Us <ArrowUpRight size={16} />
             </Link>
           </motion.div>
@@ -29,7 +29,7 @@ const ServicesSection = ({ fadeUp, services }) => {
               key={i} 
               {...fadeUp}
               transition={{ delay: i * 0.1 }}
-              className="group p-8 md:p-10 bg-card border border-white/5 rounded-2xl hover:border-teal/20 hover:shadow-[0_0_40px_rgba(0,168,150,0.1)] transition-all duration-500 relative overflow-hidden"
+              className="group p-6 sm:p-8 md:p-10 bg-card border border-white/5 rounded-2xl hover:border-teal/20 hover:shadow-[0_0_40px_rgba(0,168,150,0.1)] transition-all duration-500 relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 p-6 md:p-10 text-teal/10 font-syne font-extrabold text-6xl md:text-8xl group-hover:text-teal/20 transition-colors">
                 {service.id}
