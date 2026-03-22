@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-black: #080808;
+  --color-surface: #0F0F0F;
+  --color-card: #141414;
+  --color-teal: #00A896;
+  --color-teal-dim: rgba(0, 168, 150, 0.12);
+  --color-teal-glow: rgba(0, 168, 150, 0.25);
+  --color-white: #FFFFFF;
+  --color-gray: #A1A1AA;
+  --color-gray-dim: #52525B;
+  --color-border: rgba(255, 255, 255, 0.06);
+
+  --font-syne: "Syne", sans-serif;
+  --font-dm: "DM Sans", sans-serif;
+
+  --animate-shimmer: shimmer 2s linear infinite;
+  @keyframes shimmer {
+    from { background-position: 0 0; }
+    to { background-position: 200% 0; }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white font-dm;
+  }
+}
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
