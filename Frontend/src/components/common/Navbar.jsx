@@ -50,7 +50,7 @@ const Navbar = () => {
           <img 
             src="/logo.png" 
             alt="CoreCraft Logo" 
-            className="h-10 md:h-16 lg:h-20 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500" 
+            className="h-10 md:h-16 lg:h-12 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500" 
           />
         </Link>
 
@@ -91,7 +91,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <button 
-          className="md:hidden text-white focus:outline-none p-2"
+          className="md:hidden text-white focus:outline-none p-2 cursor-pointer"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}

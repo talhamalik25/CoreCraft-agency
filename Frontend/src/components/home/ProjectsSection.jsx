@@ -79,24 +79,24 @@ const ProjectsSection = ({ fadeUp, projects }) => {
               <React.Fragment key={i}>
                 <button 
                   onClick={() => scrollToIndex(i)}
-                  className={`transition-colors duration-300 ${activeIndex === i ? 'text-teal' : 'text-gray-dim hover:text-white'}`}
+                  className={`transition-colors duration-300 cursor-pointer ${activeIndex === i ? 'text-teal' : 'text-gray-dim hover:text-white'}`}
                 >
                   {String(i + 1).padStart(2, '0')}
                 </button>
-                {i === 0 && <span className="w-8 h-px bg-white/20" />}
+                {i < projects.length - 1 && <span className="w-8 h-px bg-white/20" />}
               </React.Fragment>
             ))}
           </div>
           <div className="flex gap-4">
             <button 
               onClick={() => scroll('left')}
-              className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-teal hover:text-teal transition-all"
+              className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-teal hover:text-teal transition-all cursor-pointer"
             >
               <ChevronLeft size={20} />
             </button>
             <button 
               onClick={() => scroll('right')}
-              className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-teal hover:text-teal transition-all"
+              className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-teal hover:text-teal transition-all cursor-pointer"
             >
               <ChevronRight size={20} />
             </button>

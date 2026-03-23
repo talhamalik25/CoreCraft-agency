@@ -25,7 +25,7 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
           <SectionLabel text="SOFTWARE AGENCY" />
         </motion.div>
 
-        <motion.h1 variants={fadeUp} className="font-syne font-extrabold uppercase leading-[0.9] tracking-tight mb-6 sm:mb-8">
+        <motion.h1 variants={fadeUp} className="font-syne font-extrabold uppercase leading-[0.9] tracking-tight mb-6 sm:mb-8 mt-12 md:mt-24">
           <span className="block text-white text-[clamp(2rem,7vw,7rem)]">CRAFTING</span>
           <span className="block text-transparent text-stroke text-[clamp(2rem,7vw,7rem)]">YOUR DIGITAL</span>
           <span className="block text-teal text-[clamp(2rem,7vw,7rem)]">SUCCESS.</span>

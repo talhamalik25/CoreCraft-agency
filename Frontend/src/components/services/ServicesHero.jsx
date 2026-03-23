@@ -8,7 +8,7 @@ const ServicesHero = ({ fadeUp }) => {
       <div className="max-w-7xl mx-auto">
         <motion.div {...fadeUp}>
           <SectionLabel text="WHAT WE DO" />
-          <h1 className="text-white font-syne font-extrabold text-4xl md:text-8xl uppercase leading-[0.9] mb-12">
+          <h1 className="text-white font-syne font-extrabold text-[clamp(1.75rem,7vw,6rem)] uppercase leading-[0.9] mb-12">
             PRECISION. / <br /> PERFORMANCE. / <br /> POLISH.
           </h1>
           <p className="text-gray text-lg font-dm max-w-2xl leading-relaxed">
