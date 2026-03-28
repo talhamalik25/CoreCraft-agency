@@ -21,9 +21,9 @@ const AboutSection = ({ fadeUp }) => {
 
         <div className="grid grid-cols-3 lg:flex lg:flex-col gap-6 sm:gap-8 md:gap-12 lg:pl-20">
           {[
-            { val: '25+', label: 'Projects' },
-            { val: '15+', label: 'Clients' },
-            { val: '2+', label: 'Years' },
+            { val: '4', label: 'Services' },
+            { val: '02', label: 'Live Project' },
+            { val: '∞', label: 'Ambition' },
           ].map((stat, i) => (
             <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.1 }} className="flex flex-col">
               <div className="text-teal font-syne font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-7xl mb-2">{stat.val}</div>

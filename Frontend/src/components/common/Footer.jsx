@@ -9,19 +9,15 @@ const Footer = () => {
     Company: [
       { name: 'About Us', path: '/about' },
       { name: 'Our Story', path: '/about#genesis' },
-      { name: 'Careers', path: '#' },
-      { name: 'News', path: '#' },
     ],
     Services: [
       { name: 'Web Development', path: '/services#web' },
-      { name: 'AI Integration', path: '/services#ai' },
+      { name: 'Custom Web Apps', path: '/services#custom' },
+      { name: 'SaaS Development', path: '/services#saas' },
       { name: 'UI/UX Design', path: '/services#design' },
-      { name: 'Digital Marketing', path: '/services#marketing' },
     ],
     Work: [
       { name: 'Portfolio', path: '/work' },
-      { name: 'Case Studies', path: '#' },
-      { name: 'Clients', path: '#' },
       { name: 'Process', path: '/services#process' },
     ],
   };
@@ -43,7 +39,7 @@ const Footer = () => {
               <img 
                 src="/logo.png" 
                 alt="CoreCraft Logo" 
-                className="h-16 md:h-32 lg:h-12 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500" 
+                className="h-10 md:h-12 lg:h-12 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500" 
               />
             </Link>
             <p className="text-gray text-sm font-dm leading-relaxed max-w-xs mb-8">
@@ -97,7 +93,7 @@ const Footer = () => {
                 DHA Phase 6, Karachi,<br />Pakistan
               </p>
               <a
-                href="mailto:hello@corecraft.studio"
+                href="mailto:hello@corecraft.agency"
                 className="text-teal text-xs font-dm hover:underline block"
               >
                 hello@corecraft.agency
@@ -112,7 +108,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-gray-dim text-[10px] uppercase tracking-widest font-dm">
-            © {currentYear} CoreCraft Agency. All rights reserved.
+            © {currentYear} CoreCraft Studio. All rights reserved.
           </p>
           <div className="flex gap-8">
             <Link to="#" className="text-gray-dim text-[10px] uppercase tracking-widest font-dm hover:text-teal transition-colors">

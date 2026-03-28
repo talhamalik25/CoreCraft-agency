@@ -1,10 +1,8 @@
 import React from 'react';
 import { Target, Zap, Eye } from 'lucide-react';
 import AboutHero from '../components/about/AboutHero';
-import StatsBar from '../components/about/StatsBar';
 import GenesisSection from '../components/about/GenesisSection';
 import ValuesSection from '../components/about/ValuesSection';
-import TeamSection from '../components/about/TeamSection';
 
 const About = () => {
   const fadeUp = {
@@ -22,10 +20,9 @@ const About = () => {
   ];
 
   const milestones = [
-    { year: '2021', name: 'Foundation', desc: 'Launched with a small team of 3 specialized crafters focused on premium web architecture.' },
-    { year: '2022', name: 'Expansion', desc: 'Formalized our Precision-First workflow, resulting in a 40% increase in client conversion rates.' },
-    { year: '2023', name: 'Innovation', desc: 'Pioneered AI-integrated partnerships across Europe and MENA regions, scaling our impact.' },
-    { year: 'Present', name: 'Vision', desc: 'Engineering next-gen digital identities for high-growth tech startups and established brands.' }
+    { year: '2025', name: 'The Idea', desc: 'CoreCraft was founded with one goal: to build digital products that actually work — fast, clean, and built to last.' },
+    { year: '2026', name: 'First Clients', desc: 'We shipped our first client projects and began building EduCore OS — a SaaS platform redefining school management in Pakistan.' },
+    { year: 'Now', name: 'Growing', desc: 'Actively taking on new projects. We are small, precise, and fully invested in every client we work with.' },
   ];
 
   const values = [
@@ -34,19 +31,12 @@ const About = () => {
     { icon: <Eye className="text-teal" />, name: 'Transparency', desc: 'Honest communication is the cornerstone of great work. We build trust through absolute clarity.' }
   ];
 
-  const team = [
-    { name: 'Zayn Malik', role: 'Founding Director', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400' },
-    { name: 'Sarah Khan', role: 'Creative Lead', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400' },
-    { name: 'Omar Siddiqui', role: 'Technical Lead', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400' }
-  ];
 
   return (
     <div className="bg-black pt-20">
       <AboutHero fadeUp={fadeUp} />
-      <StatsBar stats={stats} />
       <GenesisSection fadeUp={fadeUp} milestones={milestones} />
       <ValuesSection fadeUp={fadeUp} values={values} />
-      <TeamSection fadeUp={fadeUp} team={team} />
     </div>
   );
 };

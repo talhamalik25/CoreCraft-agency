@@ -26,10 +26,10 @@ const Home = () => {
   };
 
   const services = [
-    { id: '01', title: 'Web Engineering', desc: 'High-performance, scalable web applications built with architectural precision.' },
-    { id: '02', title: 'Digital Marketing', desc: 'Data-driven campaigns that grow your brand, capture leads, and convert traffic into revenue.' },
-    { id: '03', title: 'UI/UX Design', desc: 'Visual systems that command attention and user journeys that drive results.' },
-    { id: '04', title: 'SaaS Development', desc: 'Full-spectrum software solutions for high-growth tech startups.' },
+    { id: '01', title: 'Web Development', desc: 'High-performance, scalable web applications built with architectural precision.' },
+    { id: '02', title: 'Custom Web Apps', desc: 'Tailor-made applications engineered around your exact business logic and workflows.' },
+    { id: '03', title: 'SaaS Development', desc: 'Full-spectrum SaaS products — multi-tenant, subscription-ready, and built to scale.' },
+    { id: '04', title: 'UI/UX Design', desc: 'Visual systems that command attention and user journeys that drive results.' },
   ];
 
   const projects = [

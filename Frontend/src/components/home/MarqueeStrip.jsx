@@ -4,11 +4,9 @@ import { motion } from 'framer-motion';
 const MarqueeStrip = () => {
   const marqueeItems = [
     'WEB DEVELOPMENT',
-    'AI SOLUTIONS',
+    'CUSTOM WEB APPS',
+    'SAAS DEVELOPMENT',
     'UI/UX DESIGN',
-    'DIGITAL MARKETING',
-    'SAAS PRODUCTS',
-    'MOBILE APPS',
   ];
 
   return (

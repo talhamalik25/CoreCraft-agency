@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import WorkHero from '../components/work/WorkHero';
-import FilterBar from '../components/work/FilterBar';
-import ProjectsGrid from '../components/work/ProjectsGrid';
 import WorkCTA from '../components/work/WorkCTA';
 
 const Work = () => {
-  const [filter, setFilter] = useState('All');
-
   const fadeUp = {
     initial: { opacity: 0, y: 40 },
     whileInView: { opacity: 1, y: 0 },
@@ -14,57 +12,50 @@ const Work = () => {
     transition: { duration: 0.8, ease: "easeOut" }
   };
 
-  const categories = ['All', 'Web Dev', 'AI', 'Design', 'Marketing'];
-
-  const projects = [
-    {
-      id: 1,
-      name: 'Neon Syndicate',
-      category: 'Web Dev',
-      desc: 'A full-scale digital ecosystem for the next generation of cyberpunk gaming. Custom engine integration and visceral UI design.',
-      image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1200',
-      isFeatured: true,
-      tag: 'FLAGSHIP PROJECT'
-    },
-    {
-      id: 2,
-      name: 'Onyx Chronos',
-      category: 'Web Dev',
-      desc: 'High-performance e-commerce for luxury horology brands.',
-      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=800'
-    },
-    {
-      id: 3,
-      name: 'Aether Intelligence',
-      category: 'AI',
-      desc: 'Predictive analytics engine for distributed cloud networks.',
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800'
-    },
-    {
-      id: 4,
-      name: 'Retro Vibe',
-      category: 'Design',
-      desc: 'Identity system for a boutique synthesizer manufacturer.',
-      image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=800'
-    },
-    {
-      id: 5,
-      name: 'Scale Matrix',
-      category: 'Marketing',
-      desc: 'Growth hacking strategy for an emerging Fintech unicorn.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800'
-    }
-  ];
-
-  const filteredProjects = filter === 'All' 
-    ? projects 
-    : projects.filter(p => p.category === filter);
-
   return (
     <div className="bg-black pt-20">
       <WorkHero fadeUp={fadeUp} />
-      <FilterBar categories={categories} filter={filter} setFilter={setFilter} />
-      <ProjectsGrid filteredProjects={filteredProjects} />
+      
+      {/* Coming Soon Section */}
+      <section className="px-4 sm:px-6 md:px-20 pb-20 md:pb-40">
+        <motion.div 
+          {...fadeUp}
+          className="border border-white/5 rounded-[2rem] bg-card p-12 md:p-24 flex flex-col items-center justify-center text-center min-h-[400px] relative overflow-hidden"
+        >
+          {/* Subtle Background */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,168,150,0.06),transparent_70%)] pointer-events-none" />
+          
+          <div className="relative z-10 flex flex-col items-center gap-8">
+            {/* Status Pill */}
+            <div className="border border-teal/30 bg-teal/5 rounded-full px-5 py-2 flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-teal animate-pulse" />
+              <span className="text-teal font-dm text-[10px] uppercase tracking-[0.3em]">
+                CURRENTLY IN PROGRESS
+              </span>
+            </div>
+
+            {/* Heading */}
+            <h2 className="font-syne font-extrabold text-3xl sm:text-5xl md:text-6xl uppercase leading-[0.9] flex flex-col">
+              <span className="text-white">PROJECTS</span>
+              <span className="text-stroke">INCOMING.</span>
+            </h2>
+
+            {/* Paragraph */}
+            <p className="text-gray font-dm text-base md:text-lg max-w-lg">
+              We're currently heads-down building for our first clients. Our work will be showcased here as soon as it ships.
+            </p>
+
+            {/* CTA Link */}
+            <Link 
+              to="/contact"
+              className="mt-4 bg-teal text-black rounded-full px-8 py-3 font-dm text-xs uppercase tracking-widest hover:bg-white transition-all shadow-lg shadow-teal/20"
+            >
+              Start a Project With Us
+            </Link>
+          </div>
+        </motion.div>
+      </section>
+
       <WorkCTA fadeUp={fadeUp} />
     </div>
   );

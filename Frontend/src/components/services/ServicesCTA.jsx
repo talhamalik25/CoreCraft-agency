@@ -18,9 +18,6 @@ const ServicesCTA = ({ fadeUp }) => {
             <Link to="/contact" className="px-7 sm:px-10 py-3 sm:py-4 bg-black rounded-full text-white font-dm text-[10px] sm:text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300">
               Start Your Project
             </Link>
-            <button className="px-7 sm:px-10 py-3 sm:py-4 border border-black/20 rounded-full text-black font-dm text-[10px] sm:text-xs uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300">
-              View Showreel
-            </button>
           </div>
         </div>
       </motion.div>

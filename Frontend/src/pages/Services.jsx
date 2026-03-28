@@ -17,27 +17,27 @@ const Services = () => {
     {
       num: '01',
       name: 'Web Development',
-      desc: 'Scalable, robust, and lightning-fast web applications built with the most modern stacks. We prioritize architectural integrity and user experience in every line of code.',
-      tags: ['MERN', 'SaaS', 'REST APIs', 'Next.js']
+      desc: 'Scalable, robust, and lightning-fast web applications built with modern stacks. We prioritize architectural integrity and user experience in every line of code.',
+      tags: ['MERN', 'Next.js', 'REST APIs', 'E-commerce']
     },
     {
       num: '02',
-      name: 'AI Solutions',
-      desc: 'Empowering business workflows through intelligent automation. From custom LLM implementations to predictive analytics, we make your data work harder.',
-      tags: ['Chatbots', 'Automation', 'ML', 'LLM Fine-tuning']
+      name: 'Custom Web Apps',
+      desc: 'Tailor-made web applications engineered around your exact business logic. From internal tools to customer-facing platforms — built to fit, not to compromise.',
+      tags: ['React', 'Node.js', 'MongoDB', 'Custom Portals']
     },
     {
       num: '03',
+      name: 'SaaS Development',
+      desc: 'End-to-end SaaS product development — multi-tenant architecture, subscription billing, role-based access, and everything in between.',
+      tags: ['Multi-tenant', 'Subscription', 'Dashboards', 'Scalable']
+    },
+    {
+      num: '04',
       name: 'UI/UX Design',
       desc: 'Visual systems that command attention. We build design languages that scale, ensuring consistency and brand authority across every digital touchpoint.',
       tags: ['Figma', 'Prototyping', 'Design Systems', 'Motion']
     },
-    {
-      num: '04',
-      name: 'Digital Marketing',
-      desc: 'Strategic growth through precision targeting. We don\'t just find an audience; we build a movement around your digital presence.',
-      tags: ['SEO', 'Social Media', 'Campaigns', 'Growth Hacking']
-    }
   ];
 
   const processSteps = [
