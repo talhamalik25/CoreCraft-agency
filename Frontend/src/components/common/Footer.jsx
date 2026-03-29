@@ -1,6 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Linkedin, Github, Instagram, Dribbble, ArrowUpRight } from 'lucide-react';
+import { Linkedin, Facebook, Instagram, ArrowUpRight } from 'lucide-react';
+
+const Pinterest = ({ size = 24, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M8 22c.11-1.33.22-3.33.56-4.67C8.89 16 10.33 11 10.33 11s-.44-1-.44-2.33c0-2.11 1.22-3.78 2.78-3.78 1.44 0 2.11 1.11 2.11 2.44 0 1.44-.89 3.67-1.33 5.78-.44 1.78.89 3.22 2.67 3.22 3.22 0 5.67-3.44 5.67-8.33 0-4.33-3.11-7.33-7.56-7.33-5.11 0-8.11 3.78-8.11 7.78 0 1.56.56 3.11 1.33 4 .11.11.22.22.11.44 0 .33-.33 1-.33 1.11-.11.22-.33.33-.56.22-1.44-.67-2.33-2.78-2.33-4.56 0-3.67 2.67-7.11 7.78-7.11 4.11 0 7.22 2.89 7.22 6.78 0 4-2.56 7.33-6 7.33-1.22 0-2.33-.67-2.78-1.44l-.78 3c-.22.89-.89 2.11-1.33 2.78z" />
+  </svg>
+);
+
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -23,10 +41,10 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: <Linkedin size={18} />, path: '#' },
-    { icon: <Github size={18} />, path: '#' },
-    { icon: <Instagram size={18} />, path: '#' },
-    { icon: <Dribbble size={18} />, path: '#' },
+    { icon: <Linkedin size={18} />, path: 'https://www.linkedin.com/company/corecraftagency/' },
+    { icon: <Facebook size={18} />, path: 'https://www.facebook.com/share/18K9EhcQhS/?mibextid=wwXIfr' },
+    { icon: <Instagram size={18} />, path: 'https://www.instagram.com/corecraftagency/' },
+    { icon: <Pinterest size={18} />, path: 'https://www.pinterest.com/corecraftagency/' },
   ];
 
   return (
@@ -36,10 +54,10 @@ const Footer = () => {
           {/* Logo Column */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center group mb-6 md:mb-8">
-              <img 
-                src="/logo.png" 
-                alt="CoreCraft Logo" 
-                className="h-10 md:h-12 lg:h-12 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500" 
+              <img
+                src="/logo.png"
+                alt="CoreCraft Logo"
+                className="h-10 md:h-12 lg:h-12 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500"
               />
             </Link>
             <p className="text-gray text-sm font-dm leading-relaxed max-w-xs mb-8">
@@ -50,10 +68,13 @@ const Footer = () => {
                 <a
                   key={index}
                   href={social.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full border border-white/5 flex items-center justify-center text-gray hover:text-teal hover:border-teal transition-all duration-300"
                 >
                   {social.icon}
                 </a>
+
               ))}
             </div>
           </div>
@@ -90,14 +111,15 @@ const Footer = () => {
             </h4>
             <div className="space-y-4">
               <p className="text-gray text-xs font-dm leading-relaxed">
-                DHA Phase 6, Karachi,<br />Pakistan
+                Karachi, Pakistan
               </p>
               <a
-                href="mailto:hello@corecraft.agency"
+                href="mailto:corecraftagency07@gmail.com"
                 className="text-teal text-xs font-dm hover:underline block"
               >
-                hello@corecraft.agency
+                corecraftagency07@gmail.com
               </a>
+
               <p className="text-gray text-xs font-dm">
                 +92 (300) 123-4567
               </p>
@@ -108,15 +130,17 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-gray-dim text-[10px] uppercase tracking-widest font-dm">
-            © {currentYear} CoreCraft Studio. All rights reserved.
+            © {currentYear} CoreCraft Agency. All rights reserved.
           </p>
           <div className="flex gap-8">
-            <Link to="#" className="text-gray-dim text-[10px] uppercase tracking-widest font-dm hover:text-teal transition-colors">
+            <Link to="/privacy-policy" className="text-gray-dim text-[10px] uppercase tracking-widest font-dm hover:text-teal transition-colors">
               Privacy Policy
             </Link>
-            <Link to="#" className="text-gray-dim text-[10px] uppercase tracking-widest font-dm hover:text-teal transition-colors">
+
+            <Link to="/terms-conditions" className="text-gray-dim text-[10px] uppercase tracking-widest font-dm hover:text-teal transition-colors">
               Terms of Service
             </Link>
+
           </div>
         </div>
       </div>

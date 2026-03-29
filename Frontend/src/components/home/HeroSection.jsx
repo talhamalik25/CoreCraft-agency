@@ -1,7 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Linkedin, Github, Instagram } from 'lucide-react';
+import { Linkedin, Facebook, Instagram } from 'lucide-react';
+
+const Pinterest = ({ size = 24, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M8 22c.11-1.33.22-3.33.56-4.67C8.89 16 10.33 11 10.33 11s-.44-1-.44-2.33c0-2.11 1.22-3.78 2.78-3.78 1.44 0 2.11 1.11 2.11 2.44 0 1.44-.89 3.67-1.33 5.78-.44 1.78.89 3.22 2.67 3.22 3.22 0 5.67-3.44 5.67-8.33 0-4.33-3.11-7.33-7.56-7.33-5.11 0-8.11 3.78-8.11 7.78 0 1.56.56 3.11 1.33 4 .11.11.22.22.11.44 0 .33-.33 1-.33 1.11-.11.22-.33.33-.56.22-1.44-.67-2.33-2.78-2.33-4.56 0-3.67 2.67-7.11 7.78-7.11 4.11 0 7.22 2.89 7.22 6.78 0 4-2.56 7.33-6 7.33-1.22 0-2.33-.67-2.78-1.44l-.78 3c-.22.89-.89 2.11-1.33 2.78z" />
+  </svg>
+);
+
+
 import { SectionLabel } from '../common/SectionLabel';
 
 const HeroSection = ({ fadeUp, staggerContainer }) => {
@@ -52,12 +71,18 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
         </motion.div>
         
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="hidden sm:flex flex-col gap-6">
-          {[Linkedin, Github, Instagram].map((Icon, i) => (
-            <a key={i} href="#" className="text-gray hover:text-teal transition-colors">
+          {[
+            { Icon: Linkedin, href: 'https://www.linkedin.com/company/corecraftagency/' },
+            { Icon: Facebook, href: 'https://www.facebook.com/share/18K9EhcQhS/?mibextid=wwXIfr' },
+            { Icon: Instagram, href: 'https://www.instagram.com/corecraftagency/' },
+            { Icon: Pinterest, href: 'https://www.pinterest.com/corecraftagency/' }
+          ].map(({ Icon, href }, i) => (
+            <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="text-gray hover:text-teal transition-colors">
               <Icon size={18} />
             </a>
           ))}
         </motion.div>
+
       </div>
     </section>
   );

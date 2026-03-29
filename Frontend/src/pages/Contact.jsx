@@ -16,9 +16,10 @@ const Contact = () => {
   };
 
   const infoCards = [
-    { icon: <Mail className="text-teal" size={24} />, title: 'Email', detail: 'hello@corecraft.studio', link: 'mailto:hello@corecraft.studio' },
+    { icon: <Mail className="text-teal" size={24} />, title: 'Email', detail: 'corecraftagency07@gmail.com', link: 'mailto:corecraftagency07@gmail.com' },
+
     { icon: <MessageSquare className="text-teal" size={24} />, title: 'WhatsApp', detail: '+92 300 1234567', link: '#' },
-    { icon: <MapPin className="text-teal" size={24} />, title: 'Location', detail: 'DHA Phase 6, Karachi', link: '#' },
+    { icon: <MapPin className="text-teal" size={24} />, title: 'Location', detail: 'Karachi, Pakistan', link: '#' },
     { icon: <Clock className="text-teal" size={24} />, title: 'Availability', detail: 'Open for Projects', badge: true },
   ];
 
@@ -33,7 +34,7 @@ const Contact = () => {
   return (
     <div className="bg-black pt-20">
       <ContactHero fadeUp={fadeUp} />
-      
+
       <section className="px-4 sm:px-6 md:px-20 pb-20 md:pb-40">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20">
           <ContactForm fadeUp={fadeUp} />
@@ -41,11 +42,11 @@ const Contact = () => {
         </div>
       </section>
 
-      <FAQSection 
-        fadeUp={fadeUp} 
-        faqs={faqs} 
-        activeFaq={activeFaq} 
-        setActiveFaq={setActiveFaq} 
+      <FAQSection
+        fadeUp={fadeUp}
+        faqs={faqs}
+        activeFaq={activeFaq}
+        setActiveFaq={setActiveFaq}
       />
     </div>
   );

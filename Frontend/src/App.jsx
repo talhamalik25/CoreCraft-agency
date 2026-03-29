@@ -6,6 +6,10 @@ import Services from './pages/Services';
 import Work from './pages/Work';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';
+
+
 
 function App() {
   return (
@@ -19,6 +23,10 @@ function App() {
             <Route path="/work" element={<Work />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
+
+
           </Routes>
         </main>
         <Footer />

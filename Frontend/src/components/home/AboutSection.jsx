@@ -12,7 +12,7 @@ const AboutSection = ({ fadeUp }) => {
           <SectionLabel text="ABOUT" />
           <h2 className="text-white font-syne font-extrabold text-4xl sm:text-5xl md:text-7xl uppercase mb-6 sm:mb-8">OUR ESSENCE.</h2>
           <p className="text-gray text-lg font-dm leading-relaxed mb-10 max-w-lg">
-            CoreCraft Studio is a multidisciplinary creative hub where code meets cinematic aesthetics. We don't just build interfaces; we engineer digital environments that reflect the uncompromising standards of our clients.
+            CoreCraft Agency is a multidisciplinary creative hub where code meets cinematic aesthetics. We don't just build interfaces; we engineer digital environments that reflect the uncompromising standards of our clients.
           </p>
           <Link to="/about" className="text-teal font-dm text-sm uppercase tracking-widest flex items-center gap-2 group">
             More <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
