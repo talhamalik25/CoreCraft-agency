@@ -68,6 +68,17 @@ const ProjectsSection = ({ fadeUp, projects }) => {
                   {project.category}
                 </div>
                 <h3 className="text-white font-syne font-bold text-2xl md:text-3xl uppercase">{project.name}</h3>
+
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center gap-2 text-teal text-xs uppercase tracking-widest hover:underline"
+                  >
+                    Live Site ↗
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}

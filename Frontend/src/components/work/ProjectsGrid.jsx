@@ -50,9 +50,9 @@ const ProjectsGrid = ({ filteredProjects }) => {
                       <p className="text-gray text-base font-dm leading-relaxed mb-10 max-w-md">
                         {project.desc}
                       </p>
-                      <Link to="#" className="text-teal font-dm text-sm uppercase tracking-widest flex items-center gap-2 group/link">
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-teal font-dm text-sm uppercase tracking-widest flex items-center gap-2 group/link">
                         View Project <ArrowUpRight size={18} className="group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </div>
