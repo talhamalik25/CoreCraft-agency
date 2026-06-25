@@ -36,11 +36,11 @@ const Home = () => {
     { name: 'Sooti Mehal', category: 'E-commerce', image: '/project1.png', link: 'https://sootimehal.com/' },
     { name: 'Malikenterprices', category: 'Web App', image: '/project2.png', link: 'https://malikenterprices.com/' },
     { name: 'Iqra Roadmap', category: 'Education', image: '/project3.png', link: 'https://6a19fe709f2390c597b29f72--stellar-dodol-606588.netlify.app/' },
-    { name: 'Aurora', category: 'Restaurant', image: '/project4.png', link: 'https://aurora-ten-delta.vercel.app/' },
     { name: 'CoreCraft Portfolio', category: 'Portfolio', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20minimal%20dark%20theme%20portfolio%20website%20design%20with%20teal%20accent%20colors&image_size=landscape_16_9', link: '#' },
-    { name: 'Educore OS', category: 'portfolio', image: '/project6', link: 'https://educore-liard.vercel.app/' },
+    { name: 'Aurora', category: 'Restaurant', image: '/project4.png', link: 'https://aurora-ten-delta.vercel.app/' },
+    { name: 'Educore OS', category: 'portfolio', image: '/project6.png', link: 'https://educore-liard.vercel.app/' },
   ];
-  
+
   return (
     <div className="relative pt-20" ref={containerRef}>
       <HeroSection fadeUp={fadeUp} staggerContainer={staggerContainer} />
