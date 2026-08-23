@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 
 const MarqueeStrip = () => {
   const marqueeItems = [
-    'WEB DEVELOPMENT',
-    'CUSTOM WEB APPS',
-    'SAAS DEVELOPMENT',
-    'UI/UX DESIGN',
+    'Web Development',
+    'Custom Web Apps',
+    'SaaS Development',
+    'UI/UX Design',
   ];
 
   return (
@@ -24,7 +24,7 @@ const MarqueeStrip = () => {
           <div key={i} className="flex items-center gap-12">
             {marqueeItems.map((item, index) => (
               <React.Fragment key={index}>
-                <span className="text-gray uppercase tracking-[0.3em] text-xs font-dm font-light">
+                <span className="text-gray tracking-[0.3em] text-xs font-dm font-light">
                   {item}
                 </span>
                 <span className="w-1.5 h-1.5 bg-teal rounded-full" />

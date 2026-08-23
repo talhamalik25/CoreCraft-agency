@@ -82,9 +82,9 @@ const Footer = () => {
           {/* Link Columns */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="text-white font-syne font-bold text-sm uppercase tracking-widest mb-6">
+              <h3 className="text-white font-syne font-bold text-sm uppercase tracking-widest mb-6">
                 {category}
-              </h4>
+              </h3>
               <ul className="space-y-4">
                 {links.map((link) => (
                   <li key={link.name}>
@@ -106,9 +106,9 @@ const Footer = () => {
 
           {/* Contact Column */}
           <div>
-            <h4 className="text-white font-syne font-bold text-sm uppercase tracking-widest mb-6">
+            <h3 className="text-white font-syne font-bold text-sm uppercase tracking-widest mb-6">
               Contact
-            </h4>
+            </h3>
             <div className="space-y-4">
               <p className="text-gray text-xs font-dm leading-relaxed">
                 Karachi, Pakistan
@@ -129,15 +129,15 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-gray-dim text-[10px] uppercase tracking-widest font-dm">
+          <p className="text-gray-dim text-xs uppercase tracking-widest font-dm">
             © {currentYear} CoreCraft Agency. All rights reserved.
           </p>
           <div className="flex gap-8">
-            <Link to="/privacy-policy" className="text-gray-dim text-[10px] uppercase tracking-widest font-dm hover:text-teal transition-colors">
+            <Link to="/privacy-policy" className="text-gray-dim text-xs uppercase tracking-widest font-dm hover:text-teal transition-colors">
               Privacy Policy
             </Link>
 
-            <Link to="/terms-conditions" className="text-gray-dim text-[10px] uppercase tracking-widest font-dm hover:text-teal transition-colors">
+            <Link to="/terms-conditions" className="text-gray-dim text-xs uppercase tracking-widest font-dm hover:text-teal transition-colors">
               Terms of Service
             </Link>
 

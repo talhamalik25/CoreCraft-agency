@@ -70,14 +70,16 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
           Karachi, Pakistan — Available Worldwide
         </motion.div>
         
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="hidden sm:flex flex-col gap-6">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="hidden sm:flex flex-col items-center gap-4">
+          <span className="text-[9px] text-gray-dim uppercase tracking-[0.2em] font-dm [writing-mode:vertical-lr] rotate-180 select-none">Follow Us</span>
+          <div className="w-px h-6 bg-white/10 my-1" />
           {[
-            { Icon: Linkedin, href: 'https://www.linkedin.com/company/corecraftagency/' },
-            { Icon: Facebook, href: 'https://www.facebook.com/share/18K9EhcQhS/?mibextid=wwXIfr' },
-            { Icon: Instagram, href: 'https://www.instagram.com/corecraftagency/' },
-            { Icon: Pinterest, href: 'https://www.pinterest.com/corecraftagency/' }
-          ].map(({ Icon, href }, i) => (
-            <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="text-gray hover:text-teal transition-colors">
+            { Icon: Linkedin, href: 'https://www.linkedin.com/company/corecraftagency/', name: 'LinkedIn' },
+            { Icon: Facebook, href: 'https://www.facebook.com/share/18K9EhcQhS/?mibextid=wwXIfr', name: 'Facebook' },
+            { Icon: Instagram, href: 'https://www.instagram.com/corecraftagency/', name: 'Instagram' },
+            { Icon: Pinterest, href: 'https://www.pinterest.com/corecraftagency/', name: 'Pinterest' }
+          ].map(({ Icon, href, name }, i) => (
+            <a key={i} href={href} target="_blank" rel="noopener noreferrer" aria-label={name} className="text-gray hover:text-teal transition-colors p-1">
               <Icon size={18} />
             </a>
           ))}

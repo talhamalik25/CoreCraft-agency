@@ -84,12 +84,13 @@ const ProjectsSection = ({ fadeUp, projects }) => {
           ))}
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-white/5">
+        <div className="flex flex-col sm:flex-row items-center justify-end gap-8 pt-10 border-t border-white/5">
           <div className="flex items-center gap-6 font-syne font-bold text-sm">
             {projects.map((_, i) => (
               <React.Fragment key={i}>
                 <button 
                   onClick={() => scrollToIndex(i)}
+                  aria-label={`Go to slide ${i + 1}`}
                   className={`transition-colors duration-300 cursor-pointer ${activeIndex === i ? 'text-teal' : 'text-gray-dim hover:text-white'}`}
                 >
                   {String(i + 1).padStart(2, '0')}
@@ -98,16 +99,18 @@ const ProjectsSection = ({ fadeUp, projects }) => {
               </React.Fragment>
             ))}
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center pl-6 border-l border-white/10">
             <button 
               onClick={() => scroll('left')}
-              className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-teal hover:text-teal transition-all cursor-pointer"
+              aria-label="Previous slide"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-teal hover:text-teal transition-all cursor-pointer"
             >
               <ChevronLeft size={20} />
             </button>
             <button 
               onClick={() => scroll('right')}
-              className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-teal hover:text-teal transition-all cursor-pointer"
+              aria-label="Next slide"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-teal hover:text-teal transition-all cursor-pointer"
             >
               <ChevronRight size={20} />
             </button>
