@@ -38,25 +38,50 @@ export default function MarqueeSection() {
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
+
       const sectionTop = sectionRef.current.offsetTop;
-      const raw = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
+
+      const raw =
+        (window.scrollY - sectionTop + window.innerHeight) * 0.3;
+
       setOffset(raw);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, {
+      passive: true,
+    });
+
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="bg-[#0C0C0C] pt-15 sm:pt-20 md:pt-20 pb-10 overflow-hidden"
+      className="
+        bg-[#0C0C0C]
+        pt-12 sm:pt-16 md:pt-20
+        pb-8 sm:pb-10
+        overflow-hidden
+        w-full
+      "
     >
-      <div className="flex flex-col gap-3">
+      <div
+        className="
+          flex flex-col
+          gap-2 sm:gap-3
+        "
+      >
         {/* Row 1 — moves right */}
         <div
-          className="flex gap-3"
+          className="
+            flex
+            gap-2 sm:gap-3
+            w-max
+          "
           style={{
             transform: `translateX(${offset - 200}px)`,
             willChange: 'transform',
@@ -68,14 +93,39 @@ export default function MarqueeSection() {
               src={src}
               alt=""
               loading="lazy"
-              className="w-[420px] h-[270px] rounded-2xl object-cover flex-shrink-0"
+              className="
+                w-[220px]
+                h-[145px]
+
+                xs:w-[240px]
+                xs:h-[155px]
+
+                sm:w-[280px]
+                sm:h-[180px]
+
+                md:w-[340px]
+                md:h-[220px]
+
+                lg:w-[420px]
+                lg:h-[270px]
+
+                rounded-xl
+                sm:rounded-2xl
+
+                object-cover
+                flex-shrink-0
+              "
             />
           ))}
         </div>
 
         {/* Row 2 — moves left */}
         <div
-          className="flex gap-3"
+          className="
+            flex
+            gap-2 sm:gap-3
+            w-max
+          "
           style={{
             transform: `translateX(${-(offset - 200)}px)`,
             willChange: 'transform',
@@ -87,7 +137,28 @@ export default function MarqueeSection() {
               src={src}
               alt=""
               loading="lazy"
-              className="w-[420px] h-[270px] rounded-2xl object-cover flex-shrink-0"
+              className="
+                w-[220px]
+                h-[145px]
+
+                xs:w-[240px]
+                xs:h-[155px]
+
+                sm:w-[280px]
+                sm:h-[180px]
+
+                md:w-[340px]
+                md:h-[220px]
+
+                lg:w-[420px]
+                lg:h-[270px]
+
+                rounded-xl
+                sm:rounded-2xl
+
+                object-cover
+                flex-shrink-0
+              "
             />
           ))}
         </div>

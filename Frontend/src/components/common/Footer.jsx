@@ -19,7 +19,6 @@ const Pinterest = ({ size = 24, ...props }) => (
   </svg>
 );
 
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -41,51 +40,51 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: <Linkedin size={18} />, path: 'https://www.linkedin.com/company/corecraftagency/' },
-    { icon: <Facebook size={18} />, path: 'https://www.facebook.com/share/18K9EhcQhS/?mibextid=wwXIfr' },
-    { icon: <Instagram size={18} />, path: 'https://www.instagram.com/corecraftagency/' },
-    { icon: <Pinterest size={18} />, path: 'https://www.pinterest.com/corecraftagency/' },
+    { icon: <Linkedin size={18} />, path: 'https://www.linkedin.com/company/corecraftagency/', name: 'LinkedIn' },
+    { icon: <Facebook size={18} />, path: 'https://www.facebook.com/share/18K9EhcQhS/?mibextid=wwXIfr', name: 'Facebook' },
+    { icon: <Instagram size={18} />, path: 'https://www.instagram.com/corecraftagency/', name: 'Instagram' },
+    { icon: <Pinterest size={18} />, path: 'https://www.pinterest.com/corecraftagency/', name: 'Pinterest' },
   ];
 
   return (
     <footer className="bg-black border-t border-white/5 pt-12 md:pt-20 pb-10">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-12 mb-12 md:mb-20">
-          {/* Logo Column */}
-          <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center group mb-6 md:mb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 md:gap-12 mb-12 md:mb-20">
+          {/* Logo Column — full width on mobile */}
+          <div className="col-span-2 lg:col-span-2 mb-4 lg:mb-0">
+            <Link to="/" className="flex items-center group mb-4 sm:mb-6 md:mb-8">
               <img
                 src="/logo.png"
                 alt="CoreCraft Logo"
-                className="h-10 md:h-12 lg:h-12 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500"
+                className="h-9 sm:h-10 md:h-12 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500"
               />
             </Link>
-            <p className="text-gray text-sm font-dm leading-relaxed max-w-xs mb-8">
+            <p className="text-gray text-xs sm:text-sm font-dm leading-relaxed max-w-xs mb-6 sm:mb-8">
               Crafting digital monoliths with architectural precision. Based in Karachi, delivering excellence worldwide.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-3 sm:gap-4">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
                   href={social.path}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-white/5 flex items-center justify-center text-gray hover:text-teal hover:border-teal transition-all duration-300"
+                  aria-label={social.name}
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/5 flex items-center justify-center text-gray hover:text-teal hover:border-teal transition-all duration-300"
                 >
                   {social.icon}
                 </a>
-
               ))}
             </div>
           </div>
 
           {/* Link Columns */}
           {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="text-white font-syne font-bold text-sm uppercase tracking-widest mb-6">
+            <div key={category} className="col-span-1">
+              <h3 className="text-white font-syne font-bold text-xs sm:text-sm uppercase tracking-widest mb-4 sm:mb-6">
                 {category}
               </h3>
-              <ul className="space-y-4">
+              <ul className="space-y-3 sm:space-y-4">
                 {links.map((link) => (
                   <li key={link.name}>
                     <Link
@@ -105,17 +104,17 @@ const Footer = () => {
           ))}
 
           {/* Contact Column */}
-          <div>
-            <h3 className="text-white font-syne font-bold text-sm uppercase tracking-widest mb-6">
+          <div className="col-span-1 sm:col-span-1">
+            <h3 className="text-white font-syne font-bold text-xs sm:text-sm uppercase tracking-widest mb-4 sm:mb-6">
               Contact
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <p className="text-gray text-xs font-dm leading-relaxed">
                 Karachi, Pakistan
               </p>
               <a
                 href="mailto:corecraftagency07@gmail.com"
-                className="text-teal text-xs font-dm hover:underline block"
+                className="text-teal text-xs font-dm hover:underline block break-all"
               >
                 corecraftagency07@gmail.com
               </a>
@@ -128,19 +127,18 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-gray-dim text-xs uppercase tracking-widest font-dm">
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 text-center sm:text-left">
+          <p className="text-gray-dim text-[10px] sm:text-xs uppercase tracking-widest font-dm">
             © {currentYear} CoreCraft Agency. All rights reserved.
           </p>
-          <div className="flex gap-8">
-            <Link to="/privacy-policy" className="text-gray-dim text-xs uppercase tracking-widest font-dm hover:text-teal transition-colors">
+          <div className="flex gap-6 sm:gap-8">
+            <Link to="/privacy-policy" className="text-gray-dim text-[10px] sm:text-xs uppercase tracking-widest font-dm hover:text-teal transition-colors">
               Privacy Policy
             </Link>
 
-            <Link to="/terms-conditions" className="text-gray-dim text-xs uppercase tracking-widest font-dm hover:text-teal transition-colors">
+            <Link to="/terms-conditions" className="text-gray-dim text-[10px] sm:text-xs uppercase tracking-widest font-dm hover:text-teal transition-colors">
               Terms of Service
             </Link>
-
           </div>
         </div>
       </div>

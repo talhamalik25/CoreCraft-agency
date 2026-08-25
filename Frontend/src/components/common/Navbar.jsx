@@ -41,16 +41,16 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/5 bg-black/70 backdrop-blur-xl ${
-        isScrolled ? 'py-4' : 'py-6'
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/5 bg-black/75 backdrop-blur-xl ${
+        isScrolled ? 'py-3.5 sm:py-4' : 'py-5 sm:py-6'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center group">
           <img 
             src="/logo.png" 
             alt="CoreCraft Logo" 
-            className="h-10 md:h-16 lg:h-12 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500" 
+            className="h-9 sm:h-10 md:h-12 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500" 
           />
         </Link>
 
@@ -91,10 +91,11 @@ const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <button 
-          className="md:hidden text-white focus:outline-none p-2 cursor-pointer"
+          className="md:hidden text-white focus:outline-none p-2 cursor-pointer rounded-lg hover:bg-white/5 transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
 
@@ -103,10 +104,19 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: '100vh' }}
+            animate={{ opacity: 1, height: '100dvh' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-2xl overflow-hidden flex flex-col items-center justify-center gap-8 border-t border-white/5"
+            className="md:hidden fixed top-0 left-0 w-full h-[100dvh] bg-black/95 backdrop-blur-2xl z-50 overflow-hidden flex flex-col items-center justify-center gap-7 px-6 border-t border-white/5"
           >
+            {/* Close Icon inside Overlay */}
+            <button
+              className="absolute top-5 right-5 text-white p-2.5 cursor-pointer rounded-full bg-white/5 hover:bg-white/10"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              <X size={26} />
+            </button>
+
             {navLinks.map((link, i) => {
               const isActive = location.pathname === link.path;
               return (
@@ -114,11 +124,11 @@ const Navbar = () => {
                   key={link.name}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
+                  transition={{ delay: i * 0.08 }}
                 >
                   <Link
                     to={link.path}
-                    className={`font-syne text-3xl font-bold uppercase tracking-tighter transition-colors ${
+                    className={`font-syne text-3xl font-bold uppercase tracking-tight transition-colors ${
                       isActive ? 'text-teal' : 'text-white hover:text-teal'
                     }`}
                   >
@@ -130,12 +140,12 @@ const Navbar = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navLinks.length * 0.1 }}
+              transition={{ delay: navLinks.length * 0.08 }}
               className="mt-4"
             >
               <Link
                 to="/contact"
-                className="px-10 py-4 rounded-full bg-teal text-black font-dm text-sm uppercase tracking-widest hover:bg-white transition-all duration-300"
+                className="px-9 py-3.5 rounded-full bg-teal text-black font-dm text-xs font-semibold uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(0,168,150,0.3)]"
               >
                 Start a Project
               </Link>
