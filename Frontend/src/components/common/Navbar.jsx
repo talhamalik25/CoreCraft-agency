@@ -1,159 +1,556 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
+
+const NAV_LINKS = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+  { name: 'Work', path: '/work' },
+  { name: 'About', path: '/about' },
+  { name: 'Contact', path: '/contact' },
+];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 30);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = ''; };
+
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isMobileMenuOpen]);
 
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
-    { name: 'Work', path: '/work' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
-  ];
-
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/5 bg-black/75 backdrop-blur-xl ${
-        isScrolled ? 'py-3.5 sm:py-4' : 'py-5 sm:py-6'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center group">
-          <img 
-            src="/logo.png" 
-            alt="CoreCraft Logo" 
-            className="h-9 sm:h-10 md:h-12 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500" 
-          />
-        </Link>
+    <>
+      {/* =========================
+          NAVBAR
+      ========================== */}
+      <nav
+        className={`
+          fixed top-0 left-0 w-full z-[100]
+          transition-all duration-500
+          ${
+            isScrolled
+              ? 'py-3 sm:py-3.5'
+              : 'py-5 sm:py-6'
+          }
+        `}
+      >
+        <div
+          className={`
+            max-w-[1400px]
+            mx-auto
+            px-4
+            sm:px-6
+            lg:px-8
+            transition-all duration-500
+          `}
+        >
+          <div
+            className={`
+              relative
+              flex
+              items-center
+              justify-between
+              h-14
+              sm:h-15
+              px-4
+              sm:px-5
+              rounded-full
+              border
+              transition-all
+              duration-500
+              ${
+                isScrolled
+                  ? 'bg-[#0C0C0C]/85 border-white/10 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.25)]'
+                  : 'bg-black/20 border-white/5 backdrop-blur-md'
+              }
+            `}
+          >
+            {/* =========================
+                LOGO
+            ========================== */}
+            <Link
+              to="/"
+              className="
+                relative
+                z-[110]
+                flex
+                items-center
+                shrink-0
+                group
+              "
+              aria-label="CoreCraft Home"
+            >
+              <img
+                src="/logo.png"
+                alt="CoreCraft"
+                className="
+                  h-8
+                  sm:h-9
+                  md:h-10
+                  w-auto
+                  object-contain
+                  brightness-110
+                  transition-transform
+                  duration-500
+                  group-hover:scale-[1.04]
+                "
+              />
+            </Link>
 
-        {/* Desktop Navigation Links */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-10">
-          {navLinks.map((link) => {
-            const isActive = location.pathname === link.path;
-            return (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`relative font-dm text-xs uppercase tracking-[0.2em] transition-colors duration-300 ${
-                  isActive ? 'text-teal' : 'text-gray hover:text-white'
-                }`}
-              >
-                {link.name}
-                {isActive && (
+            {/* =========================
+                DESKTOP NAV
+            ========================== */}
+            <div className="hidden md:flex items-center gap-6 lg:gap-8">
+              {NAV_LINKS.map((link, index) => {
+                const isActive =
+                  location.pathname === link.path;
+
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className={`
+                      group
+                      relative
+                      flex
+                      items-center
+                      gap-1.5
+                      font-dm
+                      text-[10px]
+                      lg:text-[11px]
+                      uppercase
+                      tracking-[0.18em]
+                      transition-colors
+                      duration-300
+                      ${
+                        isActive
+                          ? 'text-teal'
+                          : 'text-white/60 hover:text-white'
+                      }
+                    `}
+                  >
+                    <span className="opacity-40 text-[8px]">
+                      0{index + 1}
+                    </span>
+
+                    <span>{link.name}</span>
+
+                    <span
+                      className={`
+                        absolute
+                        -bottom-2
+                        left-0
+                        h-px
+                        bg-teal
+                        transition-all
+                        duration-300
+                        ${
+                          isActive
+                            ? 'w-full'
+                            : 'w-0 group-hover:w-full'
+                        }
+                      `}
+                    />
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* =========================
+                DESKTOP CTA
+            ========================== */}
+            <Link
+              to="/contact"
+              className="
+                hidden
+                md:inline-flex
+                items-center
+                gap-2
+                px-4
+                lg:px-5
+                py-2.5
+                rounded-full
+                border
+                border-teal/70
+                text-teal
+                font-dm
+                text-[10px]
+                lg:text-[11px]
+                font-medium
+                uppercase
+                tracking-[0.15em]
+                transition-all
+                duration-300
+                hover:bg-teal
+                hover:text-black
+                hover:border-teal
+                hover:shadow-[0_0_25px_rgba(0,168,150,0.2)]
+              "
+            >
+              Start a Project
+              <ArrowUpRight size={13} />
+            </Link>
+
+            {/* =========================
+                MOBILE MENU BUTTON
+            ========================== */}
+            <button
+              type="button"
+              onClick={() =>
+                setIsMobileMenuOpen((prev) => !prev)
+              }
+              className="
+                md:hidden
+                relative
+                z-[110]
+                flex
+                items-center
+                gap-2
+                text-white
+                font-dm
+                text-[10px]
+                uppercase
+                tracking-[0.18em]
+                px-3
+                py-2
+                rounded-full
+                border
+                border-white/10
+                bg-white/5
+                hover:bg-white/10
+                transition-all
+                duration-300
+              "
+              aria-label={
+                isMobileMenuOpen
+                  ? 'Close menu'
+                  : 'Open menu'
+              }
+              aria-expanded={isMobileMenuOpen}
+            >
+              <span>
+                {isMobileMenuOpen ? 'Close' : 'Menu'}
+              </span>
+
+              <AnimatePresence mode="wait">
+                {isMobileMenuOpen ? (
                   <motion.div
-                    layoutId="nav-underline"
-                    className="absolute -bottom-1 left-0 w-full h-px bg-teal"
-                  />
+                    key="close"
+                    initial={{
+                      opacity: 0,
+                      rotate: -90,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      rotate: 0,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      rotate: 90,
+                    }}
+                  >
+                    <X size={16} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{
+                      opacity: 0,
+                      rotate: 90,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      rotate: 0,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      rotate: -90,
+                    }}
+                  >
+                    <Menu size={16} />
+                  </motion.div>
                 )}
-                {!isActive && (
-                  <div className="absolute -bottom-1 left-0 w-0 h-px bg-teal transition-all duration-300 group-hover:w-full" />
-                )}
-              </Link>
-            );
-          })}
+              </AnimatePresence>
+            </button>
+          </div>
         </div>
+      </nav>
 
-        {/* Desktop CTA Button */}
-        <Link
-          to="/contact"
-          className="hidden md:block px-6 py-2.5 rounded-full border border-teal text-teal font-dm text-xs uppercase tracking-widest hover:bg-teal hover:text-black transition-all duration-300"
-        >
-          Start a Project
-        </Link>
-
-        {/* Mobile Menu Toggle */}
-        <button 
-          className="md:hidden text-white focus:outline-none p-2 cursor-pointer rounded-lg hover:bg-white/5 transition-colors"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
-        </button>
-      </div>
-
-      {/* Mobile Menu Overlay */}
+      {/* =========================
+          MOBILE MENU
+      ========================== */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: '100dvh' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden fixed top-0 left-0 w-full h-[100dvh] bg-black/95 backdrop-blur-2xl z-50 overflow-hidden flex flex-col items-center justify-center gap-7 px-6 border-t border-white/5"
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            transition={{
+              duration: 0.35,
+            }}
+            className="
+              fixed
+              inset-0
+              z-[90]
+              bg-[#0C0C0C]
+              overflow-hidden
+              md:hidden
+            "
           >
-            {/* Close Icon inside Overlay */}
-            <button
-              className="absolute top-5 right-5 text-white p-2.5 cursor-pointer rounded-full bg-white/5 hover:bg-white/10"
-              onClick={() => setIsMobileMenuOpen(false)}
-              aria-label="Close menu"
-            >
-              <X size={26} />
-            </button>
+            {/* Background glow */}
+            <div
+              className="
+                absolute
+                top-[20%]
+                left-1/2
+                -translate-x-1/2
+                w-[280px]
+                h-[280px]
+                rounded-full
+                bg-teal/10
+                blur-[120px]
+                pointer-events-none
+              "
+            />
 
-            {navLinks.map((link, i) => {
-              const isActive = location.pathname === link.path;
-              return (
-                <motion.div
-                  key={link.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08 }}
-                >
-                  <Link
-                    to={link.path}
-                    className={`font-syne text-3xl font-bold uppercase tracking-tight transition-colors ${
-                      isActive ? 'text-teal' : 'text-white hover:text-teal'
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                </motion.div>
-              );
-            })}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navLinks.length * 0.08 }}
-              className="mt-4"
+            {/* Menu content */}
+            <div
+              className="
+                relative
+                w-full
+                h-full
+                flex
+                flex-col
+                justify-center
+                px-6
+                sm:px-10
+              "
             >
-              <Link
-                to="/contact"
-                className="px-9 py-3.5 rounded-full bg-teal text-black font-dm text-xs font-semibold uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(0,168,150,0.3)]"
+              {/* Small label */}
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: 15,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  delay: 0.15,
+                }}
+                className="
+                  absolute
+                  top-24
+                  left-6
+                  sm:left-10
+                  font-dm
+                  text-[9px]
+                  uppercase
+                  tracking-[0.25em]
+                  text-white/30
+                "
               >
-                Start a Project
-              </Link>
-            </motion.div>
+                Navigation
+              </motion.div>
+
+              {/* Links */}
+              <div className="flex flex-col gap-4 sm:gap-5">
+                {NAV_LINKS.map((link, index) => {
+                  const isActive =
+                    location.pathname === link.path;
+
+                  return (
+                    <motion.div
+                      key={link.name}
+                      initial={{
+                        opacity: 0,
+                        x: -30,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        x: 0,
+                      }}
+                      transition={{
+                        delay: 0.15 + index * 0.07,
+                        duration: 0.45,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                    >
+                      <Link
+                        to={link.path}
+                        className={`
+                          group
+                          flex
+                          items-baseline
+                          gap-4
+                          sm:gap-5
+                          font-syne
+                          text-[2.5rem]
+                          sm:text-5xl
+                          font-bold
+                          uppercase
+                          tracking-tight
+                          transition-colors
+                          duration-300
+                          ${
+                            isActive
+                              ? 'text-teal'
+                              : 'text-white hover:text-teal'
+                          }
+                        `}
+                      >
+                        <span
+                          className="
+                            font-dm
+                            text-[9px]
+                            sm:text-[10px]
+                            tracking-widest
+                            text-white/25
+                            font-normal
+                          "
+                        >
+                          0{index + 1}
+                        </span>
+
+                        <span>
+                          {link.name}
+                        </span>
+
+                        {isActive && (
+                          <span
+                            className="
+                              w-2
+                              h-2
+                              rounded-full
+                              bg-teal
+                              inline-block
+                              mb-2
+                            "
+                          />
+                        )}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Mobile CTA */}
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  delay: 0.55,
+                  duration: 0.4,
+                }}
+                className="mt-10"
+              >
+                <Link
+                  to="/contact"
+                  className="
+                    inline-flex
+                    items-center
+                    gap-2
+                    px-6
+                    py-3.5
+                    rounded-full
+                    bg-teal
+                    text-black
+                    font-dm
+                    text-[10px]
+                    font-semibold
+                    uppercase
+                    tracking-[0.16em]
+                    transition-all
+                    duration-300
+                    hover:bg-white
+                  "
+                >
+                  Start a Project
+                  <ArrowUpRight size={14} />
+                </Link>
+              </motion.div>
+
+              {/* Bottom information */}
+              <motion.div
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: 1,
+                }}
+                transition={{
+                  delay: 0.7,
+                }}
+                className="
+                  absolute
+                  bottom-8
+                  left-6
+                  right-6
+                  sm:left-10
+                  sm:right-10
+                  flex
+                  items-center
+                  justify-between
+                  font-dm
+                  text-[8px]
+                  uppercase
+                  tracking-[0.2em]
+                  text-white/25
+                "
+              >
+                <span>CoreCraft Agency</span>
+
+                <span>Available for projects</span>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
 
