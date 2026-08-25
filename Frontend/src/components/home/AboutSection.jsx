@@ -9,8 +9,8 @@ const AboutSection = ({ fadeUp }) => {
     <section className="py-20 md:py-32 px-4 sm:px-6 md:px-20 bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
         <motion.div {...fadeUp}>
-          <SectionLabel text="ABOUT" />
-          <h2 className="text-white font-syne font-extrabold text-4xl sm:text-5xl md:text-7xl uppercase mb-6 sm:mb-8">OUR ESSENCE.</h2>
+          <SectionLabel text="ABOUT" number="01" />
+          <h2 className="text-white font-syne font-extrabold text-4xl sm:text-5xl md:text-7xl uppercase mb-6 sm:mb-8 mt-4">OUR ESSENCE.</h2>
           <p className="text-gray text-base sm:text-lg font-dm leading-relaxed mb-10 max-w-lg">
             CoreCraft Agency is a multidisciplinary creative hub where code meets cinematic aesthetics. We don't just build interfaces; we engineer digital environments that reflect the uncompromising standards of our clients.
           </p>

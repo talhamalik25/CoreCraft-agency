@@ -1,49 +1,46 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import FadeIn from '../FadeIn';
-import LiveProjectButton from '../LiveProjectButton';
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import FadeIn from "../FadeIn";
+import LiveProjectButton from "../LiveProjectButton";
 
 const PROJECTS = [
   {
-    num: '01',
-    category: 'Client',
-    name: 'Nextlevel Studio',
-    link: 'https://sootimehal.com/',
+    num: "01",
+    category: "Client",
+    name: "Nextlevel Studio",
+    link: "https://sootimehal.com/",
     images: {
       col1Top:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85',
+        "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85",
       col1Bottom:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055431_11d841fd-8b41-46a5-82e4-b04f2407a7d8.png&w=1280&q=85',
-      col2:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85',
+        "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055431_11d841fd-8b41-46a5-82e4-b04f2407a7d8.png&w=1280&q=85",
+      col2: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85",
     },
   },
   {
-    num: '02',
-    category: 'Personal',
-    name: 'Aura Brand Identity',
-    link: 'https://aurora-ten-delta.vercel.app/',
+    num: "02",
+    category: "Personal",
+    name: "Aura Brand Identity",
+    link: "https://aurora-ten-delta.vercel.app/",
     images: {
       col1Top:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85',
+        "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85",
       col1Bottom:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055723_5ceda0b8-d9c2-4665-b2e3-83ba19ba76d1.png&w=1280&q=85',
-      col2:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055753_adc5dcbd-a8e6-49c0-b43a-9b030d835cea.png&w=1280&q=85',
+        "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055723_5ceda0b8-d9c2-4665-b2e3-83ba19ba76d1.png&w=1280&q=85",
+      col2: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055753_adc5dcbd-a8e6-49c0-b43a-9b030d835cea.png&w=1280&q=85",
     },
   },
   {
-    num: '03',
-    category: 'Client',
-    name: 'Solaris Digital',
-    link: 'https://educore-liard.vercel.app/',
+    num: "03",
+    category: "Client",
+    name: "Solaris Digital",
+    link: "https://educore-liard.vercel.app/",
     images: {
       col1Top:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85',
+        "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85",
       col1Bottom:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b.png&w=1280&q=85',
-      col2:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055818_9d062121-ad7e-46b9-999a-1a6a692ef1ee.png&w=1280&q=85',
+        "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b.png&w=1280&q=85",
+      col2: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055818_9d062121-ad7e-46b9-999a-1a6a692ef1ee.png&w=1280&q=85",
     },
   },
 ];
@@ -54,18 +51,18 @@ function ProjectCard({ project, index, totalCards }) {
   // Measure scroll progress of card relative to overall scroll track
   const { scrollYProgress } = useScroll({
     target: cardRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
 
   const targetScale = 1 - (totalCards - index - 1) * 0.04;
   const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale]);
 
-  const num = project.num || String(index + 1).padStart(2, '0');
+  const num = project.num || String(index + 1).padStart(2, "0");
 
   // Safe image extraction supporting both 3-image objects and single image props
-  const img1 = project.images?.col1Top || project.image || '/project1.png';
-  const img2 = project.images?.col1Bottom || project.image || '/project2.png';
-  const img3 = project.images?.col2 || project.image || '/project3.png';
+  const img1 = project.images?.col1Top || project.image || "/project1.png";
+  const img2 = project.images?.col1Bottom || project.image || "/project2.png";
+  const img3 = project.images?.col2 || project.image || "/project3.png";
 
   // Stack top offset: 96px base below navbar, + 28px per card index
   const stickyTop = 96 + index * 28;
@@ -79,7 +76,7 @@ function ProjectCard({ project, index, totalCards }) {
       style={{
         top: `${stickyTop}px`,
         scale,
-        transformOrigin: 'top center',
+        transformOrigin: "top center",
         zIndex: index + 1,
       }}
     >
@@ -88,27 +85,27 @@ function ProjectCard({ project, index, totalCards }) {
         <div className="flex items-start gap-4 sm:gap-6 md:gap-8">
           <span
             className="hero-heading text-teal font-syne font-black leading-none"
-            style={{ fontSize: 'clamp(3rem, 10vw, 140px)' }}
+            style={{ fontSize: "clamp(3rem, 10vw, 140px)" }}
           >
             {num}
           </span>
           <div className="flex flex-col gap-1 pt-2 sm:pt-4">
             <span
               className="text-teal/80 font-dm uppercase tracking-wide font-semibold"
-              style={{ fontSize: 'clamp(0.7rem, 1.2vw, 1rem)' }}
+              style={{ fontSize: "clamp(0.7rem, 1.2vw, 1rem)" }}
             >
               {project.category}
             </span>
             <span
               className="text-[#D7E2EA] font-syne font-medium uppercase"
-              style={{ fontSize: 'clamp(1rem, 2.2vw, 2.1rem)' }}
+              style={{ fontSize: "clamp(1rem, 2.2vw, 2.1rem)" }}
             >
               {project.name}
             </span>
           </div>
         </div>
         <div className="pt-2 sm:pt-4">
-          <LiveProjectButton href={project.link || '#'} />
+          <LiveProjectButton href={project.link || "#"} />
         </div>
       </div>
 
@@ -120,14 +117,14 @@ function ProjectCard({ project, index, totalCards }) {
             src={img1}
             alt={`${project.name} preview 1`}
             className="w-full object-cover rounded-[30px] sm:rounded-[40px] md:rounded-[48px]"
-            style={{ height: 'clamp(130px, 16vw, 230px)' }}
+            style={{ height: "clamp(130px, 16vw, 230px)" }}
             loading="lazy"
           />
           <img
             src={img2}
             alt={`${project.name} preview 2`}
             className="w-full object-cover rounded-[30px] sm:rounded-[40px] md:rounded-[48px] flex-1"
-            style={{ height: 'clamp(160px, 22vw, 340px)' }}
+            style={{ height: "clamp(160px, 22vw, 340px)" }}
             loading="lazy"
           />
         </div>
@@ -147,7 +144,7 @@ function ProjectCard({ project, index, totalCards }) {
 }
 
 export default function ProjectsSection({ fadeUp, projects }) {
-  const projectList = (projects && projects.length > 0) ? projects : PROJECTS;
+  const projectList = projects && projects.length > 0 ? projects : PROJECTS;
 
   return (
     <section
@@ -160,7 +157,7 @@ export default function ProjectsSection({ fadeUp, projects }) {
         <h2
           className="hero-heading font-syne font-black uppercase text-center leading-none tracking-tight
                      mb-16 sm:mb-20 md:mb-28 text-white"
-          style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+          style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
         >
           Project
         </h2>

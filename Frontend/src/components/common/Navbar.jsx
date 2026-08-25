@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const NAV_LINKS = [
-  { name: 'Home', path: '/' },
-  { name: 'Services', path: '/services' },
-  { name: 'Work', path: '/work' },
-  { name: 'About', path: '/about' },
-  { name: 'Contact', path: '/contact' },
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/services" },
+  { name: "Work", path: "/work" },
+  { name: "About", path: "/about" },
+  { name: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
@@ -24,12 +24,12 @@ const Navbar = () => {
 
     handleScroll();
 
-    window.addEventListener('scroll', handleScroll, {
+    window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -39,13 +39,13 @@ const Navbar = () => {
 
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
 
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
 
@@ -58,11 +58,7 @@ const Navbar = () => {
         className={`
           fixed top-0 left-0 w-full z-[100]
           transition-all duration-500
-          ${
-            isScrolled
-              ? 'py-3 sm:py-3.5'
-              : 'py-5 sm:py-6'
-          }
+          ${isScrolled ? "py-3 sm:py-3.5" : "py-5 sm:py-6"}
         `}
       >
         <div
@@ -91,8 +87,8 @@ const Navbar = () => {
               duration-500
               ${
                 isScrolled
-                  ? 'bg-[#0C0C0C]/85 border-white/10 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.25)]'
-                  : 'bg-black/20 border-white/5 backdrop-blur-md'
+                  ? "bg-[#0C0C0C]/85 border-white/10 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
+                  : "bg-black/20 border-white/5 backdrop-blur-md"
               }
             `}
           >
@@ -133,8 +129,7 @@ const Navbar = () => {
             ========================== */}
             <div className="hidden md:flex items-center gap-6 lg:gap-8">
               {NAV_LINKS.map((link, index) => {
-                const isActive =
-                  location.pathname === link.path;
+                const isActive = location.pathname === link.path;
 
                 return (
                   <Link
@@ -155,15 +150,11 @@ const Navbar = () => {
                       duration-300
                       ${
                         isActive
-                          ? 'text-teal'
-                          : 'text-white/60 hover:text-white'
+                          ? "text-teal"
+                          : "text-white/60 hover:text-white"
                       }
                     `}
                   >
-                    <span className="opacity-40 text-[8px]">
-                      0{index + 1}
-                    </span>
-
                     <span>{link.name}</span>
 
                     <span
@@ -175,11 +166,7 @@ const Navbar = () => {
                         bg-teal
                         transition-all
                         duration-300
-                        ${
-                          isActive
-                            ? 'w-full'
-                            : 'w-0 group-hover:w-full'
-                        }
+                        ${isActive ? "w-full" : "w-0 group-hover:w-full"}
                       `}
                     />
                   </Link>
@@ -227,9 +214,7 @@ const Navbar = () => {
             ========================== */}
             <button
               type="button"
-              onClick={() =>
-                setIsMobileMenuOpen((prev) => !prev)
-              }
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               className="
                 md:hidden
                 relative
@@ -252,16 +237,10 @@ const Navbar = () => {
                 transition-all
                 duration-300
               "
-              aria-label={
-                isMobileMenuOpen
-                  ? 'Close menu'
-                  : 'Open menu'
-              }
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
             >
-              <span>
-                {isMobileMenuOpen ? 'Close' : 'Menu'}
-              </span>
+              <span>{isMobileMenuOpen ? "Close" : "Menu"}</span>
 
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
@@ -394,8 +373,7 @@ const Navbar = () => {
               {/* Links */}
               <div className="flex flex-col gap-4 sm:gap-5">
                 {NAV_LINKS.map((link, index) => {
-                  const isActive =
-                    location.pathname === link.path;
+                  const isActive = location.pathname === link.path;
 
                   return (
                     <motion.div
@@ -432,8 +410,8 @@ const Navbar = () => {
                           duration-300
                           ${
                             isActive
-                              ? 'text-teal'
-                              : 'text-white hover:text-teal'
+                              ? "text-teal"
+                              : "text-white hover:text-teal"
                           }
                         `}
                       >
@@ -450,9 +428,7 @@ const Navbar = () => {
                           0{index + 1}
                         </span>
 
-                        <span>
-                          {link.name}
-                        </span>
+                        <span>{link.name}</span>
 
                         {isActive && (
                           <span

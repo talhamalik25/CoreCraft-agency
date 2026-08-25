@@ -1,7 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Linkedin, Facebook, Instagram } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Linkedin, Facebook, Instagram } from "lucide-react";
 
 const Pinterest = ({ size = 24, ...props }) => (
   <svg
@@ -20,7 +20,7 @@ const Pinterest = ({ size = 24, ...props }) => (
   </svg>
 );
 
-import { SectionLabel } from '../common/SectionLabel';
+import { SectionLabel } from "../common/SectionLabel";
 
 const HeroSection = ({ fadeUp, staggerContainer }) => {
   return (
@@ -41,14 +41,18 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/60 to-black z-[1]" />
         {/* Background Grid */}
         <div
-          className="absolute inset-0 opacity-[0.04] z-[2]" 
-          style={{ backgroundImage: 'linear-gradient(to right, #00A896 1px, transparent 1px), linear-gradient(to bottom, #00A896 1px, transparent 1px)', backgroundSize: '80px 80px' }} 
+          className="absolute inset-0 opacity-[0.04] z-[2]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #00A896 1px, transparent 1px), linear-gradient(to bottom, #00A896 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
         />
         {/* Radial Teal Glow */}
         <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-glow blur-[140px] rounded-full opacity-35 z-[3]" />
       </div>
 
-      <motion.div 
+      <motion.div
         variants={staggerContainer}
         initial="initial"
         whileInView="whileInView"
@@ -59,21 +63,43 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
           <SectionLabel text="SOFTWARE AGENCY" />
         </motion.div>
 
-        <motion.h1 variants={fadeUp} className="font-syne font-extrabold uppercase leading-[0.9] tracking-tight mb-6 sm:mb-8 mt-8 sm:mt-12 md:mt-16">
-          <span className="block text-white text-[clamp(1.85rem,6.5vw,7rem)]">CRAFTING</span>
-          <span className="block text-transparent text-stroke text-[clamp(1.85rem,6.5vw,7rem)]">YOUR DIGITAL</span>
-          <span className="block text-teal text-[clamp(1.85rem,6.5vw,7rem)]">SUCCESS.</span>
+        <motion.h1
+          variants={fadeUp}
+          className="font-syne font-extrabold uppercase leading-[0.9] tracking-tight mb-6 sm:mb-8 mt-8 sm:mt-12 md:mt-16"
+        >
+          <span className="block text-white text-[clamp(1.85rem,6.5vw,7rem)]">
+            CRAFTING
+          </span>
+          <span className="block text-transparent text-stroke text-[clamp(1.85rem,6.5vw,7rem)]">
+            YOUR DIGITAL
+          </span>
+          <span className="block text-teal text-[clamp(1.85rem,6.5vw,7rem)]">
+            SUCCESS.
+          </span>
         </motion.h1>
 
-        <motion.p variants={fadeUp} className="text-gray text-base sm:text-lg md:text-xl font-dm font-light max-w-xl mb-10 sm:mb-12 leading-relaxed mx-auto px-2">
-          We transform ideas into precision-crafted digital products that command attention and drive results.
+        <motion.p
+          variants={fadeUp}
+          className="text-gray text-base sm:text-lg md:text-xl font-dm font-light max-w-xl mb-10 sm:mb-12 leading-relaxed mx-auto px-2"
+        >
+          We transform ideas into precision-crafted digital products that
+          command attention and drive results.
         </motion.p>
 
-        <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 sm:mb-12">
-          <Link to="/work" className="px-7 sm:px-10 py-3.5 sm:py-4 bg-teal rounded-full text-black font-dm text-[10px] sm:text-xs font-semibold uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_25px_rgba(0,168,150,0.35)]">
+        <motion.div
+          variants={fadeUp}
+          className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 sm:mb-12"
+        >
+          <Link
+            to="/work"
+            className="px-7 sm:px-10 py-3.5 sm:py-4 bg-teal rounded-full text-black font-dm text-[10px] sm:text-xs font-semibold uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_25px_rgba(0,168,150,0.35)]"
+          >
             View Our Work
           </Link>
-          <Link to="/services" className="px-7 sm:px-10 py-3.5 sm:py-4 border border-white/20 rounded-full text-white font-dm text-[10px] sm:text-xs uppercase tracking-widest hover:border-white transition-all duration-300 backdrop-blur-sm">
+          <Link
+            to="/services"
+            className="px-7 sm:px-10 py-3.5 sm:py-4 border border-white/20 rounded-full text-white font-dm text-[10px] sm:text-xs uppercase tracking-widest hover:border-white transition-all duration-300 backdrop-blur-sm"
+          >
             Our Services
           </Link>
         </motion.div>
@@ -81,28 +107,62 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
 
       {/* Hero Bottom */}
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center sm:items-end gap-4 mt-auto">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="text-gray-dim text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-dm text-center sm:text-left">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="text-gray-dim text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-dm text-center sm:text-left"
+        >
           Karachi, Pakistan — Available Worldwide
         </motion.div>
-        
+
         {/* Social Links — Horizontal on Mobile, Vertical on Desktop */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="flex sm:flex-col items-center gap-3 sm:gap-4">
-          <span className="hidden sm:block text-[9px] text-gray-dim uppercase tracking-[0.2em] font-dm [writing-mode:vertical-lr] rotate-180 select-none">Follow Us</span>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="flex sm:flex-col items-center gap-3 sm:gap-4"
+        >
+          <span className="hidden sm:block text-[9px] text-gray-dim uppercase tracking-[0.2em] font-dm [writing-mode:vertical-lr] rotate-180 select-none">
+            Follow Us
+          </span>
           <div className="hidden sm:block w-px h-6 bg-white/10 my-1" />
           <div className="flex items-center gap-3">
             {[
-              { Icon: Linkedin, href: 'https://www.linkedin.com/company/corecraftagency/', name: 'LinkedIn' },
-              { Icon: Facebook, href: 'https://www.facebook.com/share/18K9EhcQhS/?mibextid=wwXIfr', name: 'Facebook' },
-              { Icon: Instagram, href: 'https://www.instagram.com/corecraftagency/', name: 'Instagram' },
-              { Icon: Pinterest, href: 'https://www.pinterest.com/corecraftagency/', name: 'Pinterest' }
+              {
+                Icon: Linkedin,
+                href: "https://www.linkedin.com/company/corecraftagency/",
+                name: "LinkedIn",
+              },
+              {
+                Icon: Facebook,
+                href: "https://www.facebook.com/share/18K9EhcQhS/?mibextid=wwXIfr",
+                name: "Facebook",
+              },
+              {
+                Icon: Instagram,
+                href: "https://www.instagram.com/corecraftagency/",
+                name: "Instagram",
+              },
+              {
+                Icon: Pinterest,
+                href: "https://www.pinterest.com/corecraftagency/",
+                name: "Pinterest",
+              },
             ].map(({ Icon, href, name }, i) => (
-              <a key={i} href={href} target="_blank" rel="noopener noreferrer" aria-label={name} className="text-gray hover:text-teal transition-colors p-1.5 rounded-full hover:bg-white/5">
+              <a
+                key={i}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={name}
+                className="text-gray hover:text-teal transition-colors p-1.5 rounded-full hover:bg-white/5"
+              >
                 <Icon size={18} />
               </a>
             ))}
           </div>
         </motion.div>
-
       </div>
     </section>
   );

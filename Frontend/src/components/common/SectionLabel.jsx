@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export const SectionLabel = ({ text }) => (
   <div className="text-teal text-xs uppercase tracking-[0.2em] font-dm flex items-center gap-3 mb-8">

@@ -1,23 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { SectionLabel } from '../common/SectionLabel';
-import FadeIn from '../FadeIn';
+import React from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { SectionLabel } from "../common/SectionLabel";
+import FadeIn from "../FadeIn";
 
 const defaultServices = [
-  { id: '01', title: 'Web Development', desc: 'High-performance, scalable web applications built with architectural precision.' },
-  { id: '02', title: 'Custom Web Apps', desc: 'Tailor-made applications engineered around your exact business logic and workflows.' },
-  { id: '03', title: 'SaaS Development', desc: 'Full-spectrum SaaS products — multi-tenant, subscription-ready, and built to scale.' },
-  { id: '04', title: 'UI/UX Design', desc: 'Visual systems that command attention and user journeys that drive results.' },
+  {
+    id: "01",
+    title: "Web Development",
+    desc: "High-performance, scalable web applications built with architectural precision.",
+  },
+  {
+    id: "02",
+    title: "Custom Web Apps",
+    desc: "Tailor-made applications engineered around your exact business logic and workflows.",
+  },
+  {
+    id: "03",
+    title: "SaaS Development",
+    desc: "Full-spectrum SaaS products — multi-tenant, subscription-ready, and built to scale.",
+  },
+  {
+    id: "04",
+    title: "UI/UX Design",
+    desc: "Visual systems that command attention and user journeys that drive results.",
+  },
 ];
 
 const ServicesSection = ({ fadeUp, services = defaultServices }) => {
-  const serviceList = (services && services.length > 0) ? services : defaultServices;
+  const serviceList =
+    services && services.length > 0 ? services : defaultServices;
 
   return (
     <section className="py-20 md:py-36 px-4 sm:px-6 md:px-20 bg-surface text-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        
         {/* Services Heading */}
         <FadeIn delay={0} y={40}>
           <div className="mb-14 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 md:pb-8 border-b border-white/10">
@@ -27,8 +43,8 @@ const ServicesSection = ({ fadeUp, services = defaultServices }) => {
                 SERVICES
               </h2>
             </div>
-            <Link 
-              to="/contact" 
+            <Link
+              to="/contact"
               className="px-6 sm:px-8 py-3 sm:py-4 border border-teal rounded-full text-teal font-dm text-xs uppercase tracking-widest inline-flex items-center gap-3 hover:bg-teal hover:text-black transition-all duration-300 w-fit self-start md:self-end mb-2"
             >
               Contact Us <ArrowUpRight size={16} />
@@ -44,11 +60,7 @@ const ServicesSection = ({ fadeUp, services = defaultServices }) => {
             const desc = service.desc;
 
             return (
-              <FadeIn
-                key={num}
-                delay={i * 0.1}
-                y={30}
-              >
+              <FadeIn key={num} delay={i * 0.1} y={30}>
                 <div className="group py-10 md:py-16 grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-start hover:bg-white/[0.015] transition-colors duration-300 rounded-xl px-2 sm:px-4">
                   {/* Large Number */}
                   <div className="md:col-span-2 lg:col-span-2 text-teal/80 group-hover:text-teal font-syne font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-tight transition-colors duration-300">
@@ -67,8 +79,8 @@ const ServicesSection = ({ fadeUp, services = defaultServices }) => {
                     <p className="text-gray font-dm text-sm sm:text-base md:text-lg leading-relaxed">
                       {desc}
                     </p>
-                    <Link 
-                      to="/services" 
+                    <Link
+                      to="/services"
                       className="inline-flex items-center gap-3 text-teal font-dm text-xs font-semibold uppercase tracking-widest group-hover:text-white transition-colors w-fit pt-1 sm:pt-2"
                     >
                       <span>Learn More</span>
@@ -82,7 +94,6 @@ const ServicesSection = ({ fadeUp, services = defaultServices }) => {
             );
           })}
         </div>
-
       </div>
     </section>
   );
