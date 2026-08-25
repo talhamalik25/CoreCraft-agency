@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import MarqueeStrip from '../components/home/MarqueeStrip';
+import MarqueSection from '../components/home/MarqueSection';
 import HeroSection from '../components/home/HeroSection';
 import AboutSection from '../components/home/AboutSection';
 import ServicesSection from '../components/home/ServicesSection';
@@ -45,6 +46,7 @@ const Home = () => {
     <div className="relative pt-20" ref={containerRef}>
       <HeroSection fadeUp={fadeUp} staggerContainer={staggerContainer} />
       <MarqueeStrip />
+      <MarqueSection />
       <AboutSection fadeUp={fadeUp} />
       <ServicesSection fadeUp={fadeUp} services={services} />
       <ProjectsSection fadeUp={fadeUp} projects={projects} />

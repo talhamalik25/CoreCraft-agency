@@ -24,7 +24,7 @@
 
 @layer base {
   html, body {
-    @apply bg-black text-white font-dm overflow-x-hidden;
+    @apply bg-black text-white font-dm overflow-x-clip;
   }
 }
 
