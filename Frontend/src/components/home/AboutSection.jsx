@@ -21,9 +21,10 @@ const AboutSection = ({ fadeUp }) => {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:flex lg:flex-col gap-6 sm:gap-8 md:gap-12 pt-4 lg:pt-0">
           {[
-            { val: '4', label: 'Services' },
-            { val: '04', label: 'Live Projects' },
-            { val: '∞', label: 'Ambition' },
+            // [PLACEHOLDER: Request real current figures from the site owner before finalizing — do not invent numbers]
+            { val: '--', label: 'SERVICES' },
+            { val: '--', label: 'PROJECTS' },
+            { val: '--', label: 'CLIENTS' },
           ].map((stat, i) => (
             <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.1 }} className="flex flex-col border-l border-teal/20 pl-4 sm:border-l-0 sm:pl-0">
               <div className="text-teal font-syne font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-1 sm:mb-2">{stat.val}</div>

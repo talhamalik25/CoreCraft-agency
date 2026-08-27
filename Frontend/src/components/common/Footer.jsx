@@ -28,10 +28,11 @@ const Footer = () => {
       { name: 'Our Story', path: '/about#genesis' },
     ],
     Services: [
-      { name: 'Web Development', path: '/services#web' },
-      { name: 'Custom Web Apps', path: '/services#custom' },
-      { name: 'SaaS Development', path: '/services#saas' },
-      { name: 'UI/UX Design', path: '/services#design' },
+      { name: 'Digital Experiences', path: '/services#digital-experiences' },
+      { name: 'Digital Products', path: '/services#digital-products' },
+      { name: 'AI & Automation', path: '/services#ai-automation' },
+      { name: 'E-Commerce', path: '/services#ecommerce' },
+      { name: 'Brand Strategy', path: '/services#brand-strategy' },
     ],
     Work: [
       { name: 'Portfolio', path: '/work' },
@@ -120,7 +121,7 @@ const Footer = () => {
               </a>
 
               <p className="text-gray text-xs font-dm">
-                +92 (300) 123-4567
+                +92 300 1234567
               </p>
             </div>
           </div>

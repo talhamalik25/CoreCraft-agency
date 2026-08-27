@@ -15,9 +15,7 @@ const GenesisSection = ({ fadeUp, milestones }) => {
               Our philosophy is precision-first. We don't just build websites or brands; we engineer digital environments that reflect the uncompromising standards of our clients.
             </p>
           </div>
-          <div className="mt-12 aspect-square max-w-sm rounded-2xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 border border-white/5">
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800" alt="Studio" className="w-full h-full object-cover" />
-          </div>
+          {/* [PLACEHOLDER: Request a real image from the site owner — a workspace photo, product screenshot, or abstract brand visual in the existing teal/black palette] */}
         </motion.div>
 
         <div className="space-y-12">

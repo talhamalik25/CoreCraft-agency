@@ -23,8 +23,29 @@
 }
 
 @layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   html, body {
     @apply bg-black text-white font-dm overflow-x-clip;
+  }
+
+  html {
+    min-width: 320px;
+  }
+
+  img,
+  svg,
+  video {
+    max-width: 100%;
+  }
+
+  button,
+  a {
+    touch-action: manipulation;
   }
 }
 
@@ -39,4 +60,38 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+
+/* ---------------------------------------------------------------------------
+ * Floating AI assistant widget (ChatWidgetEmbed)
+ * Styled here instead of inline in JSX so media queries can be used.
+ * ------------------------------------------------------------------------- */
+.chat-widget-iframe {
+  position: fixed;
+  /* Respect notched phones / iOS home-indicator spacing */
+  bottom: env(safe-area-inset-bottom, 0px);
+  right: env(safe-area-inset-right, 0px);
+  border: none;
+  background: transparent;
+  z-index: 9999;
+  transition: width 200ms ease, height 200ms ease;
+}
+
+/* Closed state — the floating bubble (56px button + breathing room). */
+.chat-widget-iframe--closed {
+  width: 88px;
+  height: 88px;
+  /* Never overflow the viewport, even mid-transition */
+  max-width: calc(100vw - 12px);
+  /* 100vh fallback first, then 100dvh for mobile URL-bar-aware sizing */
+  max-height: calc(100vh - 12px);
+  max-height: calc(100dvh - 12px);
+}
+
+/* Open state — the expanded chat window. min() keeps it fully visible
+   on screens narrower than 420px (most phones) without layout jump. */
+.chat-widget-iframe--open {
+  width: min(420px, calc(100vw - 16px));
+  height: min(620px, calc(100vh - 24px));
+  height: min(620px, calc(100dvh - 24px));
 }

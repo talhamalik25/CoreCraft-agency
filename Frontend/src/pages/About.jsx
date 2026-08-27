@@ -12,11 +12,11 @@ const About = () => {
     transition: { duration: 0.8, ease: "easeOut" }
   };
 
+  // [PLACEHOLDER: Request real current figures from the site owner before finalizing — do not invent numbers]
   const stats = [
-    { val: '25+', label: 'PROJECTS' },
-    { val: '15+', label: 'CLIENTS' },
-    { val: '4', label: 'SERVICES' },
-    { val: '1', label: 'VISION' },
+    { val: '--', label: 'SERVICES' },
+    { val: '--', label: 'PROJECTS' },
+    { val: '--', label: 'CLIENTS' },
   ];
 
   const milestones = [
@@ -36,6 +36,24 @@ const About = () => {
     <div className="bg-black pt-20">
       <AboutHero fadeUp={fadeUp} />
       <GenesisSection fadeUp={fadeUp} milestones={milestones} />
+      
+      {/* Stats Section */}
+      <section className="py-20 md:py-32 px-4 sm:px-6 md:px-20 bg-surface">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
+          {stats.map((stat, i) => (
+            <motion.div 
+              key={i}
+              {...fadeUp}
+              transition={{ delay: i * 0.1 }}
+              className="flex flex-col border-l border-teal/20 pl-4"
+            >
+              <div className="text-teal font-syne font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-1 sm:mb-2">{stat.val}</div>
+              <div className="text-gray text-[10px] md:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] font-dm">{stat.label}</div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+      
       <ValuesSection fadeUp={fadeUp} values={values} />
     </div>
   );

@@ -1,13 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const MarqueeStrip = () => {
-  const marqueeItems = [
-    'Web Development',
-    'Custom Web Apps',
-    'SaaS Development',
-    'UI/UX Design',
-  ];
+const MarqueeStrip = ({ services = [] }) => {
+  const marqueeItems = services.map(service => service.title);
+
+  if (!marqueeItems || marqueeItems.length === 0) {
+    return null;
+  }
 
   return (
     <div className="w-full bg-surface border-y border-white/5 py-6 overflow-hidden relative">

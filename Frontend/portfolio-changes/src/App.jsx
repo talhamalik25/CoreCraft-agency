@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
+import ChatWidgetEmbed from './components/common/ChatWidgetEmbed';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Work from './pages/Work';
@@ -8,7 +9,6 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
-import ChatWidgetEmbed from './components/common/ChatWidgetEmbed';
 
 
 

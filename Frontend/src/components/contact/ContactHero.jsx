@@ -8,7 +8,7 @@ const ContactHero = ({ fadeUp }) => {
       <div className="max-w-7xl mx-auto">
         <motion.div {...fadeUp}>
           <SectionLabel text="GET IN TOUCH" />
-          <h1 className="text-white font-syne font-extrabold text-4xl md:text-8xl uppercase leading-[0.9] mb-12">
+          <h1 className="text-white font-syne font-extrabold text-3xl sm:text-5xl md:text-8xl uppercase leading-[0.9] mb-12">
             LET'S CRAFT / <br /> SOMETHING / <br /> TOGETHER.
           </h1>
         </motion.div>

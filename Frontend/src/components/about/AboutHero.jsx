@@ -8,7 +8,7 @@ const AboutHero = ({ fadeUp }) => {
       <div className="max-w-7xl mx-auto">
         <motion.div {...fadeUp}>
           <SectionLabel text="IDENTITY" />
-          <h1 className="text-white font-syne font-extrabold text-4xl md:text-8xl uppercase leading-[0.9] mb-12">
+          <h1 className="text-white font-syne font-extrabold text-3xl sm:text-5xl md:text-8xl uppercase leading-[0.9] mb-12">
             BUILT / <br /> DIFFERENT. / <br /> BY DESIGN.
           </h1>
           <p className="text-gray text-lg font-dm max-w-2xl leading-relaxed">
