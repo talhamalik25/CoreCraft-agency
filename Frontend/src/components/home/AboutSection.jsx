@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { SectionLabel } from '../common/SectionLabel';
 
@@ -14,7 +14,7 @@ const AboutSection = ({ fadeUp }) => {
           <p className="text-gray text-base sm:text-lg font-dm leading-relaxed mb-10 max-w-lg">
             CoreCraft Agency is a multidisciplinary creative hub where code meets cinematic aesthetics. We don't just build interfaces; we engineer digital environments that reflect the uncompromising standards of our clients.
           </p>
-          <Link to="/about" className="text-teal font-dm text-xs sm:text-sm uppercase tracking-widest flex items-center gap-2 group w-fit">
+          <Link href="/about" className="text-teal font-dm text-xs sm:text-sm uppercase tracking-widest flex items-center gap-2 group w-fit">
             More <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
           </Link>
         </motion.div>

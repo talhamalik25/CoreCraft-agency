@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 // Deployed URL of the ai-lead-assistant widget's /widget route.
-// Set VITE_WIDGET_URL in your .env (and in Vercel project settings) once
+// Set NEXT_PUBLIC_WIDGET_URL in your .env (and in Vercel project settings) once
 // the widget app is deployed, e.g.:
-//   VITE_WIDGET_URL=https://corecraft-lead-assistant.vercel.app/widget
+//   NEXT_PUBLIC_WIDGET_URL=https://corecraft-lead-assistant.vercel.app/widget
 const WIDGET_URL =
-  import.meta.env.VITE_WIDGET_URL || "corecraft-assistant-3qld.vercel.app/widget";
+  process.env.NEXT_PUBLIC_WIDGET_URL || "corecraft-assistant-3qld.vercel.app/widget";
 
 // Sizes (88px closed bubble / 420x620 open window) live in src/index.css
 // under the .chat-widget-iframe--* classes so they can be responsive.

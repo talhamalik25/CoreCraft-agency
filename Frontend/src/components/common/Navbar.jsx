@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
@@ -15,7 +16,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,7 +36,7 @@ const Navbar = () => {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -96,7 +97,7 @@ const Navbar = () => {
                 LOGO
             ========================== */}
             <Link
-              to="/"
+              href="/"
               className="
                 relative
                 z-[110]
@@ -129,12 +130,12 @@ const Navbar = () => {
             ========================== */}
             <div className="hidden md:flex items-center gap-6 lg:gap-8">
               {NAV_LINKS.map((link, index) => {
-                const isActive = location.pathname === link.path;
+                const isActive = pathname === link.path;
 
                 return (
                   <Link
                     key={link.name}
-                    to={link.path}
+                    href={link.path}
                     className={`
                       group
                       relative
@@ -178,7 +179,7 @@ const Navbar = () => {
                 DESKTOP CTA
             ========================== */}
             <Link
-              to="/contact"
+              href="/contact"
               className="
                 hidden
                 md:inline-flex
@@ -393,7 +394,7 @@ const Navbar = () => {
                       }}
                     >
                       <Link
-                        to={link.path}
+                        href={link.path}
                         className={`
                           group
                           flex
@@ -465,7 +466,7 @@ const Navbar = () => {
                 className="mt-10"
               >
                 <Link
-                  to="/contact"
+                  href="/contact"
                   className="
                     inline-flex
                     items-center

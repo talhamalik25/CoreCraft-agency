@@ -1,6 +1,8 @@
 @import "tailwindcss";
+@source "../src";
+@source "../app";
 
-@theme {
+@theme inline {
   --color-black: #080808;
   --color-surface: #0F0F0F;
   --color-card: #141414;
@@ -12,8 +14,8 @@
   --color-gray-dim: #52525B;
   --color-border: rgba(255, 255, 255, 0.06);
 
-  --font-syne: "Syne", sans-serif;
-  --font-dm: "DM Sans", sans-serif;
+  --font-syne: var(--font-syne-family), sans-serif;
+  --font-dm: var(--font-dm-family), sans-serif;
 
   --animate-shimmer: shimmer 2s linear infinite;
   @keyframes shimmer {

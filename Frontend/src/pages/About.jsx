@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Target, Zap, Eye } from 'lucide-react';
 import AboutHero from '../components/about/AboutHero';
 import GenesisSection from '../components/about/GenesisSection';

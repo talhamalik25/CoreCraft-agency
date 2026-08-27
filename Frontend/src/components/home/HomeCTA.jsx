@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 const HomeCTA = ({ fadeUp }) => {
@@ -70,14 +70,14 @@ const HomeCTA = ({ fadeUp }) => {
           className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-5"
         >
           <Link
-            to="/contact"
+            href="/contact"
             className="group inline-flex items-center gap-3 border-b border-teal pb-3 font-dm text-xs font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-teal"
           >
             Start a Project
             <ArrowUpRight size={17} className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
           </Link>
           <Link
-            to="/contact"
+            href="/contact"
             className="group inline-flex items-center gap-3 font-dm text-xs uppercase tracking-[0.2em] text-white/45 transition-colors duration-300 hover:text-white"
           >
             Let&apos;s Talk

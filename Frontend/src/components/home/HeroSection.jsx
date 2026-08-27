@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Linkedin, Facebook, Instagram } from "lucide-react";
 
 const Pinterest = ({ size = 24, ...props }) => (
@@ -91,13 +91,13 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
           className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 sm:mb-12"
         >
           <Link
-            to="/work"
+            href="/work"
             className="px-7 sm:px-10 py-3.5 sm:py-4 bg-teal rounded-full text-black font-dm text-[10px] sm:text-xs font-semibold uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_25px_rgba(0,168,150,0.35)]"
           >
             View Our Work
           </Link>
           <Link
-            to="/services"
+            href="/services"
             className="px-7 sm:px-10 py-3.5 sm:py-4 border border-white/20 rounded-full text-white font-dm text-[10px] sm:text-xs uppercase tracking-widest hover:border-white transition-all duration-300 backdrop-blur-sm"
           >
             Our Services

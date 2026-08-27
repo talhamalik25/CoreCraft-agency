@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Linkedin, Facebook, Instagram, ArrowUpRight } from 'lucide-react';
 
 const Pinterest = ({ size = 24, ...props }) => (
@@ -53,7 +53,7 @@ const Footer = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 md:gap-12 mb-12 md:mb-20">
           {/* Logo Column — full width on mobile */}
           <div className="col-span-2 lg:col-span-2 mb-4 lg:mb-0">
-            <Link to="/" className="flex items-center group mb-4 sm:mb-6 md:mb-8">
+            <Link href="/" className="flex items-center group mb-4 sm:mb-6 md:mb-8">
               <img
                 src="/logo.png"
                 alt="CoreCraft Logo"
@@ -89,7 +89,7 @@ const Footer = () => {
                 {links.map((link) => (
                   <li key={link.name}>
                     <Link
-                      to={link.path}
+                      href={link.path}
                       className="text-gray text-xs font-dm hover:text-teal transition-colors duration-300 flex items-center group"
                     >
                       {link.name}
@@ -133,11 +133,11 @@ const Footer = () => {
             © {currentYear} CoreCraft Agency. All rights reserved.
           </p>
           <div className="flex gap-6 sm:gap-8">
-            <Link to="/privacy-policy" className="text-gray-dim text-[10px] sm:text-xs uppercase tracking-widest font-dm hover:text-teal transition-colors">
+            <Link href="/privacy-policy" className="text-gray-dim text-[10px] sm:text-xs uppercase tracking-widest font-dm hover:text-teal transition-colors">
               Privacy Policy
             </Link>
 
-            <Link to="/terms-conditions" className="text-gray-dim text-[10px] sm:text-xs uppercase tracking-widest font-dm hover:text-teal transition-colors">
+            <Link href="/terms-conditions" className="text-gray-dim text-[10px] sm:text-xs uppercase tracking-widest font-dm hover:text-teal transition-colors">
               Terms of Service
             </Link>
           </div>

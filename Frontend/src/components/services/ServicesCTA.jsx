@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const ServicesCTA = ({ fadeUp }) => {
   return (
@@ -15,7 +15,7 @@ const ServicesCTA = ({ fadeUp }) => {
             LEAVE THE <br /> MEDIOCRE <br /> IN THE PAST.
           </h2>
           <div className="flex flex-wrap justify-center gap-6">
-            <Link to="/contact" className="px-7 sm:px-10 py-3 sm:py-4 bg-black rounded-full text-white font-dm text-[10px] sm:text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+            <Link href="/contact" className="px-7 sm:px-10 py-3 sm:py-4 bg-black rounded-full text-white font-dm text-[10px] sm:text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300">
               Start Your Project
             </Link>
           </div>
