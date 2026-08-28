@@ -1,32 +1,49 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ArrowUpRight, Instagram, Linkedin } from 'lucide-react';
 
 const ContactInfo = ({ fadeUp, infoCards }) => {
+  const socialLinks = [
+    { name: 'LinkedIn', handle: '@corecraftagency', href: 'https://www.linkedin.com/company/corecraftagency/' },
+    { name: 'Instagram', handle: '@corecraftagency', href: 'https://www.instagram.com/corecraftagency/' },
+  ];
+
   return (
-    <div className="lg:col-span-5 grid grid-cols-2 gap-4 md:gap-6">
-      {infoCards.map((card, i) => (
-        <motion.div 
-          key={i}
-          {...fadeUp}
-          transition={{ delay: i * 0.1 }}
-          className="bg-card border border-white/5 rounded-2xl p-6 md:p-8 hover:border-teal/20 transition-all duration-300 group"
-        >
-          <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-teal-dim flex items-center justify-center mb-4 md:mb-6 group-hover:bg-teal transition-colors">
-            {React.cloneElement(card.icon, { size: 18, className: "group-hover:text-black transition-colors" })}
-          </div>
-          <h3 className="text-gray-dim text-[9px] md:text-[10px] uppercase tracking-widest font-dm mb-1 md:mb-2">{card.title}</h3>
-          {card.badge ? (
-            <span className="px-3 py-1 bg-teal/10 border border-teal/20 rounded-full text-teal text-[9px] md:text-[10px] uppercase tracking-widest font-dm">
-              {card.detail}
-            </span>
-          ) : (
-            <a href={card.link} className="text-white font-syne font-bold text-xs md:text-sm hover:text-teal transition-colors break-words">
-              {card.detail}
+    <motion.div {...fadeUp} className="lg:col-span-5">
+      <div className="max-w-lg">
+        <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.22em] text-teal">Start a conversation</p>
+        <h2 className="font-syne text-4xl font-extrabold uppercase leading-[0.92] text-white sm:text-5xl md:text-7xl">
+          Let&apos;s build something <span className="text-teal">premium.</span>
+        </h2>
+        <p className="mt-8 max-w-md font-dm text-base leading-relaxed text-gray md:text-lg">
+          Bring us the ambition, the rough sketch, or the problem you cannot quite name yet. We&apos;ll shape the next move together.
+        </p>
+      </div>
+
+      <div className="mt-14 border-t border-white/10 pt-6">
+        <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/35">Find us online</p>
+        <div className="space-y-3">
+          {socialLinks.map((social) => (
+            <a key={social.name} href={social.href} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between border-b border-white/10 py-3 font-dm text-sm text-white/70 transition-colors hover:border-teal hover:text-teal">
+              <span className="flex items-center gap-3">
+                {social.name === 'LinkedIn' ? <Linkedin size={16} /> : <Instagram size={16} />}
+                {social.handle}
+              </span>
+              <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
             </a>
-          )}
-        </motion.div>
-      ))}
-    </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-14 grid grid-cols-2 gap-6 border-t border-white/10 pt-6">
+        {infoCards.slice(0, 2).map((card) => (
+          <div key={card.title}>
+            <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.18em] text-white/35">{card.title}</p>
+            <a href={card.link} className="break-words font-dm text-sm text-white/75 transition-colors hover:text-teal">{card.detail}</a>
+          </div>
+        ))}
+      </div>
+    </motion.div>
   );
 };
 

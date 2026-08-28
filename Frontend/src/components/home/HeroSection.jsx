@@ -22,6 +22,12 @@ const Pinterest = ({ size = 24, ...props }) => (
 
 import { SectionLabel } from "../common/SectionLabel";
 
+const headlineLines = [
+  { text: "CRAFTING", className: "text-white" },
+  { text: "YOUR DIGITAL", className: "text-transparent text-stroke" },
+  { text: "SUCCESS.", className: "text-teal" },
+];
+
 const HeroSection = ({ fadeUp, staggerContainer }) => {
   return (
     <section className="relative min-h-[100dvh] w-full bg-black overflow-hidden flex flex-col items-center justify-center px-4 sm:px-6 md:px-20 pt-20 pb-16">
@@ -63,20 +69,21 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
           <SectionLabel text="SOFTWARE AGENCY" />
         </motion.div>
 
-        <motion.h1
-          variants={fadeUp}
-          className="font-syne font-extrabold uppercase leading-[0.9] tracking-tight mb-6 sm:mb-8 mt-8 sm:mt-12 md:mt-16"
-        >
-          <span className="block text-white text-[clamp(1.85rem,6.5vw,7rem)]">
-            CRAFTING
-          </span>
-          <span className="block text-transparent text-stroke text-[clamp(1.85rem,6.5vw,7rem)]">
-            YOUR DIGITAL
-          </span>
-          <span className="block text-teal text-[clamp(1.85rem,6.5vw,7rem)]">
-            SUCCESS.
-          </span>
-        </motion.h1>
+        <h1 className="mb-6 mt-8 font-syne font-extrabold uppercase leading-[0.9] tracking-tight sm:mb-8 sm:mt-12 md:mt-16">
+          {headlineLines.map((line) => (
+            <span key={line.text} className="block overflow-hidden text-[clamp(1.85rem,6.5vw,7rem)]">
+              {line.text.split("").map((character, index) => (
+                <span
+                  key={`${line.text}-${index}`}
+                  data-entrance-headline-char
+                  className={`inline-block ${line.className}`}
+                >
+                  {character === " " ? "\u00a0" : character}
+                </span>
+              ))}
+            </span>
+          ))}
+        </h1>
 
         <motion.p
           variants={fadeUp}
@@ -86,23 +93,26 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
           command attention and drive results.
         </motion.p>
 
-        <motion.div
-          variants={fadeUp}
+        <div
           className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 sm:mb-12"
         >
           <Link
             href="/work"
+            data-entrance-cta
+            data-magnetic
             className="px-7 sm:px-10 py-3.5 sm:py-4 bg-teal rounded-full text-black font-dm text-[10px] sm:text-xs font-semibold uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_25px_rgba(0,168,150,0.35)]"
           >
-            View Our Work
+            <span data-magnetic-text>View Our Work</span>
           </Link>
           <Link
             href="/services"
+            data-entrance-cta
+            data-magnetic
             className="px-7 sm:px-10 py-3.5 sm:py-4 border border-white/20 rounded-full text-white font-dm text-[10px] sm:text-xs uppercase tracking-widest hover:border-white transition-all duration-300 backdrop-blur-sm"
           >
-            Our Services
+            <span data-magnetic-text>Our Services</span>
           </Link>
-        </motion.div>
+        </div>
       </motion.div>
 
       {/* Hero Bottom */}

@@ -56,7 +56,7 @@ const bentoItems = [
 
 const CapabilityPanel = ({ item }) => {
   return (
-    <article className="group relative flex min-h-[27rem] w-[min(78vw,56rem)] shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#141414] p-7 sm:p-10 md:min-h-[31rem] md:p-14">
+    <article className="group relative flex min-h-[27rem] w-full flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#141414] p-7 sm:p-10 md:min-h-[31rem] md:p-14 lg:w-screen">
       <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${item.accent}`} />
       <div className="relative z-10 flex items-start justify-between gap-6 font-mono text-xs uppercase tracking-[0.08em] text-cyan-400">
         <span>{item.id} / {item.eyebrow}</span>
@@ -74,21 +74,29 @@ const CapabilityPanel = ({ item }) => {
 };
 
 const ServicesSection = () => {
-  const sectionRef = useRef(null);
+  const servicesRef = useRef(null);
   const viewportRef = useRef(null);
   const trackRef = useRef(null);
 
   useGSAP(() => {
     const media = gsap.matchMedia();
+    const resetServicesLayout = () => {
+      const directChildren = Array.from(servicesRef.current.children);
 
-    media.add("(min-width: 768px)", () => {
+      gsap.set(
+        [servicesRef.current, ...directChildren, trackRef.current],
+        { clearProps: "all" }
+      );
+    };
+
+    media.add("(min-width: 1024px)", () => {
       const getDistance = () => trackRef.current.scrollWidth - viewportRef.current.offsetWidth;
 
       gsap.to(trackRef.current, {
         x: () => -getDistance(),
         ease: "none",
         scrollTrigger: {
-          trigger: sectionRef.current,
+          trigger: servicesRef.current,
           pin: viewportRef.current,
           start: "top top",
           end: () => `+=${getDistance()}`,
@@ -98,13 +106,29 @@ const ServicesSection = () => {
       });
     });
 
-    return () => media.revert();
-  }, { scope: sectionRef });
+    media.add("(max-width: 1023px)", () => {
+      resetServicesLayout();
+      ScrollTrigger.normalizeScroll(true);
+
+      return () => {
+        ScrollTrigger.normalizeScroll(false);
+        resetServicesLayout();
+      };
+    });
+
+    ScrollTrigger.refresh();
+
+    return () => {
+      media.revert();
+      resetServicesLayout();
+      ScrollTrigger.refresh();
+    };
+  }, { scope: servicesRef });
 
   return (
     <section 
-      ref={sectionRef}
-      className="bg-[#0D0D0D] px-5 py-24 text-white sm:px-8 md:px-16 md:py-36"
+      ref={servicesRef}
+      className="overflow-hidden bg-[#0D0D0D] px-5 py-24 text-white sm:px-8 md:px-16 md:py-36"
     >
       <div className="mx-auto max-w-[100rem]">
         {/* Section Header */}
@@ -121,7 +145,7 @@ const ServicesSection = () => {
         </div>
 
         <div ref={viewportRef} className="overflow-hidden">
-          <div ref={trackRef} className="flex flex-col gap-4 md:flex-row md:gap-6">
+          <div ref={trackRef} className="flex w-full flex-col gap-4 lg:w-[500vw] lg:flex-row lg:gap-6">
             {bentoItems.map((item) => (
               <CapabilityPanel key={item.id} item={item} />
             ))}

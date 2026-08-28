@@ -35,10 +35,10 @@ const Contact = () => {
     <div className="bg-black pt-20">
       <ContactHero fadeUp={fadeUp} />
 
-      <section className="px-4 sm:px-6 md:px-20 pb-20 md:pb-40">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20">
-          <ContactForm fadeUp={fadeUp} />
+      <section className="px-4 pb-20 sm:px-6 md:px-20 md:pb-40">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-24">
           <ContactInfo fadeUp={fadeUp} infoCards={infoCards} />
+          <ContactForm fadeUp={fadeUp} />
         </div>
       </section>
 

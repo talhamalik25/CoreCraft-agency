@@ -107,6 +107,7 @@ const Navbar = () => {
                 group
               "
               aria-label="CoreCraft Home"
+              data-entrance-nav
             >
               <img
                 src="/logo.png"
@@ -129,12 +130,13 @@ const Navbar = () => {
                 DESKTOP NAV
             ========================== */}
             <div className="hidden md:flex items-center gap-6 lg:gap-8">
-              {NAV_LINKS.map((link, index) => {
+              {NAV_LINKS.map((link) => {
                 const isActive = pathname === link.path;
 
                 return (
                   <Link
                     key={link.name}
+                    data-entrance-nav
                     href={link.path}
                     className={`
                       group
@@ -180,6 +182,8 @@ const Navbar = () => {
             ========================== */}
             <Link
               href="/contact"
+              data-entrance-nav
+              data-magnetic
               className="
                 hidden
                 md:inline-flex
@@ -206,7 +210,7 @@ const Navbar = () => {
                 hover:shadow-[0_0_25px_rgba(0,168,150,0.2)]
               "
             >
-              Start a Project
+              <span data-magnetic-text>Start a Project</span>
               <ArrowUpRight size={13} />
             </Link>
 
@@ -215,6 +219,7 @@ const Navbar = () => {
             ========================== */}
             <button
               type="button"
+              data-entrance-nav
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               className="
                 md:hidden
@@ -467,6 +472,7 @@ const Navbar = () => {
               >
                 <Link
                   href="/contact"
+                    data-magnetic
                   className="
                     inline-flex
                     items-center
@@ -486,7 +492,7 @@ const Navbar = () => {
                     hover:bg-white
                   "
                 >
-                  Start a Project
+                    <span data-magnetic-text>Start a Project</span>
                   <ArrowUpRight size={14} />
                 </Link>
               </motion.div>

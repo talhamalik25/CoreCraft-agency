@@ -38,35 +38,35 @@ const ContactForm = ({ fadeUp }) => {
 
   return (
     <motion.div {...fadeUp} className="lg:col-span-7">
-      <form onSubmit={onSubmit} className="space-y-6">
+      <form onSubmit={onSubmit} className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="text-gray-dim text-[10px] uppercase tracking-widest font-dm ml-4">Full Name</label>
+            <label className="font-mono text-[10px] uppercase tracking-widest text-gray-dim">Full Name</label>
             <input
               type="text"
               name="name"
               required
               placeholder="CoreCraft Agency"
-              className="w-full bg-card border border-white/10 rounded-2xl p-5 text-white placeholder:text-gray-dim focus:border-teal outline-none transition-all duration-300"
+              className="w-full border-0 border-b border-white/15 bg-transparent px-0 py-4 font-dm text-white outline-none transition-all duration-300 placeholder:text-gray-dim focus:border-teal focus:shadow-[0_10px_25px_-18px_rgba(0,168,150,0.95)]"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-gray-dim text-[10px] uppercase tracking-widest font-dm ml-4">Email Address</label>
+            <label className="font-mono text-[10px] uppercase tracking-widest text-gray-dim">Email Address</label>
             <input
               type="email"
               name="email"
               required
               placeholder="corecraftagency07@gmail.com"
-              className="w-full bg-card border border-white/10 rounded-2xl p-5 text-white placeholder:text-gray-dim focus:border-teal outline-none transition-all duration-300"
+              className="w-full border-0 border-b border-white/15 bg-transparent px-0 py-4 font-dm text-white outline-none transition-all duration-300 placeholder:text-gray-dim focus:border-teal focus:shadow-[0_10px_25px_-18px_rgba(0,168,150,0.95)]"
             />
           </div>
         </div>
 
         <div className="space-y-2">
-          <label className="text-gray-dim text-[10px] uppercase tracking-widest font-dm ml-4">Service Type</label>
+          <label className="font-mono text-[10px] uppercase tracking-widest text-gray-dim">Service Type</label>
           <select
             name="service"
-            className="w-full bg-card border border-white/10 rounded-2xl p-5 text-white focus:border-teal outline-none transition-all duration-300 appearance-none"
+            className="w-full appearance-none border-0 border-b border-white/15 bg-transparent px-0 py-4 font-dm text-white outline-none transition-all duration-300 focus:border-teal focus:shadow-[0_10px_25px_-18px_rgba(0,168,150,0.95)]"
           >
             <option>Web Development</option>
             <option>Custom Web Apps</option>
@@ -77,13 +77,13 @@ const ContactForm = ({ fadeUp }) => {
 
 
         <div className="space-y-2">
-          <label className="text-gray-dim text-[10px] uppercase tracking-widest font-dm ml-4">Your Message</label>
+          <label className="font-mono text-[10px] uppercase tracking-widest text-gray-dim">Your Message</label>
           <textarea
             name="message"
             required
             rows="6"
             placeholder="Tell us about your vision..."
-            className="w-full bg-card border border-white/10 rounded-2xl p-5 text-white placeholder:text-gray-dim focus:border-teal outline-none transition-all duration-300 resize-none"
+            className="w-full resize-none border-0 border-b border-white/15 bg-transparent px-0 py-4 font-dm text-white outline-none transition-all duration-300 placeholder:text-gray-dim focus:border-teal focus:shadow-[0_10px_25px_-18px_rgba(0,168,150,0.95)]"
           />
         </div>
 

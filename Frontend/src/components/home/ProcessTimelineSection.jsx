@@ -1,4 +1,3 @@
-import { useReducedMotion } from "framer-motion";
 import { SectionLabel } from "../common/SectionLabel";
 import FadeIn from "../FadeIn";
 
@@ -31,8 +30,6 @@ const steps = [
 ];
 
 export default function ProcessTimelineSection() {
-  const reducedMotion = useReducedMotion();
-
   return (
     <section className="bg-surface px-5 py-24 text-white sm:px-8 md:px-16 md:py-36">
       <div className="mx-auto max-w-[1440px]">
@@ -45,26 +42,25 @@ export default function ProcessTimelineSection() {
           </div>
         </FadeIn>
 
-        <div className="max-w-3xl space-y-8 md:space-y-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:grid-rows-[1fr_1fr]">
           {steps.map((step, index) => (
-            <FadeIn 
-              key={step.num} 
-              y={30} 
-              delay={reducedMotion ? 0 : index * 0.1}
-            >
-              <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-8">
-                <span className="text-teal/80 font-syne font-extrabold text-3xl uppercase leading-none md:text-4xl lg:text-5xl flex-shrink-0">
-                  {step.num}
-                </span>
-                <div className="flex-1">
-                  <h3 className="text-white font-syne font-bold text-xl uppercase leading-tight mb-2 md:text-2xl lg:text-3xl">
+            <FadeIn key={step.num} y={30} className={index === 0 ? "md:col-span-7 md:row-span-2" : index === 1 ? "md:col-span-5" : index === 2 ? "md:col-span-5" : index === 3 ? "md:col-span-5" : "md:col-span-7"}>
+              <article className="group relative flex h-full min-h-[15rem] flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-card p-7 transition-colors duration-500 hover:border-teal/50 sm:p-9">
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-teal/15 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="relative z-10 flex items-start justify-between border-b border-white/10 pb-5">
+                  <span className="font-mono text-xs tracking-[0.2em] text-teal">{step.num}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">0{index + 1} / 05</span>
+                </div>
+                <div className="relative z-10 mt-10">
+                  <h3 className="font-syne text-2xl font-bold uppercase leading-tight text-white transition-transform duration-500 group-hover:translate-x-2 md:text-3xl lg:text-4xl">
                     {step.title}
                   </h3>
-                  <p className="text-gray text-base font-dm leading-relaxed md:text-lg">
+                  <p className="mt-4 max-w-xl font-dm text-base leading-relaxed text-gray transition-colors duration-500 group-hover:text-white/75 md:text-lg">
                     {step.description}
                   </p>
                 </div>
-              </div>
+                <div className="relative z-10 mt-8 h-px w-10 bg-teal transition-all duration-500 group-hover:w-20" />
+              </article>
             </FadeIn>
           ))}
         </div>

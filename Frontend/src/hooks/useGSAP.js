@@ -34,34 +34,76 @@ export const useGSAPAnimations = (callback, config = {}) => {
  * @param {string} options.selector - Selector for magnetic elements
  * @param {number} options.strength - Magnetic strength (default: 0.3)
  */
-export const useMagneticEffect = ({ selector, strength = 0.3 }) => {
+export const useMagneticEffect = ({ selector, strength = 0.3, radius = 50 }) => {
   useGSAPAnimations((gsap) => {
     const elements = document.querySelectorAll(selector);
-    
-    elements.forEach(element => {
-      element.addEventListener('mousemove', (e) => {
+
+    const activeElements = new Set();
+    const resetElement = (element) => {
+      const text = element.querySelector('[data-magnetic-text]');
+
+      gsap.to(element, {
+        x: 0,
+        y: 0,
+        duration: 0.7,
+        ease: 'elastic.out(1, 0.35)',
+        overwrite: true,
+      });
+      gsap.to(text, {
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        ease: 'elastic.out(1, 0.35)',
+        overwrite: true,
+      });
+      activeElements.delete(element);
+    };
+
+    const handleMouseMove = (event) => {
+      elements.forEach((element) => {
         const rect = element.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        
+
+        if (!rect.width || !rect.height) return;
+
+        const closestX = Math.max(rect.left, Math.min(event.clientX, rect.right));
+        const closestY = Math.max(rect.top, Math.min(event.clientY, rect.bottom));
+        const distance = Math.hypot(event.clientX - closestX, event.clientY - closestY);
+
+        if (distance > radius) {
+          if (activeElements.has(element)) resetElement(element);
+          return;
+        }
+
+        activeElements.add(element);
+        const pull = (1 - distance / radius) * strength;
+        const offsetX = (event.clientX - (rect.left + rect.width / 2)) * pull;
+        const offsetY = (event.clientY - (rect.top + rect.height / 2)) * pull;
+        const text = element.querySelector('[data-magnetic-text]');
+
         gsap.to(element, {
-          x: x * strength,
-          y: y * strength,
-          duration: 0.3,
-          ease: 'power2.out'
+          x: offsetX,
+          y: offsetY,
+          duration: 0.35,
+          ease: 'power3.out',
+          overwrite: true,
         });
-      });
-      
-      element.addEventListener('mouseleave', () => {
-        gsap.to(element, {
-          x: 0,
-          y: 0,
+        gsap.to(text, {
+          x: offsetX * 0.45,
+          y: offsetY * 0.45,
           duration: 0.5,
-          ease: 'elastic.out(1, 0.3)'
+          ease: 'power2.out',
+          overwrite: true,
         });
       });
-    });
-  }, { dependencies: [selector, strength] });
+    };
+
+    document.addEventListener('mousemove', handleMouseMove, { passive: true });
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      activeElements.forEach(resetElement);
+    };
+  }, { dependencies: [selector, strength, radius] });
 
   return { gsap, ScrollTrigger };
 };
