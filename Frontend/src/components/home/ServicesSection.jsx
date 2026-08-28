@@ -1,144 +1,130 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight } from "lucide-react";
-import { SectionLabel } from "../common/SectionLabel";
-import FadeIn from "../FadeIn";
 
-const capabilities = [
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+const bentoItems = [
   {
     id: "01",
     title: "Digital Experiences",
-    desc: "Modern websites, landing pages and interactive digital experiences.",
-    mark: "DX",
-    detail: "INTERFACE / MOTION / STORY",
+    description: "Modern websites, landing pages and interactive digital experiences.",
+    eyebrow: "Experience layer",
+    metric: "01 / 05",
+    detail: "Shape the first impression into a digital experience people remember.",
+    accent: "from-cyan-400/25 via-cyan-400/5 to-transparent",
   },
   {
-    id: "02",
+    id: "02", 
     title: "Digital Products",
-    desc: "SaaS platforms, dashboards, portals and custom web applications.",
-    mark: "DP",
-    detail: "PRODUCT / SYSTEMS / SCALE",
+    description: "SaaS platforms, dashboards, portals and custom web applications.",
+    eyebrow: "Product layer",
+    metric: "02 / 05",
+    detail: "Turn complex workflows into focused products that feel simple to use.",
+    accent: "from-emerald-400/20 via-emerald-400/5 to-transparent",
   },
   {
     id: "03",
     title: "AI & Automation",
-    desc: "AI-powered systems, intelligent workflows and automation.",
-    mark: "AI",
-    detail: "INTELLIGENCE / FLOW / LEVERAGE",
+    description: "AI-powered systems, intelligent workflows and automation.",
+    eyebrow: "Intelligence layer",
+    metric: "03 / 05",
+    detail: "Put repetitive work on autopilot with useful, human-centered automation.",
+    accent: "from-sky-400/20 via-sky-400/5 to-transparent",
   },
   {
     id: "04",
     title: "E-Commerce",
-    desc: "Premium e-commerce experiences designed for conversion.",
-    mark: "EC",
-    detail: "COMMERCE / TRUST / CONVERSION",
+    description: "Premium e-commerce experiences designed for conversion.",
+    eyebrow: "Commerce layer",
+    metric: "04 / 05",
+    detail: "Build storefronts that earn trust quickly and make every interaction count.",
+    accent: "from-teal-400/20 via-teal-400/5 to-transparent",
   },
   {
     id: "05",
     title: "Brand Strategy",
-    desc: "Strategic brand positioning and visual identity systems that differentiate and resonate.",
-    mark: "BS",
-    detail: "POSITIONING / IDENTITY / VOICE",
-  },
+    description: "Strategic brand positioning and visual identity systems.",
+    eyebrow: "Identity layer",
+    metric: "05 / 05",
+    detail: "Give ambitious businesses a clear position and a visual system to own it.",
+    accent: "from-cyan-300/20 via-cyan-300/5 to-transparent",
+  }
 ];
 
-function CapabilityVisual({ capability, index }) {
-  const rotation = index % 2 === 0 ? -8 : 8;
-
+const CapabilityPanel = ({ item }) => {
   return (
-    <div className="relative aspect-square w-full max-w-[420px] overflow-hidden border border-white/10 bg-[#101514] p-8 sm:p-12">
-      <div className="absolute inset-0 opacity-50 [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:40px_40px]" />
-      <motion.div
-        key={capability.id}
-        initial={{ opacity: 0, scale: 0.88, rotate: rotation - 8 }}
-        animate={{ opacity: 1, scale: 1, rotate: rotation }}
-        exit={{ opacity: 0, scale: 1.08, rotate: rotation + 8 }}
-        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        className="relative flex h-full w-full items-center justify-center border border-teal/50"
-      >
-        <div className="absolute inset-[14%] border border-white/25" />
-        <div className="absolute inset-[28%] border border-teal/60" />
-        <span className="relative font-syne text-[clamp(3.25rem,16vw,7rem)] font-extrabold tracking-[-0.08em] text-white">
-          {capability.mark}
-        </span>
-        <span className="absolute left-4 top-4 font-dm text-[9px] tracking-[0.25em] text-teal">
-          {capability.id}
-        </span>
-        <span className="absolute bottom-4 right-4 text-right font-dm text-[9px] tracking-[0.18em] text-white/45">
-          {capability.detail}
-        </span>
-      </motion.div>
-    </div>
+    <article className="group relative flex min-h-[27rem] w-[min(78vw,56rem)] shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#141414] p-7 sm:p-10 md:min-h-[31rem] md:p-14">
+      <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${item.accent}`} />
+      <div className="relative z-10 flex items-start justify-between gap-6 font-mono text-xs uppercase tracking-[0.08em] text-cyan-400">
+        <span>{item.id} / {item.eyebrow}</span>
+        <span className="text-white/35">{item.metric}</span>
+      </div>
+      <div className="relative z-10 max-w-2xl">
+        <h3 className="font-syne text-4xl font-semibold leading-[0.98] text-white sm:text-5xl md:text-7xl">{item.title}</h3>
+        <p className="mt-7 max-w-lg font-dm text-base leading-relaxed text-gray-400 md:text-lg">{item.description} {item.detail}</p>
+        <div className="mt-10 flex items-center gap-2 font-dm text-sm text-cyan-400 transition-transform duration-300 group-hover:translate-x-2">
+          Explore capability <ArrowUpRight size={16} />
+        </div>
+      </div>
+    </article>
   );
-}
+};
 
 const ServicesSection = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeCapability = capabilities[activeIndex];
+  const sectionRef = useRef(null);
+  const viewportRef = useRef(null);
+  const trackRef = useRef(null);
+
+  useGSAP(() => {
+    const media = gsap.matchMedia();
+
+    media.add("(min-width: 768px)", () => {
+      const getDistance = () => trackRef.current.scrollWidth - viewportRef.current.offsetWidth;
+
+      gsap.to(trackRef.current, {
+        x: () => -getDistance(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          pin: viewportRef.current,
+          start: "top top",
+          end: () => `+=${getDistance()}`,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+
+    return () => media.revert();
+  }, { scope: sectionRef });
 
   return (
-    <section className="overflow-hidden bg-surface px-5 py-24 text-white sm:px-8 md:px-16 md:py-36">
-      <div className="mx-auto max-w-[1440px]">
-        <FadeIn y={40}>
-          <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[0.8fr_1.2fr] md:gap-16 md:pb-20">
-            <div>
-              <SectionLabel text="WHAT WE BUILD" />
-              <h2 className="mt-6 max-w-2xl font-syne text-[clamp(2.5rem,11vw,7.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.06em] sm:text-[clamp(3.2rem,8vw,7.5rem)]">
-                What we <span className="text-teal">build.</span>
-              </h2>
-            </div>
-            <p className="max-w-md self-end font-dm text-base font-light leading-relaxed text-gray sm:text-lg">
-              We bring design clarity and engineering depth to the digital
-              systems ambitious businesses depend on.
-            </p>
-          </div>
-        </FadeIn>
+    <section 
+      ref={sectionRef}
+      className="bg-[#0D0D0D] px-5 py-24 text-white sm:px-8 md:px-16 md:py-36"
+    >
+      <div className="mx-auto max-w-[100rem]">
+        {/* Section Header */}
+        <div className="services-header mb-16 md:mb-20">
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.08em] text-cyan-400 sm:text-[12px] sm:text-[13px]">
+            WHAT WE BUILD
+          </p>
+          <h2 className="font-syne text-[clamp(2rem,3.5vw,3rem)] font-semibold text-white">
+            Strategic <span className="text-cyan-400">Capabilities</span>
+          </h2>
+          <p className="mt-4 max-w-2xl font-dm text-base leading-relaxed text-gray-400 md:text-lg">
+            We bring design clarity and engineering depth to the digital systems ambitious businesses depend on.
+          </p>
+        </div>
 
-        <div className="grid gap-12 pt-12 md:grid-cols-[minmax(240px,0.65fr)_minmax(0,1.35fr)] md:gap-16 md:pt-20">
-          <FadeIn y={25} delay={0.1}>
-            <div className="flex justify-center md:sticky md:top-28 md:block">
-              <AnimatePresence mode="wait">
-                <CapabilityVisual
-                  key={activeCapability.id}
-                  capability={activeCapability}
-                  index={activeIndex}
-                />
-              </AnimatePresence>
-            </div>
-          </FadeIn>
-
-          <div className="divide-y divide-white/10 border-b border-white/10">
-            {capabilities.map((capability, index) => {
-              const isActive = index === activeIndex;
-
-              return (
-                <FadeIn key={capability.id} y={25} delay={0.15 + index * 0.08}>
-                  <button
-                    type="button"
-                    onMouseEnter={() => setActiveIndex(index)}
-                    onFocus={() => setActiveIndex(index)}
-                    onClick={() => setActiveIndex(index)}
-                    className="group grid w-full grid-cols-[3rem_1fr_auto] items-start gap-3 py-7 text-left transition-colors duration-300 sm:grid-cols-[5rem_1fr_auto] sm:gap-6 sm:py-10"
-                  >
-                    <span className={`font-syne text-lg font-bold transition-colors duration-300 sm:text-2xl ${isActive ? "text-teal" : "text-white/35"}`}>
-                      {capability.id}
-                    </span>
-                    <span>
-                      <span className={`block font-syne text-2xl font-bold uppercase leading-none tracking-[-0.04em] transition-transform transition-colors duration-300 sm:text-4xl md:text-5xl ${isActive ? "translate-x-2 text-teal" : "text-white group-hover:translate-x-1 group-hover:text-teal"}`}>
-                        {capability.title}
-                      </span>
-                      <span className={`block max-w-lg overflow-hidden font-dm text-sm font-light leading-relaxed text-gray transition-all duration-500 sm:text-base ${isActive ? "mt-4 max-h-20 opacity-100" : "mt-0 max-h-0 opacity-0 md:group-hover:mt-3 md:group-hover:max-h-20 md:group-hover:opacity-100"}`}>
-                        {capability.desc}
-                      </span>
-                    </span>
-                    <ArrowUpRight
-                      size={20}
-                      className={`mt-1 transition-all duration-300 ${isActive ? "translate-x-1 -translate-y-1 text-teal" : "text-white/25 group-hover:text-teal"}`}
-                    />
-                  </button>
-                </FadeIn>
-              );
-            })}
+        <div ref={viewportRef} className="overflow-hidden">
+          <div ref={trackRef} className="flex flex-col gap-4 md:flex-row md:gap-6">
+            {bentoItems.map((item) => (
+              <CapabilityPanel key={item.id} item={item} />
+            ))}
           </div>
         </div>
       </div>

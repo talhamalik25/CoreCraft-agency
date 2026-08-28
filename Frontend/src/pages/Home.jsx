@@ -8,6 +8,8 @@ import ProcessTimelineSection from "../components/home/ProcessTimelineSection";
 import ProjectsSection from "../components/home/ProjectsSection";
 import BuiltWithPurposeSection from "../components/home/BuiltWithPurposeSection";
 import HomeCTA from "../components/home/HomeCTA";
+import TechnologiesSection from "../components/home/TechnologiesSection";
+
 
 const Home = () => {
   const containerRef = useRef(null);
@@ -100,6 +102,7 @@ const Home = () => {
       <MarqueeStrip services={services} />
       <ServicesSection fadeUp={fadeUp} services={services} />
       <ProjectsSection projects={projects} />
+      <TechnologiesSection fadeUp={fadeUp} />
       <TechnologyEcosystemSection />
       <BuiltWithPurposeSection />
       <ProcessTimelineSection />
