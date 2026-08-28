@@ -25,11 +25,9 @@ const ContactForm = ({ fadeUp, className = "lg:col-span-7" }) => {
         setResult("Message Sent Successfully!");
         event.target.reset();
       } else {
-        console.log("Error", data);
         setResult(data.message || "Something went wrong. Please try again.");
       }
-    } catch (error) {
-      console.error("Submission error", error);
+    } catch {
       setResult("Server error. Please try again later.");
     } finally {
       setIsSending(false);

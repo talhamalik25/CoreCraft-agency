@@ -58,8 +58,14 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [pathname]);
+    if (!isMobileMenuOpen) return undefined;
+
+    const frame = window.requestAnimationFrame(() => {
+      setIsMobileMenuOpen(false);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [isMobileMenuOpen, pathname]);
 
   useEffect(() => {
     if (isMobileMenuOpen) {

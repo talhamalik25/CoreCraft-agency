@@ -1,5 +1,6 @@
 import "../src/index.css";
 import SiteShell from "../src/components/common/SiteShell";
+import ScrollTriggerRefresh from "../src/components/common/ScrollTriggerRefresh";
 import { DM_Sans, Syne } from "next/font/google";
 
 const dmSans = DM_Sans({
@@ -54,6 +55,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${syne.variable}`}>
+        <ScrollTriggerRefresh />
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

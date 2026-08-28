@@ -1,15 +1,17 @@
 import React, { useRef } from "react";
+import dynamic from "next/dynamic";
 import MarqueeStrip from "../components/home/MarqueeStrip";
 import HeroSection from "../components/home/HeroSection";
-import AboutSection from "../components/home/AboutSection";
-import ServicesSection from "../components/home/ServicesSection";
 import TechnologyEcosystemSection from "../components/home/TechnologyEcosystemSection";
 import ProcessTimelineSection from "../components/home/ProcessTimelineSection";
 import ProjectsSection from "../components/home/ProjectsSection";
 import BuiltWithPurposeSection from "../components/home/BuiltWithPurposeSection";
 import HomeCTA from "../components/home/HomeCTA";
 import TechnologiesSection from "../components/home/TechnologiesSection";
-import TestimonialsSection from "../components/home/TestimonialsSection";
+
+const AboutSection = dynamic(() => import("../components/home/AboutSection"), { ssr: false });
+const ServicesSection = dynamic(() => import("../components/home/ServicesSection"), { ssr: false });
+const TestimonialsSection = dynamic(() => import("../components/home/TestimonialsSection"), { ssr: false });
 
 
 const Home = () => {

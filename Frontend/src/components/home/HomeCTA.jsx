@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-const HomeCTA = ({ fadeUp }) => {
+const HomeCTA = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
