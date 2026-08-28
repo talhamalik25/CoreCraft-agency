@@ -84,12 +84,6 @@ const HomeCTA = () => {
             <ArrowUpRight size={17} className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
           </Link>
         </motion.div>
-
-        <div className="mt-20 flex items-end justify-between border-t border-white/10 pt-5 font-dm text-[9px] uppercase tracking-[0.2em] text-white/30 sm:mt-28">
-          <span>CoreCraft Agency</span>
-          <span className="hidden sm:block">Ideas into systems</span>
-          <span>2026</span>
-        </div>
       </div>
     </section>
   );
