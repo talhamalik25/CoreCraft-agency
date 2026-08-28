@@ -17,7 +17,7 @@ if (typeof window !== 'undefined') {
 export const useGSAPAnimations = (callback, config = {}) => {
   const { context } = useGSAP(() => {
     if (callback) {
-      callback(gsap, ScrollTrigger);
+      return callback(gsap, ScrollTrigger);
     }
   }, config);
 

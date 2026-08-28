@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
+import { useGSAPAnimations, useMagneticEffect } from "../../hooks/useGSAP";
 
 const NAV_LINKS = [
   { name: "Home", path: "/" },
@@ -13,10 +14,32 @@ const NAV_LINKS = [
 ];
 
 const Navbar = () => {
+  const navRef = React.useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const pathname = usePathname();
+
+  useGSAPAnimations((gsap) => {
+    const island = navRef.current?.querySelector("[data-nav-island]");
+    if (!island) return;
+
+    const hero = document.querySelector("[data-hero-section]");
+    if (!hero) return;
+
+    gsap.to(island, {
+      scale: 0.96,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: hero,
+        start: "bottom top",
+        end: "bottom+=120 top",
+        scrub: true,
+      },
+    });
+  }, []);
+
+  useMagneticEffect({ selector: "[data-nav-magnetic]", strength: 0.12, radius: 50 });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,8 +79,9 @@ const Navbar = () => {
           NAVBAR
       ========================== */}
       <nav
+        ref={navRef}
         className={`
-          fixed top-0 left-0 w-full z-[100]
+          fixed top-0 left-0 z-[100] flex w-full justify-center
           transition-all duration-500
           ${isScrolled ? "py-3 sm:py-3.5" : "py-5 sm:py-6"}
         `}
@@ -65,7 +89,7 @@ const Navbar = () => {
         <div
           className={`
             max-w-[1400px]
-            mx-auto
+            mx-4 w-[calc(100%-2rem)] sm:mx-6 sm:w-[calc(100%-3rem)] lg:mx-8 lg:w-[calc(100%-4rem)]
             px-4
             sm:px-6
             lg:px-8
@@ -73,6 +97,7 @@ const Navbar = () => {
           `}
         >
           <div
+            data-nav-island
             className={`
               relative
               flex
@@ -137,6 +162,7 @@ const Navbar = () => {
                   <Link
                     key={link.name}
                     data-entrance-nav
+                    data-nav-magnetic
                     href={link.path}
                     className={`
                       group
@@ -158,7 +184,7 @@ const Navbar = () => {
                       }
                     `}
                   >
-                    <span>{link.name}</span>
+                    <span data-magnetic-text>{link.name}</span>
 
                     <span
                       className={`

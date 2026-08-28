@@ -9,6 +9,7 @@ import ProjectsSection from "../components/home/ProjectsSection";
 import BuiltWithPurposeSection from "../components/home/BuiltWithPurposeSection";
 import HomeCTA from "../components/home/HomeCTA";
 import TechnologiesSection from "../components/home/TechnologiesSection";
+import TestimonialsSection from "../components/home/TestimonialsSection";
 
 
 const Home = () => {
@@ -106,6 +107,7 @@ const Home = () => {
       <TechnologyEcosystemSection />
       <BuiltWithPurposeSection />
       <ProcessTimelineSection />
+      <TestimonialsSection />
       <AboutSection fadeUp={fadeUp} />
       <HomeCTA fadeUp={fadeUp} />
     </div>

@@ -30,7 +30,7 @@ const headlineLines = [
 
 const HeroSection = ({ fadeUp, staggerContainer }) => {
   return (
-    <section className="relative min-h-[100dvh] w-full bg-black overflow-hidden flex flex-col items-center justify-center px-4 sm:px-6 md:px-20 pt-20 pb-16">
+    <section data-hero-section className="relative min-h-[100dvh] w-full bg-black overflow-hidden flex flex-col items-center justify-center px-4 sm:px-6 md:px-20 pt-20 pb-16">
       {/* Background Video Layer — Dynamic Abstract Blue Lines */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
         <video
@@ -121,9 +121,14 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="text-gray-dim text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-dm text-center sm:text-left"
+          data-magnetic
+          className="group flex items-center gap-3 rounded-full border border-white/10 bg-black/30 px-4 py-2.5 text-gray-dim text-[9px] uppercase tracking-[0.15em] backdrop-blur-md transition-colors duration-300 hover:border-teal/40 hover:text-white sm:text-[10px] sm:tracking-[0.2em]"
         >
-          Karachi, Pakistan — Available Worldwide
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-50" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-teal shadow-[0_0_12px_rgba(0,168,150,0.8)]" />
+          </span>
+          <span data-magnetic-text>Karachi, Pakistan — Available Worldwide</span>
         </motion.div>
 
         {/* Social Links — Horizontal on Mobile, Vertical on Desktop */}

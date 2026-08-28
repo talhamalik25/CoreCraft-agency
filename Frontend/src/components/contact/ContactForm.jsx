@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
-const ContactForm = ({ fadeUp }) => {
+const ContactForm = ({ fadeUp, className = "lg:col-span-7" }) => {
   const [result, setResult] = useState("");
   const [isSending, setIsSending] = useState(false);
 
@@ -37,7 +37,7 @@ const ContactForm = ({ fadeUp }) => {
   };
 
   return (
-    <motion.div {...fadeUp} className="lg:col-span-7">
+    <motion.div {...fadeUp} className={className}>
       <form onSubmit={onSubmit} className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">

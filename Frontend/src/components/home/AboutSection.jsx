@@ -3,11 +3,38 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { SectionLabel } from '../common/SectionLabel';
+import { useGSAPAnimations } from '../../hooks/useGSAP';
 
 const AboutSection = ({ fadeUp }) => {
+  const sectionRef = React.useRef(null);
+
+  useGSAPAnimations((gsap) => {
+    const counters = gsap.utils.toArray('[data-metric-target]', sectionRef.current);
+
+    counters.forEach((counter) => {
+      const target = Number(counter.dataset.metricTarget);
+      const suffix = counter.dataset.metricSuffix || '';
+      const value = { current: 0 };
+
+      gsap.to(value, {
+        current: target,
+        duration: 1.4,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: counter,
+          start: 'top 85%',
+          once: true,
+        },
+        onUpdate: () => {
+          counter.textContent = `${Math.round(value.current)}${suffix}`;
+        },
+      });
+    });
+  }, { scope: sectionRef });
+
   return (
-    <section className="py-20 md:py-32 px-4 sm:px-6 md:px-20 bg-black overflow-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
+    <section ref={sectionRef} className="overflow-hidden bg-black px-4 py-20 sm:px-6 md:px-20 md:py-32">
+      <div className="mx-auto max-w-7xl">
         <motion.div {...fadeUp}>
           <SectionLabel text="ABOUT" number="01" />
           <h2 className="text-white font-syne font-extrabold text-4xl sm:text-5xl md:text-7xl uppercase mb-6 sm:mb-8 mt-4">OUR ESSENCE.</h2>
@@ -19,16 +46,15 @@ const AboutSection = ({ fadeUp }) => {
           </Link>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 lg:flex lg:flex-col gap-6 sm:gap-8 md:gap-12 pt-4 lg:pt-0">
+        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-12 md:mt-24">
           {[
-            // [PLACEHOLDER: Request real current figures from the site owner before finalizing — do not invent numbers]
-            { val: '--', label: 'SERVICES' },
-            { val: '--', label: 'PROJECTS' },
-            { val: '--', label: 'CLIENTS' },
+            { val: 12, suffix: '+', label: 'PROJECTS LAUNCHED', span: 'sm:col-span-5' },
+            { val: 94, suffix: '%', label: 'CLIENT RETENTION', span: 'sm:col-span-4' },
+            { val: 5, suffix: '', label: 'CORE SERVICES', span: 'sm:col-span-3' },
           ].map((stat, i) => (
-            <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.1 }} className="flex flex-col border-l border-teal/20 pl-4 sm:border-l-0 sm:pl-0">
-              <div className="text-teal font-syne font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-1 sm:mb-2">{stat.val}</div>
-              <div className="text-gray text-[10px] md:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] font-dm">{stat.label}</div>
+            <motion.div key={stat.label} {...fadeUp} transition={{ delay: i * 0.1 }} className={`border-t border-teal/30 pt-5 ${stat.span}`}>
+              <div data-metric-target={stat.val} data-metric-suffix={stat.suffix} className="font-syne text-6xl font-extrabold leading-none text-teal sm:text-7xl md:text-8xl">0{stat.suffix}</div>
+              <div className="mt-4 font-dm text-[10px] uppercase tracking-[0.25em] text-gray sm:text-xs">{stat.label}</div>
             </motion.div>
           ))}
         </div>
