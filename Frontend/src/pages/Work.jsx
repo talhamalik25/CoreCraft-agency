@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import WorkHero from '../components/work/WorkHero';
 import WorkCTA from '../components/work/WorkCTA';
 import FilterBar from '../components/work/FilterBar';
