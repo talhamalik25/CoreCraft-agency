@@ -9,9 +9,18 @@ import BuiltWithPurposeSection from "../components/home/BuiltWithPurposeSection"
 import HomeCTA from "../components/home/HomeCTA";
 import TechnologiesSection from "../components/home/TechnologiesSection";
 
-const AboutSection = dynamic(() => import("../components/home/AboutSection"), { ssr: false });
-const ServicesSection = dynamic(() => import("../components/home/ServicesSection"), { ssr: false });
-const TestimonialsSection = dynamic(() => import("../components/home/TestimonialsSection"), { ssr: false });
+const AboutSection = dynamic(() => import("../components/home/AboutSection"), {
+  ssr: false,
+  loading: () => <div aria-hidden="true" className="min-h-[24rem] bg-surface" />,
+});
+const ServicesSection = dynamic(() => import("../components/home/ServicesSection"), {
+  ssr: false,
+  loading: () => <div aria-hidden="true" className="min-h-[36rem] bg-[#0D0D0D]" />,
+});
+const TestimonialsSection = dynamic(() => import("../components/home/TestimonialsSection"), {
+  ssr: false,
+  loading: () => <div aria-hidden="true" className="min-h-[24rem] bg-surface" />,
+});
 
 
 const Home = () => {

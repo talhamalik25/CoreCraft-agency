@@ -33,8 +33,8 @@ const AboutSection = ({ fadeUp }) => {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="overflow-hidden bg-black px-4 py-20 sm:px-6 md:px-20 md:py-32">
-      <div className="mx-auto max-w-7xl">
+    <section ref={sectionRef} className="w-full overflow-hidden bg-black py-20 md:py-32">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div {...fadeUp}>
           <SectionLabel text="ABOUT" number="01" />
           <h2 className="text-white font-syne font-extrabold text-4xl sm:text-5xl md:text-7xl uppercase mb-6 sm:mb-8 mt-4">OUR ESSENCE.</h2>

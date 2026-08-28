@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 const MarqueeStrip = ({ services = [] }) => {
   const marqueeItems = services.map(service => service.title);
@@ -10,28 +9,18 @@ const MarqueeStrip = ({ services = [] }) => {
 
   return (
     <div className="w-full bg-surface border-y border-white/5 py-6 overflow-hidden relative">
-      <motion.div
-        className="flex whitespace-nowrap gap-12"
-        animate={{ x: [0, -1000] }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
-      >
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className="flex items-center gap-12">
+      <div className="flex w-max animate-marquee whitespace-nowrap gap-12">
+        {[0, 1].map((group) => (
+          <div key={group} className="flex shrink-0 items-center gap-12">
             {marqueeItems.map((item, index) => (
-              <React.Fragment key={index}>
-                <span className="text-gray tracking-[0.3em] text-xs font-dm font-light">
-                  {item}
-                </span>
-                <span className="w-1.5 h-1.5 bg-teal rounded-full" />
+              <React.Fragment key={`${group}-${index}`}>
+                <span className="text-gray tracking-[0.3em] text-xs font-dm font-light">{item}</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-teal" />
               </React.Fragment>
             ))}
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };

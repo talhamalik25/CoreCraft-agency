@@ -30,7 +30,7 @@ const headlineLines = [
 
 const HeroSection = ({ fadeUp, staggerContainer }) => {
   return (
-    <section data-hero-section className="relative min-h-[100dvh] w-full bg-black overflow-hidden flex flex-col items-center justify-center px-4 sm:px-6 md:px-20 pt-20 pb-16">
+    <section data-hero-section className="relative min-h-[100dvh] w-full overflow-hidden bg-black px-4 pt-20 pb-16 sm:px-6 lg:px-8">
       {/* Background Video Layer — Dynamic Abstract Blue Lines */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
         <video
@@ -63,7 +63,7 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
         initial="initial"
         whileInView="whileInView"
         viewport={{ once: true }}
-        className="relative z-10 w-full max-w-5xl mx-auto text-center flex flex-col items-center my-auto"
+        className="relative z-10 w-full max-w-7xl mx-auto text-center flex flex-col items-center my-auto"
       >
         <motion.div variants={fadeUp}>
           <SectionLabel text="SOFTWARE AGENCY" />
@@ -116,7 +116,7 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
       </motion.div>
 
       {/* Hero Bottom */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center sm:items-end gap-4 mt-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-end gap-4 mt-auto">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

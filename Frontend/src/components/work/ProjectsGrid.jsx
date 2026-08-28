@@ -5,8 +5,8 @@ import { ArrowUpRight } from 'lucide-react';
 
 const ProjectsGrid = ({ filteredProjects }) => {
   return (
-    <section className="px-4 sm:px-6 md:px-20 pb-20 md:pb-40">
-      <div className="max-w-7xl mx-auto">
+    <section className="w-full pb-20 md:pb-40">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           <AnimatePresence mode='popLayout'>
             {filteredProjects.map((project) => (
@@ -26,7 +26,7 @@ const ProjectsGrid = ({ filteredProjects }) => {
                       <img 
                         src={project.image} 
                         alt={project.name} 
-                        className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
+                        className="w-full h-auto object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
                     </div>

@@ -99,14 +99,14 @@ export default function TestimonialsSection() {
   const changeSlide = (direction) => setActiveIndex((index) => Math.max(0, Math.min(testimonials.length - 1, index + direction)));
 
   return (
-    <section ref={sectionRef} className="overflow-hidden bg-black px-5 py-24 text-white sm:px-8 md:px-16 md:py-36">
-      <div className="mx-auto max-w-[1440px]">
+    <section ref={sectionRef} className="w-full overflow-hidden bg-black py-24 text-white md:py-36">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-14 flex flex-col justify-between gap-8 md:mb-20 md:flex-row md:items-end">
           <div>
             <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.22em] text-teal">Client stories</p>
             <h2 className="font-syne text-4xl font-extrabold uppercase leading-[0.92] sm:text-5xl md:text-7xl">Built on <span className="text-teal">trust.</span></h2>
           </div>
-          <div className="flex items-end justify-between gap-8 md:gap-12">
+          <div className="flex w-full flex-col items-start justify-between gap-6 sm:flex-row sm:items-end md:gap-12 md:w-auto">
             <p className="max-w-sm font-dm text-base leading-relaxed text-gray">A few words from the people building what comes next.</p>
             <div className="hidden shrink-0 gap-2 sm:flex">
               <button type="button" onClick={() => changeSlide(-1)} disabled={activeIndex === 0} aria-label="Previous client story" className="flex h-11 w-11 items-center justify-center rounded-full border border-zinc-800 text-white transition-colors hover:border-teal hover:text-teal disabled:cursor-not-allowed disabled:opacity-30"><ArrowLeft size={17} /></button>

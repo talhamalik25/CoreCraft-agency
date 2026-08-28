@@ -7,7 +7,7 @@ const HomeCTA = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#0b0e0d] px-5 py-24 text-white sm:px-8 md:px-16 md:py-40">
+    <section className="relative isolate w-full overflow-hidden bg-[#0b0e0d] py-24 text-white md:py-40">
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <motion.div
           className="absolute -right-24 top-1/2 h-[620px] w-[620px] -translate-y-1/2 rounded-full border border-teal/20"
@@ -23,7 +23,7 @@ const HomeCTA = () => {
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#0b0e0d] via-[#0b0e0d]/70 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1440px]">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}

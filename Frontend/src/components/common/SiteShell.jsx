@@ -73,7 +73,11 @@ export default function SiteShell({ children }) {
   }, { scope: shellRef });
 
   return (
-    <div ref={shellRef} className="min-h-screen bg-black text-white font-dm selection:bg-teal selection:text-black">
+    <div ref={shellRef} className="w-full overflow-x-clip relative min-h-screen bg-black text-white font-dm selection:bg-teal selection:text-black">
+      {/* overflow-x-clip (NOT hidden): `hidden` would turn this wrapper into a
+          scroll container and silently break every `position: sticky` layout
+          inside it (e.g. the stacked project cards). `clip` clips the overflow
+          without that side effect. */}
       <Navbar />
       <main>{children}</main>
       <Footer />

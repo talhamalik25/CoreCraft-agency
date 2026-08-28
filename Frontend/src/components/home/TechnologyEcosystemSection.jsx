@@ -74,8 +74,8 @@ export default function TechnologyEcosystemSection() {
   };
 
   return (
-    <section id="technologies" className="overflow-hidden bg-surface px-5 py-24 text-white sm:px-8 md:px-16 md:py-36">
-      <div className="mx-auto max-w-[1440px]">
+    <section id="technologies" className="w-full overflow-hidden bg-surface py-24 text-white md:py-36">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeIn y={40}>
           <div className="grid gap-8 border-b border-white/10 pb-12 md:grid-cols-[1fr_0.75fr] md:items-end md:pb-20">
             <div>

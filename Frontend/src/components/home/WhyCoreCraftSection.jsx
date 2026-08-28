@@ -30,8 +30,8 @@ export default function WhyCoreCraftSection() {
   const activePrinciple = PRINCIPLES[activeIndex];
 
   return (
-    <section className="overflow-hidden bg-[#101312] px-5 py-24 text-white sm:px-8 md:px-16 md:py-36">
-      <div className="mx-auto max-w-[1440px]">
+    <section className="w-full overflow-hidden bg-[#101312] py-24 text-white md:py-36">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeIn y={40}>
           <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[1fr_0.85fr] md:items-end md:gap-16 md:pb-20">
             <div>

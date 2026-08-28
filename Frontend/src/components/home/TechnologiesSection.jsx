@@ -32,7 +32,7 @@ export default function TechnologiesSection() {
     <section
       id="technologies"
       aria-labelledby="technologies-title"
-      className="relative overflow-hidden bg-surface px-4 py-20 text-white sm:px-6 md:py-28 lg:px-20 lg:py-36"
+      className="relative w-full overflow-hidden bg-surface py-20 text-white md:py-28 lg:py-36"
     >
       <div
         aria-hidden="true"
@@ -44,7 +44,7 @@ export default function TechnologiesSection() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="border-b border-white/10 pb-10 md:pb-12">
           <FadeIn delay={0} y={20}>
             <SectionLabel text="TECHNOLOGY" />

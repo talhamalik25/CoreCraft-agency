@@ -29,8 +29,8 @@ export default function BuiltWithPurposeSection() {
   const reducedMotion = useReducedMotion();
 
   return (
-    <section className="bg-black px-5 py-24 text-white sm:px-8 md:px-16 md:py-36">
-      <div className="mx-auto max-w-[1440px]">
+    <section className="w-full bg-black py-24 text-white md:py-36">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeIn y={40}>
           <div className="mb-16 md:mb-20">
             <SectionLabel text="OUR APPROACH" />

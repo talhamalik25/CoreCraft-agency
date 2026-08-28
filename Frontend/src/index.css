@@ -18,9 +18,14 @@
   --font-dm: var(--font-dm-family), sans-serif;
 
   --animate-shimmer: shimmer 2s linear infinite;
+  --animate-marquee: marquee 24s linear infinite;
   @keyframes shimmer {
     from { background-position: 0 0; }
     to { background-position: 200% 0; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-50% - 1.5rem)); }
   }
 }
 
@@ -33,11 +38,14 @@
 
   html, body {
     @apply bg-black text-white font-dm;
+    /* `overflow-x: hidden` makes body its own scroll container, which breaks
+       every position: sticky layout on the site (stacked project cards,
+       sticky sidebars). `clip` clips horizontal overflow without creating a
+       scroll container; `hidden` is kept as a fallback for older browsers. */
+    overflow-x: hidden;
+    overflow-x: clip;
   }
 
-  html {
-    min-width: 320px;
-  }
 
   img,
   svg,

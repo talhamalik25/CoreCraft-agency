@@ -50,7 +50,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-black border-t border-white/5 pt-12 md:pt-20 pb-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 grid grid-cols-1 gap-14 border-b border-white/10 pb-16 lg:grid-cols-2 lg:gap-24 lg:pb-24">
           <div className="max-w-xl">
             <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.22em] text-teal">Start a conversation</p>
@@ -70,14 +70,14 @@ const Footer = () => {
             fadeUp={{ initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.7 } }}
           />
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 md:gap-12 mb-12 md:mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 md:gap-12 mb-12 md:mb-20">
           {/* Logo Column — full width on mobile */}
           <div className="col-span-2 lg:col-span-2 mb-4 lg:mb-0">
             <Link href="/" className="flex items-center group mb-4 sm:mb-6 md:mb-8">
               <img
                 src="/logo.png"
                 alt="CoreCraft Logo"
-                className="h-9 sm:h-10 md:h-12 w-auto object-contain brightness-110 group-hover:scale-105 transition-all duration-500"
+                className="w-full h-auto max-w-[12rem] object-contain brightness-110 group-hover:scale-105 transition-all duration-500"
               />
             </Link>
             <p className="text-gray text-xs sm:text-sm font-dm leading-relaxed max-w-xs mb-6 sm:mb-8">

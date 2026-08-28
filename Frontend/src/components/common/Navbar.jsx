@@ -58,14 +58,12 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (!isMobileMenuOpen) return undefined;
-
     const frame = window.requestAnimationFrame(() => {
       setIsMobileMenuOpen(false);
     });
 
     return () => window.cancelAnimationFrame(frame);
-  }, [isMobileMenuOpen, pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -411,7 +409,7 @@ const Navbar = () => {
               {/* Links */}
               <div className="flex flex-col gap-4 sm:gap-5">
                 {NAV_LINKS.map((link, index) => {
-                  const isActive = location.pathname === link.path;
+                  const isActive = pathname === link.path;
 
                   return (
                     <motion.div
