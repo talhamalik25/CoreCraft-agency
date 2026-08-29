@@ -6,9 +6,9 @@ import { ArrowUpRight } from "lucide-react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-// Distance from the top of the viewport where the strip pins on small screens,
-// clearing the fixed navbar.
-const MOBILE_PIN_OFFSET = 88;
+// Distance from the top of the viewport where the strip pins, clearing the
+// fixed navbar.
+const PIN_OFFSET = 88;
 
 const bentoItems = [
   {
@@ -86,8 +86,11 @@ const ServicesSection = () => {
     // Horizontal-scroll strip driven purely by VERTICAL page scroll — no
     // direct left/right swiping on any device.
     //
-    //  - <section> is the trigger. When its top reaches the viewport top we
-    //    PIN the track wrapper (ScrollTrigger acts as a sticky wrapper).
+    //  - The strip is its own trigger: it PINS once its top reaches
+    //    PIN_OFFSET, so the cards sit right under the navbar for the whole
+    //    pinned stretch. (Triggering off the section top instead would park
+    //    the strip wherever the header left it — far down the viewport, with
+    //    a tall empty gap above it once the header scrolled away.)
     //  - The pin-spacer is made exactly as tall as the horizontal travel
     //    distance: track.scrollWidth − visible viewport width. That gives the
     //    "tall inner scroll-height" needed to map a full screen of vertical
@@ -98,51 +101,27 @@ const ServicesSection = () => {
     //  - invalidateOnRefresh + ScrollTrigger.refresh() on load keep the
     //    distance honest after fonts/images/layout settle; ScrollTrigger
     //    updates the transform on requestAnimationFrame so it stays smooth.
-    //  - Below `lg`, the section header is much taller relative to the screen,
-    //    so pinning off the section top would park the strip far down the
-    //    viewport and leave a tall empty gap above it. There the strip itself
-    //    is the trigger and pins just under the fixed navbar instead.
     const getDistance = () =>
       Math.max(0, trackRef.current.scrollWidth - viewportRef.current.offsetWidth);
 
-    const buildTween = (config) =>
-      gsap.to(trackRef.current, {
-        x: () => -getDistance(),
-        ease: "none",
-        scrollTrigger: {
-          pin: viewportRef.current,
-          end: () => `+=${getDistance()}`,
-          scrub: 1,
-          invalidateOnRefresh: true,
-          ...config,
-        },
-      });
-
-    const mm = gsap.matchMedia();
-
-    mm.add("(min-width: 1024px)", () => {
-      const tween = buildTween({ trigger: servicesRef.current, start: "top top" });
-      return () => {
-        tween.scrollTrigger?.kill();
-        tween.kill();
-      };
-    });
-
-    mm.add("(max-width: 1023px)", () => {
-      const tween = buildTween({
+    const tween = gsap.to(trackRef.current, {
+      x: () => -getDistance(),
+      ease: "none",
+      scrollTrigger: {
         trigger: viewportRef.current,
-        start: `top ${MOBILE_PIN_OFFSET}`,
-      });
-      return () => {
-        tween.scrollTrigger?.kill();
-        tween.kill();
-      };
+        pin: viewportRef.current,
+        start: `top ${PIN_OFFSET}`,
+        end: () => `+=${getDistance()}`,
+        scrub: 1,
+        invalidateOnRefresh: true,
+      },
     });
 
     ScrollTrigger.refresh();
 
     return () => {
-      mm.revert();
+      tween.scrollTrigger?.kill();
+      tween.kill();
       ScrollTrigger.refresh();
     };
   }, { scope: servicesRef });
