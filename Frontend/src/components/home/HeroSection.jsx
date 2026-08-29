@@ -39,9 +39,11 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
           loop
           playsInline
           disablePictureInPicture
+          poster="/backgroud-poster.webp"
           className="absolute inset-0 w-full h-full object-cover opacity-45 transform scale-105"
         >
-          <source src="./backgroud.mp4" type="video/mp4" />
+          {/* Absolute path so the video also loads on nested routes */}
+          <source src="/backgroud-opt.mp4" type="video/mp4" />
         </video>
         {/* Dark Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/60 to-black z-[1]" />

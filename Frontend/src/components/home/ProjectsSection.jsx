@@ -39,9 +39,9 @@ function ProjectCard({ project, index }) {
   const num = project.num || String(index + 1).padStart(2, "0");
 
   // Safe image extraction supporting both 3-image objects and single image props
-  const img1 = project.images?.col1Top || project.image || "/project1.png";
-  const img2 = project.images?.col1Bottom || project.image || "/project2.png";
-  const img3 = project.images?.col2 || project.image || "/project3.png";
+  const img1 = project.images?.col1Top || project.image || "/project1.webp";
+  const img2 = project.images?.col1Bottom || project.image || "/project2.webp";
+  const img3 = project.images?.col2 || project.image || "/project3.webp";
 
   // SSR-safe initial offset (desktop values); re-applied responsively by the
   // section-level effect below.
@@ -107,16 +107,22 @@ function ProjectCard({ project, index }) {
           <img
             src={img1}
             alt={`${project.name} preview 1`}
+            width={project.w}
+            height={project.h}
             className="w-full object-cover rounded-[30px] sm:rounded-[40px] md:rounded-[48px]"
             style={{ height: "clamp(130px, 16vw, 230px)" }}
             loading="lazy"
+            decoding="async"
           />
           <img
             src={img2}
             alt={`${project.name} preview 2`}
+            width={project.w}
+            height={project.h}
             className="w-full object-cover rounded-[30px] sm:rounded-[40px] md:rounded-[48px] flex-1"
             style={{ height: "clamp(160px, 22vw, 340px)" }}
             loading="lazy"
+            decoding="async"
           />
         </div>
 
@@ -125,8 +131,11 @@ function ProjectCard({ project, index }) {
           <img
             src={img3}
             alt={`${project.name} main preview`}
+            width={project.w}
+            height={project.h}
             className="w-full h-full object-cover rounded-[30px] sm:rounded-[40px] md:rounded-[48px]"
             loading="lazy"
+            decoding="async"
           />
         </div>
       </div>

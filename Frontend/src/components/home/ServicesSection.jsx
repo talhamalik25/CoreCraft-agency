@@ -56,7 +56,7 @@ const bentoItems = [
 
 const CapabilityPanel = ({ item }) => {
   return (
-    <article className="group relative flex min-h-[27rem] w-[min(85vw,26rem)] flex-shrink-0 snap-center flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-card p-7 sm:w-[min(70vw,34rem)] sm:p-10 md:min-h-[31rem] md:p-14 lg:w-1/5">
+    <article className="group relative flex min-h-[27rem] w-[min(85vw,26rem)] flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-card p-7 sm:w-[min(70vw,34rem)] sm:p-10 md:min-h-[31rem] md:p-14 lg:w-1/5">
       <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${item.accent}`} />
       <div className="relative z-10 flex items-start justify-between gap-6 font-mono text-[10px] uppercase tracking-[0.2em] text-teal">
         <span>{item.id} / {item.eyebrow}</span>
@@ -79,51 +79,42 @@ const ServicesSection = () => {
   const trackRef = useRef(null);
 
   useGSAP(() => {
-    const media = gsap.matchMedia();
-    const resetServicesLayout = () => {
-      const directChildren = Array.from(servicesRef.current.children);
+    // Horizontal-scroll strip driven purely by VERTICAL page scroll — no
+    // direct left/right swiping on any device.
+    //
+    //  - <section> is the trigger. When its top reaches the viewport top we
+    //    PIN the track wrapper (ScrollTrigger acts as a sticky wrapper).
+    //  - The pin-spacer is made exactly as tall as the horizontal travel
+    //    distance: track.scrollWidth − visible viewport width. That gives the
+    //    "tall inner scroll-height" needed to map a full screen of vertical
+    //    scroll onto one full screen of horizontal translation.
+    //  - scrub:1 maps scroll progress 0→1 onto x:0 → −distance (content slides
+    //    right). The same window scroll listener serves wheel (desktop) and
+    //    native touch scroll (mobile) — no touch-drag/pointer handlers.
+    //  - invalidateOnRefresh + ScrollTrigger.refresh() on load keep the
+    //    distance honest after fonts/images/layout settle; ScrollTrigger
+    //    updates the transform on requestAnimationFrame so it stays smooth.
+    const getDistance = () =>
+      Math.max(0, trackRef.current.scrollWidth - viewportRef.current.offsetWidth);
 
-      gsap.set(
-        [servicesRef.current, ...directChildren, trackRef.current],
-        { clearProps: "all" }
-      );
-    };
-
-    media.add("(min-width: 1024px)", () => {
-      const getDistance = () => trackRef.current.scrollWidth - viewportRef.current.offsetWidth;
-
-      gsap.to(trackRef.current, {
-        x: () => -getDistance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: servicesRef.current,
-          pin: viewportRef.current,
-          start: "top top",
-          end: () => `+=${getDistance()}`,
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-    });
-
-    media.add("(max-width: 1023px)", () => {
-      resetServicesLayout();
-      // allowNestedScroll lets native touch scrolling work inside nested
-      // scrollable areas (the capability swipe strip below) while
-      // normalizeScroll keeps handling the page-level scroll on touch devices.
-      ScrollTrigger.normalizeScroll({ allowNestedScroll: true });
-
-      return () => {
-        ScrollTrigger.normalizeScroll(false);
-        resetServicesLayout();
-      };
+    const tween = gsap.to(trackRef.current, {
+      x: () => -getDistance(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: servicesRef.current,
+        pin: viewportRef.current,
+        start: "top top",
+        end: () => `+=${getDistance()}`,
+        scrub: 1,
+        invalidateOnRefresh: true,
+      },
     });
 
     ScrollTrigger.refresh();
 
     return () => {
-      media.revert();
-      resetServicesLayout();
+      tween.scrollTrigger?.kill();
+      tween.kill();
       ScrollTrigger.refresh();
     };
   }, { scope: servicesRef });
@@ -147,14 +138,16 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        {/* Mobile: native horizontal swipe strip (overflow-x-auto + touch).
-            Desktop (lg+): overflow-hidden so the GSAP pinned scrub controls
-            the track exactly as before. */}
+        {/* Scroll-pinned horizontal strip — the wrapper is clipped so the only
+            way the cards move is the translateX driven by vertical scroll. */}
         <div
           ref={viewportRef}
-          className="no-scrollbar snap-x snap-mandatory overscroll-x-contain overflow-x-auto [-webkit-overflow-scrolling:touch] lg:overflow-hidden lg:snap-none"
+          className="overflow-hidden"
         >
-          <div ref={trackRef} className="flex w-max flex-row gap-4 lg:w-[500%] lg:gap-6">
+          <div
+            ref={trackRef}
+            className="flex w-max flex-row gap-4 will-change-transform lg:w-[500%] lg:gap-6"
+          >
             {bentoItems.map((item) => (
               <CapabilityPanel key={item.id} item={item} />
             ))}

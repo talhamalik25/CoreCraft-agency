@@ -141,6 +141,9 @@ const Navbar = () => {
               <img
                 src="/logo.png"
                 alt="CoreCraft"
+                width={641}
+                height={183}
+                decoding="async"
                 className="
                   h-8
                   sm:h-9

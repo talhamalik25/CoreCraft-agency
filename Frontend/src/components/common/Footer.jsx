@@ -75,8 +75,12 @@ const Footer = () => {
           <div className="col-span-2 lg:col-span-2 mb-4 lg:mb-0">
             <Link href="/" className="flex items-center group mb-4 sm:mb-6 md:mb-8">
               <img
-                src="/logo.png"
+                src="/logo.webp"
                 alt="CoreCraft Logo"
+                width={641}
+                height={183}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto max-w-[12rem] object-contain brightness-110 group-hover:scale-105 transition-all duration-500"
               />
             </Link>

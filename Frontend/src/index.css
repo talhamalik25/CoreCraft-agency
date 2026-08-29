@@ -72,6 +72,26 @@
   }
 }
 
+/* Respect users who prefer reduced motion without touching the default
+   experience — infinite decorative loops (marquee, shimmer, ping) and
+   long-running ambient transitions are stilled, nothing else changes. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-shimmer {
+    animation: none !important;
+  }
+  .animate-ping {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
 /* ---------------------------------------------------------------------------
  * Floating AI assistant widget (ChatWidgetEmbed)
  * Styled here instead of inline in JSX so media queries can be used.

@@ -55,6 +55,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${syne.variable}`}>
+        {/* Warm-up connections for the third-party origins the site talks to
+            at runtime: the AI-assistant widget iframe and the Web3Forms API. */}
+        <link rel="preconnect" href="https://corecraft-assistant-3qld.vercel.app" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://corecraft-assistant-3qld.vercel.app" />
+        <link rel="preconnect" href="https://api.web3forms.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://api.web3forms.com" />
         <ScrollTriggerRefresh />
         <SiteShell>{children}</SiteShell>
       </body>
