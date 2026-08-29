@@ -6,6 +6,10 @@ import { ArrowUpRight } from "lucide-react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
+// Distance from the top of the viewport where the strip pins, clearing the
+// fixed navbar.
+const PIN_OFFSET = 88;
+
 const bentoItems = [
   {
     id: "01",
@@ -56,14 +60,14 @@ const bentoItems = [
 
 const CapabilityPanel = ({ item }) => {
   return (
-    <article className="group relative flex min-h-[27rem] w-[min(85vw,26rem)] flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-card p-7 sm:w-[min(70vw,34rem)] sm:p-10 md:min-h-[31rem] md:p-14 lg:w-1/5">
+    <article className="group relative flex min-h-[27rem] w-[calc(100vw-2rem)] flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-card p-6 sm:w-[calc(100vw-3rem)] sm:p-10 md:min-h-[31rem] md:p-14 lg:w-1/5">
       <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${item.accent}`} />
       <div className="relative z-10 flex items-start justify-between gap-6 font-mono text-[10px] uppercase tracking-[0.2em] text-teal">
         <span>{item.id} / {item.eyebrow}</span>
         <span className="text-white/35">{item.metric}</span>
       </div>
       <div className="relative z-10 max-w-2xl">
-        <h3 className="font-syne text-4xl font-extrabold uppercase leading-[0.92] tracking-tight text-white sm:text-5xl md:text-7xl">{item.title}</h3>
+        <h3 className="font-syne text-[clamp(1.5rem,6vw,2.25rem)] font-extrabold uppercase leading-[0.92] tracking-tight text-white break-words sm:text-5xl md:text-7xl lg:break-normal">{item.title}</h3>
         <p className="mt-7 max-w-lg font-dm text-base leading-relaxed text-gray md:text-lg">{item.description} {item.detail}</p>
         <div className="mt-10 flex items-center gap-2 font-dm text-xs font-semibold uppercase tracking-[0.2em] text-teal transition-transform duration-300 group-hover:translate-x-2">
           Explore capability <ArrowUpRight size={16} />
@@ -82,8 +86,11 @@ const ServicesSection = () => {
     // Horizontal-scroll strip driven purely by VERTICAL page scroll — no
     // direct left/right swiping on any device.
     //
-    //  - <section> is the trigger. When its top reaches the viewport top we
-    //    PIN the track wrapper (ScrollTrigger acts as a sticky wrapper).
+    //  - The strip is its own trigger: it PINS once its top reaches
+    //    PIN_OFFSET, so the cards sit right under the navbar for the whole
+    //    pinned stretch. (Triggering off the section top instead would park
+    //    the strip wherever the header left it — far down the viewport, with
+    //    a tall empty gap above it once the header scrolled away.)
     //  - The pin-spacer is made exactly as tall as the horizontal travel
     //    distance: track.scrollWidth − visible viewport width. That gives the
     //    "tall inner scroll-height" needed to map a full screen of vertical
@@ -101,9 +108,9 @@ const ServicesSection = () => {
       x: () => -getDistance(),
       ease: "none",
       scrollTrigger: {
-        trigger: servicesRef.current,
+        trigger: viewportRef.current,
         pin: viewportRef.current,
-        start: "top top",
+        start: `top ${PIN_OFFSET}`,
         end: () => `+=${getDistance()}`,
         scrub: 1,
         invalidateOnRefresh: true,
