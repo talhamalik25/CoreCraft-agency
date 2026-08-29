@@ -67,7 +67,7 @@ const CapabilityPanel = ({ item }) => {
         <span className="text-white/35">{item.metric}</span>
       </div>
       <div className="relative z-10 max-w-2xl">
-        <h3 className="font-syne text-[clamp(1.75rem,7vw,2.25rem)] font-extrabold uppercase leading-[0.92] tracking-tight text-white break-words hyphens-auto sm:text-5xl md:text-7xl lg:break-normal lg:hyphens-none">{item.title}</h3>
+        <h3 className="font-syne text-[clamp(1.5rem,6vw,2.25rem)] font-extrabold uppercase leading-[0.92] tracking-tight text-white break-words sm:text-5xl md:text-7xl lg:break-normal">{item.title}</h3>
         <p className="mt-7 max-w-lg font-dm text-base leading-relaxed text-gray md:text-lg">{item.description} {item.detail}</p>
         <div className="mt-10 flex items-center gap-2 font-dm text-xs font-semibold uppercase tracking-[0.2em] text-teal transition-transform duration-300 group-hover:translate-x-2">
           Explore capability <ArrowUpRight size={16} />
