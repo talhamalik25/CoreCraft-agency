@@ -6,6 +6,10 @@ import { ArrowUpRight } from "lucide-react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
+// Distance from the top of the viewport where the strip pins on small screens,
+// clearing the fixed navbar.
+const MOBILE_PIN_OFFSET = 88;
+
 const bentoItems = [
   {
     id: "01",
@@ -56,14 +60,14 @@ const bentoItems = [
 
 const CapabilityPanel = ({ item }) => {
   return (
-    <article className="group relative flex min-h-[27rem] w-[min(85vw,26rem)] flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-card p-7 sm:w-[min(70vw,34rem)] sm:p-10 md:min-h-[31rem] md:p-14 lg:w-1/5">
+    <article className="group relative flex min-h-[27rem] w-[calc(100vw-2rem)] flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-card p-6 sm:w-[calc(100vw-3rem)] sm:p-10 md:min-h-[31rem] md:p-14 lg:w-1/5">
       <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${item.accent}`} />
       <div className="relative z-10 flex items-start justify-between gap-6 font-mono text-[10px] uppercase tracking-[0.2em] text-teal">
         <span>{item.id} / {item.eyebrow}</span>
         <span className="text-white/35">{item.metric}</span>
       </div>
       <div className="relative z-10 max-w-2xl">
-        <h3 className="font-syne text-4xl font-extrabold uppercase leading-[0.92] tracking-tight text-white sm:text-5xl md:text-7xl">{item.title}</h3>
+        <h3 className="font-syne text-[clamp(1.75rem,7vw,2.25rem)] font-extrabold uppercase leading-[0.92] tracking-tight text-white break-words hyphens-auto sm:text-5xl md:text-7xl lg:break-normal lg:hyphens-none">{item.title}</h3>
         <p className="mt-7 max-w-lg font-dm text-base leading-relaxed text-gray md:text-lg">{item.description} {item.detail}</p>
         <div className="mt-10 flex items-center gap-2 font-dm text-xs font-semibold uppercase tracking-[0.2em] text-teal transition-transform duration-300 group-hover:translate-x-2">
           Explore capability <ArrowUpRight size={16} />
@@ -94,27 +98,51 @@ const ServicesSection = () => {
     //  - invalidateOnRefresh + ScrollTrigger.refresh() on load keep the
     //    distance honest after fonts/images/layout settle; ScrollTrigger
     //    updates the transform on requestAnimationFrame so it stays smooth.
+    //  - Below `lg`, the section header is much taller relative to the screen,
+    //    so pinning off the section top would park the strip far down the
+    //    viewport and leave a tall empty gap above it. There the strip itself
+    //    is the trigger and pins just under the fixed navbar instead.
     const getDistance = () =>
       Math.max(0, trackRef.current.scrollWidth - viewportRef.current.offsetWidth);
 
-    const tween = gsap.to(trackRef.current, {
-      x: () => -getDistance(),
-      ease: "none",
-      scrollTrigger: {
-        trigger: servicesRef.current,
-        pin: viewportRef.current,
-        start: "top top",
-        end: () => `+=${getDistance()}`,
-        scrub: 1,
-        invalidateOnRefresh: true,
-      },
+    const buildTween = (config) =>
+      gsap.to(trackRef.current, {
+        x: () => -getDistance(),
+        ease: "none",
+        scrollTrigger: {
+          pin: viewportRef.current,
+          end: () => `+=${getDistance()}`,
+          scrub: 1,
+          invalidateOnRefresh: true,
+          ...config,
+        },
+      });
+
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1024px)", () => {
+      const tween = buildTween({ trigger: servicesRef.current, start: "top top" });
+      return () => {
+        tween.scrollTrigger?.kill();
+        tween.kill();
+      };
+    });
+
+    mm.add("(max-width: 1023px)", () => {
+      const tween = buildTween({
+        trigger: viewportRef.current,
+        start: `top ${MOBILE_PIN_OFFSET}`,
+      });
+      return () => {
+        tween.scrollTrigger?.kill();
+        tween.kill();
+      };
     });
 
     ScrollTrigger.refresh();
 
     return () => {
-      tween.scrollTrigger?.kill();
-      tween.kill();
+      mm.revert();
       ScrollTrigger.refresh();
     };
   }, { scope: servicesRef });
