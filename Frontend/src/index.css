@@ -6,7 +6,7 @@
   --color-black: #0D0D0D;
   --color-surface: #1A1A1A;
   --color-card: #141414;
-  --color-teal: #00E6D9;
+  --color-teal: #00a896;
   --color-teal-dim: rgba(0, 230, 217, 0.12);
   --color-teal-glow: rgba(0, 230, 217, 0.25);
   --color-danger: #FF5C5C;
@@ -21,13 +21,25 @@
 
   --animate-shimmer: shimmer 2s linear infinite;
   --animate-marquee: marquee 24s linear infinite;
+
   @keyframes shimmer {
-    from { background-position: 0 0; }
-    to { background-position: 200% 0; }
+    from {
+      background-position: 0 0;
+    }
+
+    to {
+      background-position: 200% 0;
+    }
   }
+
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(calc(-50% - 1.5rem)); }
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(calc(-50% - 1.5rem));
+    }
   }
 }
 
@@ -35,24 +47,30 @@
   .section-x {
     @apply px-4 sm:px-6 md:px-20;
   }
+
   .section-y {
     @apply py-20 md:py-32;
   }
+
   .section-y-lg {
     @apply py-24 md:py-36;
   }
+
   .btn-primary {
     @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-teal px-7 py-3.5 font-dm text-[10px] font-semibold uppercase tracking-widest text-black shadow-[0_0_25px_rgba(0,230,217,0.28)] transition-all duration-300 hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 sm:px-10 sm:text-xs;
   }
+
   .btn-secondary {
     @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-3.5 font-dm text-[10px] uppercase tracking-widest text-white backdrop-blur-sm transition-all duration-300 hover:border-teal hover:text-teal sm:px-10 sm:text-xs;
   }
+
   .btn-outline-teal {
     @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-teal/70 px-4 py-2.5 font-dm text-[10px] font-medium uppercase tracking-[0.15em] text-teal transition-all duration-300 hover:border-teal hover:bg-teal hover:text-black hover:shadow-[0_0_25px_rgba(0,230,217,0.2)] lg:px-5 lg:text-[11px];
   }
 }
 
 @layer base {
+
   *,
   *::before,
   *::after {
@@ -70,7 +88,8 @@
     overflow: hidden;
   }
 
-  html, body {
+  html,
+  body {
     @apply bg-black text-white font-dm;
     /* `overflow-x: hidden` makes body its own scroll container, which breaks
        every position: sticky layout on the site (stacked project cards,
@@ -97,9 +116,11 @@
   .text-stroke {
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
   }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -110,13 +131,16 @@
    experience — infinite decorative loops (marquee, shimmer, ping) and
    long-running ambient transitions are stilled, nothing else changes. */
 @media (prefers-reduced-motion: reduce) {
+
   .animate-marquee,
   .animate-shimmer {
     animation: none !important;
   }
+
   .animate-ping {
     animation: none !important;
   }
+
   *,
   *::before,
   *::after {

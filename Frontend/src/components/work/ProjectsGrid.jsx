@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { useGSAPAnimations } from "../../hooks/useGSAP";
@@ -22,7 +23,7 @@ export default function ProjectsGrid({ filteredProjects, filter }) {
     {filteredProjects.map((project) => { const wide = project.isFeatured || project.id === 5; return <article data-project-card key={project.id} onPointerMove={parallax} onPointerLeave={resetParallax} className={`group overflow-hidden border border-white/10 bg-surface transition-[border-color,box-shadow] duration-500 hover:border-teal/45 hover:shadow-[0_0_38px_rgba(0,230,217,.12)] ${wide ? "md:col-span-2" : "min-h-[34rem]"}`}>
       <div className={`grid h-full ${wide ? "lg:grid-cols-[1.16fr_.84fr]" : "grid-rows-[14rem_1fr]"}`}>
         <div className={`relative overflow-hidden border-b border-white/10 ${wide ? "min-h-[17rem] lg:min-h-[30rem] lg:border-b-0 lg:border-r" : ""}`}>
-          <img src={project.image} alt={`${project.name} project preview`} width={project.w} height={project.h} loading="lazy" decoding="async" className="h-full w-full scale-[1.03] object-cover opacity-70 transition-[transform,opacity] duration-700 ease-out group-hover:scale-110 group-hover:opacity-90" />
+          <Image src={project.image} alt={`${project.name} project preview`} width={project.w} height={project.h} sizes={wide ? "(max-width: 768px) 100vw, 100vw" : "(max-width: 768px) 100vw, 50vw"} className="h-full w-full scale-[1.03] object-cover opacity-70 transition-[transform,opacity] duration-700 ease-out group-hover:scale-110 group-hover:opacity-90" />
           <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(13,13,13,.08),rgba(13,13,13,.62))]" /><div className="absolute left-4 top-4 flex items-center gap-3 font-mono text-[9px] uppercase tracking-[.15em] text-white/70"><span className="h-1.5 w-1.5 bg-teal" />Selected</div>
         </div>
         <div className={`flex h-full flex-col p-6 sm:p-8 ${wide ? "lg:p-12" : ""}`}>

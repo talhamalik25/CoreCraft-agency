@@ -2,10 +2,15 @@
 
 import { useRef } from "react";
 import { Target, Zap, Eye, Scaling } from "lucide-react";
-import AboutHero from "../components/about/AboutHero";
+import dynamic from "next/dynamic";
 import GenesisSection from "../components/about/GenesisSection";
 import { SectionLabel } from "../components/common/SectionLabel";
 import { useGSAPAnimations } from "../hooks/useGSAP";
+
+const AboutHero = dynamic(() => import("../components/about/AboutHero"), {
+  ssr: false,
+  loading: () => <div aria-hidden="true" className="min-h-[100dvh] bg-black" />,
+});
 
 const milestones = [
   { year: "2025", name: "The Catalyst", desc: "CoreCraft was born out of frustration with template-driven agencies. We wanted to build digital systems with genuine architectural rigor." },

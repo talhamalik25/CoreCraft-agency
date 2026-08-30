@@ -1,9 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import WorkHero from "../components/work/WorkHero";
+import dynamic from "next/dynamic";
 import FilterBar from "../components/work/FilterBar";
 import ProjectsGrid from "../components/work/ProjectsGrid";
+
+const WorkHero = dynamic(() => import("../components/work/WorkHero"), {
+  ssr: false,
+  loading: () => <div aria-hidden="true" className="min-h-[100dvh] bg-black" />,
+});
 
 const projects = [
   { id: 1, name: "Sooti Mehal", category: "E-commerce Platform", tag: "E-commerce Platform", desc: "A premium handcrafted home decor e-commerce website with modern design and seamless shopping experience.", image: "/project1.webp", w: 1906, h: 943, isFeatured: true, link: "https://sootimehal.com/", tags: ["React", "Node.js", "MongoDB", "Stripe"] },

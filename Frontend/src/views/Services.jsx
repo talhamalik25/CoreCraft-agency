@@ -5,9 +5,13 @@ import dynamic from "next/dynamic";
 import { ArrowUpRight, BrainCircuit, Layers3, Monitor, ShoppingBag, Smartphone } from "lucide-react";
 import ServicesHero from "../components/services/ServicesHero";
 import ProcessSection from "../components/services/ProcessSection";
-import ToolsSection from "../components/services/ToolsSection";
 import ServicesCTA from "../components/services/ServicesCTA";
 import { useGSAPAnimations } from "../hooks/useGSAP";
+
+const ToolsSection = dynamic(() => import("../components/services/ToolsSection"), {
+  ssr: false,
+  loading: () => <div aria-hidden="true" className="min-h-[40rem] bg-black" />,
+});
 
 // The WebGL capability preview is decorative and desktop-only — load its
 // Three.js dependency in a separate chunk after the page is interactive.
