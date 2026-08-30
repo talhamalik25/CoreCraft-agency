@@ -1,46 +1,13 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+"use client";
 
-const GenesisSection = ({ fadeUp, milestones }) => {
-  return (
-    <section className="py-20 md:py-40 px-4 sm:px-6 md:px-20">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20">
-        <motion.div {...fadeUp}>
-          <h2 className="text-white font-syne font-extrabold text-3xl sm:text-4xl md:text-5xl uppercase mb-8">THE GENESIS.</h2>
-          <div className="space-y-6 text-gray text-lg font-dm leading-relaxed">
-            <p>
-              Founded in the bustling creative landscape of Karachi, CoreCraft Studio was born from a simple observation: most digital experiences lack soul. We set out to redefine the standard by infusing architectural precision into every pixel we touch.
-            </p>
-            <p>
-              Our philosophy is precision-first. We don't just build websites or brands; we engineer digital environments that reflect the uncompromising standards of our clients.
-            </p>
-          </div>
-          {/* [PLACEHOLDER: Request a real image from the site owner — a workspace photo, product screenshot, or abstract brand visual in the existing teal/black palette] */}
-        </motion.div>
+import { useRef } from "react";
+import { SectionLabel } from "../common/SectionLabel";
+import { useGSAPAnimations } from "../../hooks/useGSAP";
 
-        <div className="space-y-12">
-          {milestones.map((ms, i) => (
-            <motion.div 
-              key={i}
-              {...fadeUp}
-              transition={{ delay: i * 0.1 }}
-              className="flex gap-8 group"
-            >
-              <div className="flex flex-col items-center">
-                <div className="w-3 h-3 rounded-full bg-teal group-hover:scale-150 transition-transform duration-300" />
-                <div className="w-px h-full bg-white/10 mt-4" />
-              </div>
-              <div>
-                <div className="text-teal font-dm text-[10px] uppercase tracking-widest mb-2">{ms.year}</div>
-                <h3 className="text-white font-syne font-bold text-2xl uppercase mb-4">{ms.name}</h3>
-                <p className="text-gray text-base font-dm leading-relaxed max-w-md">{ms.desc}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default GenesisSection;
+export default function GenesisSection({ milestones }) {
+  const ref = useRef(null);
+  useGSAPAnimations((gsap) => { const steps = ref.current?.querySelectorAll("[data-genesis-step]"); const line = ref.current?.querySelector("[data-genesis-line]"); const tl = gsap.timeline({ scrollTrigger: { trigger: ref.current, start: "top 65%", end: "bottom 70%", scrub: 0.6 } }); tl.fromTo(line, { scaleX: 0 }, { scaleX: 1, ease: "none", duration: 1 }).fromTo(steps, { autoAlpha: 0.25, x: 36 }, { autoAlpha: 1, x: 0, duration: 0.9, stagger: 0.22, ease: "power2.out" }, 0.1).fromTo(ref.current?.querySelectorAll("[data-genesis-node]"), { scale: 0.1 }, { scale: 1, stagger: 0.22, duration: 0.45, ease: "back.out(2)" }, 0.13); }, { scope: ref, dependencies: [milestones] });
+  return <section ref={ref} id="genesis" className="bg-surface section-x section-y"><div className="mx-auto max-w-7xl"><div className="grid gap-10 border-b border-white/10 pb-14 lg:grid-cols-[.8fr_1.2fr] lg:items-end"><div><SectionLabel text="The Genesis" /><h2 className="mt-7 font-syne text-[clamp(3rem,6.5vw,6.4rem)] font-extrabold uppercase leading-[.84] tracking-[-.06em] text-white">Designed from a higher standard.</h2></div><div className="max-w-2xl pb-1 text-base leading-relaxed text-white/60 md:text-lg"><p>CoreCraft began with an engineering observation: most digital experiences lack robust architecture. We set out to pair performance precision with the craft that makes a product feel distinct.</p><p className="mt-5">We do not simply build websites. We engineer scalable digital environments that reflect the uncompromising standards of the businesses behind them.</p></div></div>
+    <div className="relative mt-14 grid gap-10 lg:mt-20 lg:grid-cols-3 lg:gap-12"><div data-genesis-line aria-hidden="true" className="absolute left-0 right-0 top-[5px] hidden h-px origin-left bg-teal/60 lg:block" />{milestones.map((item) => <article data-genesis-step key={item.name} className="relative border-t border-white/10 pt-7 lg:border-0 lg:pt-12"><span data-genesis-node aria-hidden="true" className="absolute -top-[1px] left-0 hidden h-3 w-3 bg-teal shadow-[0_0_20px_rgba(0,230,217,.8)] lg:block" /><p className="font-mono text-[11px] uppercase tracking-[.2em] text-teal">{item.year}</p><h3 className="mt-6 font-syne text-3xl font-bold uppercase text-white sm:text-4xl">{item.name}</h3><p className="mt-5 max-w-sm text-base leading-relaxed text-white/60">{item.desc}</p></article>)}</div>
+  </div></section>;
+}

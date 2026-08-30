@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -25,7 +27,7 @@ import { SectionLabel } from "../common/SectionLabel";
 const headlineLines = [
   { text: "CRAFTING", className: "text-white" },
   { text: "YOUR DIGITAL", className: "text-transparent text-stroke" },
-  { text: "SUCCESS.", className: "text-teal" },
+  { text: "SUCCESS", className: "text-teal" },
 ];
 
 const HeroSection = ({ fadeUp, staggerContainer }) => {
@@ -38,12 +40,13 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
           muted
           loop
           playsInline
+          preload="metadata"
           disablePictureInPicture
-          poster="/backgroud-poster.webp"
+          poster="/background-poster.webp"
           className="absolute inset-0 w-full h-full object-cover opacity-45 transform scale-105"
         >
           {/* Absolute path so the video also loads on nested routes */}
-          <source src="/backgroud-opt.mp4" type="video/mp4" />
+          <source src="/background-opt.mp4" type="video/mp4" />
         </video>
         {/* Dark Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/60 to-black z-[1]" />
@@ -52,7 +55,7 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
           className="absolute inset-0 opacity-[0.04] z-[2]"
           style={{
             backgroundImage:
-              "linear-gradient(to right, #00A896 1px, transparent 1px), linear-gradient(to bottom, #00A896 1px, transparent 1px)",
+              "linear-gradient(to right, #00E6D9 1px, transparent 1px), linear-gradient(to bottom, #00E6D9 1px, transparent 1px)",
             backgroundSize: "80px 80px",
           }}
         />
@@ -91,18 +94,19 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
           variants={fadeUp}
           className="text-gray text-base sm:text-lg md:text-xl font-dm font-light max-w-xl mb-10 sm:mb-12 leading-relaxed mx-auto px-2"
         >
-          We transform ideas into precision-crafted digital products that
-          command attention and drive results.
+          A founder-led engineering team in Karachi. We design, build, and ship
+          web platforms, AI automation, and commerce systems that hold up under
+          real traffic and real deadlines.
         </motion.p>
 
         <div
-          className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 sm:mb-12"
+          className="flex w-full flex-col items-center gap-3 min-[390px]:flex-row min-[390px]:flex-wrap min-[390px]:justify-center sm:gap-6 mb-8 sm:mb-12"
         >
           <Link
             href="/work"
             data-entrance-cta
             data-magnetic
-            className="px-7 sm:px-10 py-3.5 sm:py-4 bg-teal rounded-full text-black font-dm text-[10px] sm:text-xs font-semibold uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_25px_rgba(0,168,150,0.35)]"
+            className="btn-primary w-full min-[390px]:w-auto"
           >
             <span data-magnetic-text>View Our Work</span>
           </Link>
@@ -110,7 +114,7 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
             href="/services"
             data-entrance-cta
             data-magnetic
-            className="px-7 sm:px-10 py-3.5 sm:py-4 border border-white/20 rounded-full text-white font-dm text-[10px] sm:text-xs uppercase tracking-widest hover:border-white transition-all duration-300 backdrop-blur-sm"
+            className="btn-secondary w-full min-[390px]:w-auto"
           >
             <span data-magnetic-text>Our Services</span>
           </Link>
@@ -128,7 +132,7 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
         >
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-50" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-teal shadow-[0_0_12px_rgba(0,168,150,0.8)]" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-teal shadow-[0_0_12px_rgba(0,230,217,0.8)]" />
           </span>
           <span data-magnetic-text>Karachi, Pakistan — Available Worldwide</span>
         </motion.div>
@@ -173,7 +177,7 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={name}
-                className="text-gray hover:text-teal transition-colors p-1.5 rounded-full hover:bg-white/5"
+                className="min-h-11 min-w-11 text-gray hover:text-teal transition-colors p-2.5 rounded-full hover:bg-white/5"
               >
                 <Icon size={18} />
               </a>

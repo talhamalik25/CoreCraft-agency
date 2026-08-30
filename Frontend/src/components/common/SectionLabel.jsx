@@ -1,8 +1,8 @@
 import React from "react";
 
 export const SectionLabel = ({ text }) => (
-  <div className="text-teal text-xs uppercase tracking-[0.2em] font-dm flex items-center gap-3 mb-8">
-    <span className="w-8 h-px bg-teal inline-block" />
+  <div className="mb-8 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-teal sm:text-xs">
+    <span className="inline-block h-px w-8 bg-teal" />
     {text}
   </div>
 );

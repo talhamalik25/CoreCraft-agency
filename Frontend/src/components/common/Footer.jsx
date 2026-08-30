@@ -1,7 +1,11 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Linkedin, Facebook, Instagram, ArrowUpRight } from 'lucide-react';
 import ContactForm from '../contact/ContactForm';
+import SmartImage from './SmartImage';
 
 const Pinterest = ({ size = 24, ...props }) => (
   <svg
@@ -22,6 +26,8 @@ const Pinterest = ({ size = 24, ...props }) => (
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+  const showIntakeForm = pathname !== "/contact";
 
   const footerLinks = {
     Company: [
@@ -33,7 +39,7 @@ const Footer = () => {
       { name: 'Digital Products', path: '/services#digital-products' },
       { name: 'AI & Automation', path: '/services#ai-automation' },
       { name: 'E-Commerce', path: '/services#ecommerce' },
-      { name: 'Brand Strategy', path: '/services#brand-strategy' },
+      { name: 'Mobile Apps', path: '/services#mobile-apps' },
     ],
     Work: [
       { name: 'Portfolio', path: '/work' },
@@ -51,17 +57,18 @@ const Footer = () => {
   return (
     <footer className="bg-black border-t border-white/5 pt-12 md:pt-20 pb-10">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {showIntakeForm && (
         <div className="mb-16 grid grid-cols-1 gap-14 border-b border-white/10 pb-16 lg:grid-cols-2 lg:gap-24 lg:pb-24">
-          <div className="max-w-xl">
+          <div className="max-w-xl min-w-0">
             <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.22em] text-teal">Start a conversation</p>
-            <h2 className="font-syne text-4xl font-extrabold uppercase leading-[0.92] text-white sm:text-5xl md:text-7xl">
+            <h2 className="font-syne text-4xl font-extrabold uppercase leading-[0.92] text-white sm:text-5xl md:text-7xl break-words hyphens-auto">
               Let&apos;s craft something <span className="text-teal">extraordinary.</span>
             </h2>
             <p className="mt-8 max-w-md font-dm text-base leading-relaxed text-gray">
               Have a sharp idea or a complex problem? Tell us where you want to go and we&apos;ll help shape the route.
             </p>
             <div className="mt-10 space-y-3 font-dm text-sm">
-              <a href="mailto:corecraftagency07@gmail.com" className="block text-white/70 transition-colors hover:text-teal">corecraftagency07@gmail.com</a>
+              <Link href="mailto:corecraftagency07@gmail.com" className="block text-white/70 transition-colors hover:text-teal">corecraftagency07@gmail.com</Link>
               <Link href="/contact" className="inline-flex items-center gap-2 text-teal transition-colors hover:text-white">Open project brief <ArrowUpRight size={15} /></Link>
             </div>
           </div>
@@ -70,35 +77,34 @@ const Footer = () => {
             fadeUp={{ initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.7 } }}
           />
         </div>
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 sm:gap-10 md:gap-12 mb-12 md:mb-20">
           {/* Logo Column — full width on mobile */}
           <div className="col-span-2 lg:col-span-2 mb-4 lg:mb-0">
             <Link href="/" className="flex items-center group mb-4 sm:mb-6 md:mb-8">
-              <img
-                src="/logo.webp"
-                alt="CoreCraft Logo"
-                width={641}
-                height={183}
-                loading="lazy"
-                decoding="async"
+              <SmartImage
+                src="/corecraft-logo.png"
+                alt="CoreCraft Agency logo"
+                width={192}
+                height={55}
                 className="w-full h-auto max-w-[12rem] object-contain brightness-110 group-hover:scale-105 transition-all duration-500"
               />
             </Link>
             <p className="text-gray text-xs sm:text-sm font-dm leading-relaxed max-w-xs mb-6 sm:mb-8">
-              Crafting digital monoliths with architectural precision. Based in Karachi, delivering excellence worldwide.
+              A senior engineering team in Karachi. We design, build, and ship custom web platforms, AI automation, and commerce systems — no hand-offs, no bloat.
             </p>
             <div className="flex gap-3 sm:gap-4">
               {socialLinks.map((social, index) => (
-                <a
+                <Link
                   key={index}
                   href={social.path}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/5 flex items-center justify-center text-gray hover:text-teal hover:border-teal transition-all duration-300"
+                  className="w-11 h-11 rounded-full border border-white/5 flex items-center justify-center text-gray hover:text-teal hover:border-teal transition-all duration-300"
                 >
                   {social.icon}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -137,16 +143,12 @@ const Footer = () => {
               <p className="text-gray text-xs font-dm leading-relaxed">
                 Karachi, Pakistan
               </p>
-              <a
+              <Link
                 href="mailto:corecraftagency07@gmail.com"
                 className="text-teal text-xs font-dm hover:underline block break-all"
               >
                 corecraftagency07@gmail.com
-              </a>
-
-              <p className="text-gray text-xs font-dm">
-                +92 300 1234567
-              </p>
+              </Link>
             </div>
           </div>
         </div>

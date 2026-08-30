@@ -1,16 +1,19 @@
 "use client";
 
 import { useRef } from "react";
+import { usePathname } from "next/navigation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useMagneticEffect } from "../../hooks/useGSAP";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ChatWidgetEmbed from "./ChatWidgetEmbed";
+import InitialLoader from "./InitialLoader";
 
 export default function SiteShell({ children }) {
   const shellRef = useRef(null);
   const hasPlayedRef = useRef(false);
+  const pathname = usePathname();
 
   useMagneticEffect({
     selector: "[data-magnetic]",
@@ -78,6 +81,7 @@ export default function SiteShell({ children }) {
           scroll container and silently break every `position: sticky` layout
           inside it (e.g. the stacked project cards). `clip` clips the overflow
           without that side effect. */}
+      {pathname === "/" && <InitialLoader />}
       <Navbar />
       <main>{children}</main>
       <Footer />

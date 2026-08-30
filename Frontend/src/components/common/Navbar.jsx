@@ -1,4 +1,7 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -117,7 +120,7 @@ const Navbar = () => {
               duration-500
               ${
                 isScrolled
-                  ? "bg-[#0C0C0C]/85 border-white/10 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
+                  ? "bg-black/85 border-white/10 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
                   : "bg-black/20 border-white/5 backdrop-blur-md"
               }
             `}
@@ -138,12 +141,12 @@ const Navbar = () => {
               aria-label="CoreCraft Home"
               data-entrance-nav
             >
-              <img
-                src="/logo.png"
+              <Image
+                src="/corecraft-logo.png"
                 alt="CoreCraft"
-                width={641}
-                height={183}
-                decoding="async"
+                width={160}
+                height={46}
+                priority
                 className="
                   h-8
                   sm:h-9
@@ -217,31 +220,7 @@ const Navbar = () => {
               href="/contact"
               data-entrance-nav
               data-magnetic
-              className="
-                hidden
-                md:inline-flex
-                items-center
-                gap-2
-                px-4
-                lg:px-5
-                py-2.5
-                rounded-full
-                border
-                border-teal/70
-                text-teal
-                font-dm
-                text-[10px]
-                lg:text-[11px]
-                font-medium
-                uppercase
-                tracking-[0.15em]
-                transition-all
-                duration-300
-                hover:bg-teal
-                hover:text-black
-                hover:border-teal
-                hover:shadow-[0_0_25px_rgba(0,168,150,0.2)]
-              "
+              className="btn-outline-teal hidden md:inline-flex"
             >
               <span data-magnetic-text>Start a Project</span>
               <ArrowUpRight size={13} />
@@ -259,15 +238,16 @@ const Navbar = () => {
                 relative
                 z-[110]
                 flex
+                min-h-11
                 items-center
                 gap-2
                 text-white
-                font-dm
+                font-mono
                 text-[10px]
                 uppercase
                 tracking-[0.18em]
-                px-3
-                py-2
+                px-4
+                py-2.5
                 rounded-full
                 border
                 border-white/10
@@ -347,7 +327,7 @@ const Navbar = () => {
               fixed
               inset-0
               z-[90]
-              bg-[#0C0C0C]
+              bg-black
               overflow-hidden
               md:hidden
             "
@@ -394,17 +374,17 @@ const Navbar = () => {
                 transition={{
                   delay: 0.15,
                 }}
-                className="
-                  absolute
-                  top-24
-                  left-6
-                  sm:left-10
-                  font-dm
-                  text-[9px]
-                  uppercase
-                  tracking-[0.25em]
-                  text-white/30
-                "
+                  className="
+                    absolute
+                    top-24
+                    left-6
+                    sm:left-10
+                    font-mono
+                    text-[9px]
+                    uppercase
+                    tracking-[0.25em]
+                    text-white/30
+                  "
               >
                 Navigation
               </motion.div>
@@ -454,19 +434,6 @@ const Navbar = () => {
                           }
                         `}
                       >
-                        <span
-                          className="
-                            font-dm
-                            text-[9px]
-                            sm:text-[10px]
-                            tracking-widest
-                            text-white/25
-                            font-normal
-                          "
-                        >
-                          0{index + 1}
-                        </span>
-
                         <span>{link.name}</span>
 
                         {isActive && (
@@ -508,6 +475,7 @@ const Navbar = () => {
                     data-magnetic
                   className="
                     inline-flex
+                    min-h-11
                     items-center
                     gap-2
                     px-6
@@ -551,7 +519,7 @@ const Navbar = () => {
                   flex
                   items-center
                   justify-between
-                  font-dm
+                  font-mono
                   text-[8px]
                   uppercase
                   tracking-[0.2em]

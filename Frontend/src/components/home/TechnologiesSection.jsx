@@ -1,7 +1,18 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { SectionLabel } from "../common/SectionLabel";
 import FadeIn from "../FadeIn";
+
+const TechOrbitalScene = dynamic(() => import("./TechOrbitalScene"), {
+  ssr: false,
+  loading: () => (
+    <div
+      aria-hidden="true"
+      className="h-[440px] w-full animate-pulse rounded-2xl border border-white/5 bg-card sm:h-[520px] lg:h-[600px]"
+    />
+  ),
+});
 
 const TECHNOLOGIES = [
   { id: "react", name: "React", layer: "Frontend", description: "Component-driven interfaces for modern web applications." },
@@ -24,15 +35,66 @@ const TECHNOLOGIES = [
 const LAYERS = ["Frontend", "Backend", "AI & Automation", "Design"];
 
 export default function TechnologiesSection() {
-  const [activeId, setActiveId] = useState(null);
+  const [hoveredName, setHoveredName] = useState(null);
+  const [selectedName, setSelectedName] = useState(null);
   const reducedMotion = useReducedMotion();
-  const active = TECHNOLOGIES.find((t) => t.id === activeId);
+  const active = TECHNOLOGIES.find(
+    (t) => t.name === (hoveredName || selectedName)
+  );
+
+  const sceneWrapRef = useRef(null);
+  const [inView, setInView] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Lazy-mount the Three.js scene only when the section approaches the
+  // viewport — it never touches the DOM (or the WebGL context) before then,
+  // and on small screens the wrapper stays display:none so it won't init.
+  useEffect(() => {
+    const el = sceneWrapRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return undefined;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "600px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Detect touch / small screens so we can fall back to the static card
+  // layout instead of initialising a WebGL scene that may be janky.
+  useEffect(() => {
+    const checkMobile = () => {
+      const mq = window.matchMedia("(max-width: 768px)");
+      const isTouch =
+        "ontouchstart" in window || navigator.maxTouchPoints > 0;
+      setIsMobile(mq.matches || isTouch);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+    const handleSceneHover = (name) => {
+    // Preview description on hover; the parent combines hoveredName ||
+    // selectedName so a locked selection is restored when the cursor leaves.
+    setHoveredName(name || null);
+  };
+
+  const handleSceneSelect = (name) => {
+    setSelectedName(name || null);
+    setHoveredName(null);
+  };
 
   return (
     <section
       id="technologies"
       aria-labelledby="technologies-title"
-      className="relative w-full overflow-hidden bg-surface py-20 text-white md:py-28 lg:py-36"
+      className="relative w-full overflow-hidden bg-surface section-x section-y text-white"
     >
       <div
         aria-hidden="true"
@@ -44,7 +106,7 @@ export default function TechnologiesSection() {
         }}
       />
 
-      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-20">
         <div className="border-b border-white/10 pb-10 md:pb-12">
           <FadeIn delay={0} y={20}>
             <SectionLabel text="TECHNOLOGY" />
@@ -71,83 +133,110 @@ export default function TechnologiesSection() {
           </div>
         </div>
 
-        {/* Layered stack */}
-        <div className="relative mt-12 md:mt-16">
-          <div
-            aria-hidden="true"
-            className="absolute left-[7px] top-3 bottom-3 w-px bg-gradient-to-b from-teal/60 via-white/15 to-teal/60 sm:left-[9px]"
-          />
+        {/* Interactive 3D scene (desktop) or static cards (mobile) */}
+        <div ref={sceneWrapRef} className="mt-12 lg:mt-16">
+          {isMobile ? (
+            /* ---- Mobile fallback: static card layout ---- */
+            <div className="space-y-6">
+              {LAYERS.map((layer) => {
+                const items = TECHNOLOGIES.filter((t) => t.layer === layer);
+                const selected = items.some((t) => t.name === selectedName);
 
-          <div className="space-y-3">
-            {LAYERS.map((layer, layerIndex) => {
-              const items = TECHNOLOGIES.filter((t) => t.layer === layer);
-              const layerActive = items.some((t) => t.id === activeId);
-
-              return (
-                <FadeIn key={layer} delay={0.06 * layerIndex} y={24}>
-                  <div className="relative pl-8 sm:pl-10">
-                    <span
-                      aria-hidden="true"
-                      className={`absolute left-0 top-2.5 h-[15px] w-[15px] rounded-full border-2 bg-surface transition-colors duration-300 sm:h-[19px] sm:w-[19px] ${
-                        layerActive ? "border-teal" : "border-white/25"
-                      }`}
-                    />
-
-                    <div className="rounded-2xl border border-white/10 bg-card p-5 transition-colors duration-300 hover:border-teal/25 sm:p-6">
-                      <div className="flex flex-wrap items-baseline justify-between gap-3">
-                        <h3 className="font-syne text-lg font-bold uppercase tracking-tight text-white sm:text-xl">
-                          {layer}
-                        </h3>
-                        <span className="font-dm text-[10px] uppercase tracking-[0.2em] text-gray/50">
-                          {String(layerIndex + 1).padStart(2, "0")} /{" "}
-                          {items.length} tools
-                        </span>
-                      </div>
-
-                      <div className="mt-4 flex flex-wrap gap-2.5">
-                        {items.map((tech) => {
-                          const selected = activeId === tech.id;
-                          return (
-                            <button
-                              key={tech.id}
-                              type="button"
-                              onClick={() =>
-                                setActiveId(selected ? null : tech.id)
-                              }
-                              aria-pressed={selected}
-                              className={`rounded-full border px-4 py-2 font-dm text-xs uppercase tracking-widest transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal ${
-                                selected
-                                  ? "border-teal bg-teal text-black"
-                                  : "border-white/15 text-gray hover:border-teal/60 hover:text-white"
-                              }`}
-                            >
-                              {tech.name}
-                            </button>
-                          );
-                        })}
-                      </div>
-
-                      <AnimatePresence initial={false}>
-                        {layerActive && active && (
-                          <motion.div
-                            initial={reducedMotion ? false : { height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={reducedMotion ? {} : { height: 0, opacity: 0 }}
-                            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                            className="overflow-hidden"
-                          >
-                            <p className="mt-4 border-t border-white/10 pt-4 font-dm text-sm leading-relaxed text-gray">
-                              {active.description}
-                            </p>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                return (
+                  <div
+                    key={layer}
+                    className="rounded-2xl border border-white/10 bg-card p-5 transition-colors sm:p-6"
+                  >
+                    <div className="flex flex-wrap items-baseline justify-between gap-3">
+                      <h3 className="font-syne text-lg font-bold uppercase tracking-tight text-white sm:text-xl">
+                        {layer}
+                      </h3>
+                      <span className="font-dm text-[10px] uppercase tracking-[0.2em] text-gray/50">
+                        {String(items.length).padStart(2, "0")} /{" "}
+                        {items.length + 0} tools
+                      </span>
                     </div>
+
+                    <div className="mt-4 flex flex-wrap gap-2.5">
+                      {items.map((tech) => {
+                        const isSel = selectedName === tech.name;
+                        return (
+                          <button
+                            key={tech.id}
+                            type="button"
+                            onClick={() =>
+                              setSelectedName(isSel ? null : tech.name)
+                            }
+                            aria-pressed={isSel}
+                            className={`min-h-11 rounded-full border px-4 py-2 font-mono text-xs uppercase tracking-widest transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal ${
+                              isSel
+                                ? "border-teal bg-teal text-black"
+                                : "border-white/15 text-gray hover:border-teal/60 hover:text-white"
+                            }`}
+                          >
+                            {tech.name}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {selected && active && (
+                      <p className="mt-4 border-t border-white/10 pt-4 font-dm text-sm leading-relaxed text-gray">
+                        {active.description}
+                      </p>
+                    )}
                   </div>
-                </FadeIn>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          ) : (
+            /* ---- Desktop: lazy-loaded Three.js orbital scene ---- */
+            <div className="relative mx-auto max-w-3xl">
+              {!inView && (
+                <div
+                  aria-hidden="true"
+                  className="h-[440px] w-full animate-pulse rounded-2xl border border-white/5 bg-card sm:h-[520px] lg:h-[600px]"
+                />
+              )}
+              {inView && (
+                <TechOrbitalScene
+                  onHover={handleSceneHover}
+                  onSelect={handleSceneSelect}
+                  selectedName={selectedName}
+                />
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Selected / hovered technology description */}
+        <div className="mt-10 border-t border-white/10 pt-6 sm:pt-8">
+          {active ? (
+            <AnimatePresence initial={false}>
+              <motion.div
+                key={active.id}
+                initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reducedMotion ? {} : { opacity: 0, y: -12 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-wrap items-start gap-x-3 gap-y-2"
+              >
+                <span className="font-dm text-[10px] uppercase tracking-[0.18em] text-teal">
+                  {active.layer}
+                </span>
+                <span className="font-syne text-base font-bold uppercase tracking-[-0.02em] text-white">
+                  {active.name}
+                </span>
+                <p className="mt-2 font-dm text-sm leading-relaxed text-gray sm:mt-0 sm:text-base">
+                  {active.description}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          ) : (
+            <p className="font-dm text-sm text-gray opacity-60">
+              Hover or click a node to inspect the technology.
+            </p>
+          )}
         </div>
       </div>
     </section>

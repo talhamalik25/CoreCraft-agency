@@ -1,6 +1,10 @@
-"use client";
+import Services from "../../src/views/Services";
 
-import Services from "../../src/pages/Services";
+export const metadata = {
+  title: "Services",
+  description: "Explore our digital capabilities including custom web apps, e-commerce platforms, AI automation, and brand strategy.",
+  alternates: { canonical: "/services" },
+};
 
 export default function Page() {
   return <Services />;

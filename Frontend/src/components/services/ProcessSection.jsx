@@ -1,38 +1,43 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { SectionLabel } from '../common/SectionLabel';
+"use client";
 
-const ProcessSection = ({ fadeUp, processSteps }) => {
-  return (
-    <section className="py-20 md:py-40 px-4 sm:px-6 md:px-20 bg-surface">
-      <div className="max-w-7xl mx-auto">
-        <motion.div {...fadeUp} className="mb-24">
-          <SectionLabel text="HOW WE WORK" />
-        </motion.div>
+import { useRef } from "react";
+import { Compass, DraftingCompass, Code2, Rocket } from "lucide-react";
+import { SectionLabel } from "../common/SectionLabel";
+import { useGSAPAnimations } from "../../hooks/useGSAP";
 
-        <div className="relative">
-          {/* Connecting Line */}
-          <div className="hidden lg:block absolute top-6 left-0 w-full h-px bg-teal/20" />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
-            {processSteps.map((step, i) => (
-              <motion.div 
-                key={i}
-                {...fadeUp}
-                transition={{ delay: i * 0.1 }}
-              >
-                <div className="w-12 h-12 rounded-full bg-black border border-teal text-teal flex items-center justify-center font-syne font-bold mb-8 shadow-[0_0_20px_rgba(0,168,150,0.2)]">
-                  {i + 1}
-                </div>
-                <h3 className="text-white font-syne font-bold text-xl uppercase mb-4">{step.name}</h3>
-                <p className="text-gray text-sm font-dm leading-relaxed">{step.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+const icons = [Compass, DraftingCompass, Code2, Rocket];
+
+export default function ProcessSection({ processSteps }) {
+  const sectionRef = useRef(null);
+  useGSAPAnimations((gsap) => {
+    const steps = sectionRef.current?.querySelectorAll("[data-process-step]");
+    const line = sectionRef.current?.querySelector("[data-process-line]");
+    const timeline = gsap.timeline({
+      scrollTrigger: { trigger: sectionRef.current, start: "top 64%", end: "bottom 70%", scrub: 0.65 },
+    });
+    timeline.fromTo(line, { scaleX: 0 }, { scaleX: 1, ease: "none", duration: 1 })
+      .fromTo(steps, { autoAlpha: 0.28, y: 46 }, { autoAlpha: 1, y: 0, duration: 1, stagger: 0.2, ease: "power2.out" }, 0.12)
+      .fromTo(sectionRef.current?.querySelectorAll("[data-process-icon]"), { scale: 0.25, rotate: -30 }, { scale: 1, rotate: 0, duration: 0.65, stagger: 0.2, ease: "back.out(1.8)" }, 0.2);
+  }, { scope: sectionRef, dependencies: [processSteps] });
+
+  return <section ref={sectionRef} id="process" className="bg-surface section-x section-y">
+    <div className="mx-auto max-w-7xl">
+      <div className="mb-16 grid gap-5 md:grid-cols-[1fr_1.4fr] md:items-end"><SectionLabel text="How we work" /><p className="max-w-xl text-sm leading-relaxed text-white/55 md:text-base">A disciplined, visible process that keeps the sharp details intact from the first conversation to the final release.</p></div>
+      <div className="relative">
+        <div data-process-line aria-hidden="true" className="absolute left-6 right-6 top-6 hidden h-px origin-left bg-teal/60 lg:block" />
+        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          {processSteps.map((step, index) => { const Icon = icons[index]; return <article data-process-step key={step.name} className="relative border-t border-white/10 pt-6 lg:border-0 lg:pt-0">
+            {/* 01→04 is a real sequence (Discovery → Deliver), so the step
+                numbers here carry information — unlike decorative numbering. */}
+            <div className="mb-8 flex items-center justify-between">
+              <div data-process-icon className="flex h-12 w-12 items-center justify-center rounded-full border border-teal bg-black text-teal shadow-[0_0_28px_rgba(0,230,217,.14)]"><Icon size={18} /></div>
+              <span className="font-mono text-[10px] uppercase tracking-[.2em] text-white/30">0{index + 1}</span>
+            </div>
+            <h3 className="font-syne text-2xl font-bold uppercase text-white">{step.name}</h3>
+            <p className="mt-4 text-sm leading-relaxed text-white/55">{step.desc}</p>
+          </article>; })}
         </div>
       </div>
-    </section>
-  );
-};
-
-export default ProcessSection;
+    </div>
+  </section>;
+}

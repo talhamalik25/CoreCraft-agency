@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { WEB3FORMS_ACCESS_KEY } from '../../lib/forms';
 
 const ContactForm = ({ fadeUp, className = "lg:col-span-7" }) => {
   const [result, setResult] = useState("");
@@ -11,7 +12,7 @@ const ContactForm = ({ fadeUp, className = "lg:col-span-7" }) => {
     setResult("");
 
     const formData = new FormData(event.target);
-    formData.append("access_key", "bd26128c-8582-46c3-a185-e9aedba8e4af");
+    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -39,32 +40,35 @@ const ContactForm = ({ fadeUp, className = "lg:col-span-7" }) => {
       <form onSubmit={onSubmit} className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="font-mono text-[10px] uppercase tracking-widest text-gray-dim">Full Name</label>
+            <label htmlFor="footer-name" className="block font-mono text-[10px] uppercase tracking-widest text-gray-dim">Full Name</label>
             <input
+              id="footer-name"
               type="text"
               name="name"
               required
-              placeholder="CoreCraft Agency"
-              className="w-full border-0 border-b border-white/15 bg-transparent px-0 py-4 font-dm text-white outline-none transition-all duration-300 placeholder:text-gray-dim focus:border-teal focus:shadow-[0_10px_25px_-18px_rgba(0,168,150,0.95)]"
+              placeholder="Your name"
+              className="w-full border-0 border-b border-white/15 bg-transparent px-0 py-4 font-dm text-white outline-none transition-all duration-300 placeholder:text-gray-dim focus:border-teal focus:shadow-[0_10px_25px_-18px_rgba(0,230,217,0.95)]"
             />
           </div>
           <div className="space-y-2">
-            <label className="font-mono text-[10px] uppercase tracking-widest text-gray-dim">Email Address</label>
+            <label htmlFor="footer-email" className="block font-mono text-[10px] uppercase tracking-widest text-gray-dim">Email Address</label>
             <input
+              id="footer-email"
               type="email"
               name="email"
               required
-              placeholder="corecraftagency07@gmail.com"
-              className="w-full border-0 border-b border-white/15 bg-transparent px-0 py-4 font-dm text-white outline-none transition-all duration-300 placeholder:text-gray-dim focus:border-teal focus:shadow-[0_10px_25px_-18px_rgba(0,168,150,0.95)]"
+              placeholder="you@company.com"
+              className="w-full border-0 border-b border-white/15 bg-transparent px-0 py-4 font-dm text-white outline-none transition-all duration-300 placeholder:text-gray-dim focus:border-teal focus:shadow-[0_10px_25px_-18px_rgba(0,230,217,0.95)]"
             />
           </div>
         </div>
 
         <div className="space-y-2">
-          <label className="font-mono text-[10px] uppercase tracking-widest text-gray-dim">Service Type</label>
+          <label htmlFor="footer-service" className="font-mono text-[10px] uppercase tracking-widest text-gray-dim">Service Type</label>
           <select
+            id="footer-service"
             name="service"
-            className="w-full appearance-none border-0 border-b border-white/15 bg-transparent px-0 py-4 font-dm text-white outline-none transition-all duration-300 focus:border-teal focus:shadow-[0_10px_25px_-18px_rgba(0,168,150,0.95)]"
+            className="w-full appearance-none border-0 border-b border-white/15 bg-transparent px-0 py-4 font-dm text-white outline-none transition-all duration-300 focus:border-teal focus:shadow-[0_10px_25px_-18px_rgba(0,230,217,0.95)]"
           >
             <option>Web Development</option>
             <option>Custom Web Apps</option>
@@ -75,13 +79,14 @@ const ContactForm = ({ fadeUp, className = "lg:col-span-7" }) => {
 
 
         <div className="space-y-2">
-          <label className="font-mono text-[10px] uppercase tracking-widest text-gray-dim">Your Message</label>
+          <label htmlFor="footer-message" className="font-mono text-[10px] uppercase tracking-widest text-gray-dim">Your Message</label>
           <textarea
+            id="footer-message"
             name="message"
             required
             rows="6"
             placeholder="Tell us about your vision..."
-            className="w-full resize-none border-0 border-b border-white/15 bg-transparent px-0 py-4 font-dm text-white outline-none transition-all duration-300 placeholder:text-gray-dim focus:border-teal focus:shadow-[0_10px_25px_-18px_rgba(0,168,150,0.95)]"
+            className="w-full resize-none border-0 border-b border-white/15 bg-transparent px-0 py-4 font-dm text-white outline-none transition-all duration-300 placeholder:text-gray-dim focus:border-teal focus:shadow-[0_10px_25px_-18px_rgba(0,230,217,0.95)]"
           />
         </div>
 
@@ -89,7 +94,7 @@ const ContactForm = ({ fadeUp, className = "lg:col-span-7" }) => {
           <button
             type="submit"
             disabled={isSending}
-            className="w-full md:w-fit px-12 py-5 bg-teal rounded-full text-black font-dm text-xs uppercase tracking-[0.2em] hover:bg-white transition-all duration-300 shadow-[0_0_30px_rgba(0,168,150,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-primary w-full md:w-fit"
           >
             {isSending ? "Sending..." : "Send Message"}
           </button>
@@ -98,7 +103,7 @@ const ContactForm = ({ fadeUp, className = "lg:col-span-7" }) => {
             <motion.p
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              className={`text-xs uppercase tracking-widest font-dm ${result.includes("Success") ? "text-teal" : "text-red-500"}`}
+              className={`text-xs uppercase tracking-widest font-dm ${result.includes("Success") ? "text-teal" : "text-danger"}`}
             >
               {result}
             </motion.p>

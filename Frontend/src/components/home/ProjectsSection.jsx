@@ -1,6 +1,9 @@
+"use client";
+
 import { useEffect, useRef } from "react";
-import FadeIn from "../FadeIn";
+import SmartImage from "../common/SmartImage";
 import LiveProjectButton from "../LiveProjectButton";
+import FadeIn from "../FadeIn";
 
 /*
  * Sticky stacking cards — plain CSS + a rAF-throttled scroll listener
@@ -52,7 +55,7 @@ function ProjectCard({ project, index }) {
       data-stack-card
       className="sticky origin-top will-change-transform
                  rounded-[24px] sm:rounded-[48px] md:rounded-[56px]
-                 border-2 border-[#D7E2EA]/20 bg-[#0C0C0C]
+                 border-2 border-white/15 bg-black
                  p-3 sm:p-6 md:p-8 shadow-2xl backdrop-blur-md
                  overflow-hidden flex flex-col"
       style={{ top: `${stickyTop}px`, zIndex: index + 1 }}
@@ -61,7 +64,7 @@ function ProjectCard({ project, index }) {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4 sm:mb-6">
         <div className="flex items-start gap-4 sm:gap-6 md:gap-8">
           <span
-            className="hero-heading text-teal font-syne font-black leading-none"
+            className="text-teal font-syne font-black leading-none"
             style={{ fontSize: "clamp(3rem, 10vw, 140px)" }}
           >
             {num}
@@ -74,7 +77,7 @@ function ProjectCard({ project, index }) {
               {project.category}
             </span>
             <span
-              className="text-[#D7E2EA] font-syne font-medium uppercase"
+              className="text-white font-syne font-medium uppercase"
               style={{ fontSize: "clamp(1rem, 2.2vw, 2.1rem)" }}
             >
               {project.name}
@@ -84,7 +87,7 @@ function ProjectCard({ project, index }) {
                 {project.tags.map((tag, tagIndex) => (
                   <span
                     key={tagIndex}
-                    className="px-3 py-1 rounded-full border border-white/15 text-gray text-[10px] uppercase tracking-widest font-dm"
+                    className="px-3 py-1 rounded-full border border-white/15 text-gray text-[10px] uppercase tracking-widest font-mono"
                   >
                     {tag}
                   </span>
@@ -104,38 +107,35 @@ function ProjectCard({ project, index }) {
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 flex-1 min-h-0">
         {/* Left column — 40% */}
         <div className="w-full sm:w-[40%] flex flex-col gap-3 sm:gap-4">
-          <img
+          <SmartImage
             src={img1}
-            alt={`${project.name} preview 1`}
+            alt={`${project.name} interface preview`}
             width={project.w}
             height={project.h}
             className="w-full object-cover rounded-[30px] sm:rounded-[40px] md:rounded-[48px]"
             style={{ height: "clamp(130px, 16vw, 230px)" }}
-            loading="lazy"
-            decoding="async"
+            sizes="(max-width: 640px) 100vw, 40vw"
           />
-          <img
+          <SmartImage
             src={img2}
-            alt={`${project.name} preview 2`}
+            alt={`${project.name} secondary screen`}
             width={project.w}
             height={project.h}
             className="w-full object-cover rounded-[30px] sm:rounded-[40px] md:rounded-[48px] flex-1"
             style={{ height: "clamp(160px, 22vw, 340px)" }}
-            loading="lazy"
-            decoding="async"
+            sizes="(max-width: 640px) 100vw, 40vw"
           />
         </div>
 
         {/* Right column — 60% */}
         <div className="w-full sm:w-[60%] aspect-[4/3] sm:aspect-auto">
-          <img
+          <SmartImage
             src={img3}
-            alt={`${project.name} main preview`}
+            alt={`${project.name} featured screenshot`}
             width={project.w}
             height={project.h}
             className="w-full h-full object-cover rounded-[30px] sm:rounded-[40px] md:rounded-[48px]"
-            loading="lazy"
-            decoding="async"
+            sizes="(max-width: 640px) 100vw, 60vw"
           />
         </div>
       </div>
@@ -228,13 +228,13 @@ export default function ProjectsSection({ projects }) {
   return (
     <section
       id="projects"
-      className="bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px]
+      className="bg-black rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px]
                  -mt-10 sm:-mt-12 md:-mt-14 relative z-10
-                 px-4 sm:px-6 lg:px-8 py-20 sm:py-24 md:py-32"
+                 section-x py-20 sm:py-24 md:py-32"
     >
       <FadeIn delay={0} y={40}>
         <h2
-          className="hero-heading font-syne font-black uppercase text-center leading-none tracking-tight
+          className="font-syne font-black uppercase text-center leading-none tracking-tight
                      mb-16 sm:mb-20 md:mb-28 text-white"
           style={{ fontSize: "clamp(2rem, 11vw, 140px)" }}
         >
