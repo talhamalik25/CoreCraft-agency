@@ -28,7 +28,7 @@ export default function ProblemSection() {
         {/* Left — heading */}
         <div>
           <SectionLabel text="The problem" />
-          <h2 className="mt-8 font-syne text-[clamp(3rem,6.5vw,6.6rem)] font-extrabold uppercase leading-[.82] tracking-[-.065em] text-white">
+          <h2 className="mt-8 font-syne text-[clamp(1.6rem,8.5vw,6.6rem)] sm:text-[clamp(3rem,6.5vw,6.6rem)] font-extrabold uppercase leading-[0.9] sm:leading-[0.85] tracking-[-.05em] sm:tracking-[-.065em] text-white break-words">
             Good businesses<br />
             <span className="text-teal">deserve better</span><br />
             than digital clutter.
@@ -39,7 +39,7 @@ export default function ProblemSection() {
         <div className="border-t border-white/10">
           {problems.map((problem) => (
             <div data-problem key={problem.headline} className="border-b border-white/10 py-6 sm:py-8">
-              <p className="mb-2 font-syne text-xl font-extrabold uppercase leading-none tracking-[-.02em] text-white sm:text-2xl">
+              <p className="mb-2 font-syne text-lg font-extrabold uppercase leading-none tracking-[-.02em] text-white sm:text-2xl">
                 {problem.headline}
               </p>
               <p className="font-dm text-base leading-relaxed text-white/65 sm:text-lg">{problem.desc}</p>

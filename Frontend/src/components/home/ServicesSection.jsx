@@ -51,15 +51,15 @@ const bentoItems = [
 
 const CapabilityPanel = ({ item }) => {
   return (
-    <article className="group relative flex min-h-[27rem] w-[min(85vw,26rem)] flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-card p-7 sm:w-[min(70vw,34rem)] sm:p-10 md:min-h-[31rem] md:p-14 lg:w-1/5">
+    <article className="snap-center group relative flex min-h-[27rem] w-[min(85vw,26rem)] flex-shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-card p-7 sm:w-[min(70vw,34rem)] sm:p-10 md:min-h-[31rem] md:p-14 lg:w-1/5">
       <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${item.accent}`} />
       <div className="relative z-10 flex items-start justify-between gap-6 font-mono text-[10px] uppercase tracking-[0.2em] text-teal">
         <span>{item.eyebrow}</span>
       </div>
       <div className="relative z-10 max-w-2xl">
-        <h3 className="font-syne text-4xl font-extrabold uppercase leading-[0.92] tracking-tight text-white sm:text-5xl md:text-7xl">{item.title}</h3>
-        <p className="mt-7 max-w-lg font-dm text-base leading-relaxed text-gray md:text-lg">{item.description} {item.detail}</p>
-        <div className="mt-10 flex items-center gap-2 font-dm text-xs font-semibold uppercase tracking-[0.2em] text-teal transition-transform duration-300 group-hover:translate-x-2">
+        <h3 className="font-syne text-[clamp(2rem,8vw,5xl)] font-extrabold uppercase leading-[0.92] tracking-tight text-white sm:text-5xl md:text-7xl">{item.title}</h3>
+        <p className="mt-5 max-w-lg font-dm text-sm leading-relaxed text-gray md:mt-7 md:text-lg">{item.description} {item.detail}</p>
+        <div className="mt-8 flex items-center gap-2 font-dm text-xs font-semibold uppercase tracking-[0.2em] text-teal transition-transform duration-300 group-hover:translate-x-2 md:mt-10">
           Explore capability <ArrowUpRight size={16} />
         </div>
       </div>
@@ -90,83 +90,23 @@ const ServicesSection = () => {
     //    updates the transform on requestAnimationFrame so it stays smooth.
     const mm = gsap.matchMedia(servicesRef);
 
-    mm.add({
-      isDesktop: "(min-width: 768px)",
-      isMobile: "(max-width: 767px)"
-    }, (context) => {
-      const { isDesktop } = context.conditions;
+    mm.add("(min-width: 768px)", () => {
+      // Desktop: continuous scroll mapping
+      const getDistance = () =>
+        Math.max(0, trackRef.current.scrollWidth - viewportRef.current.offsetWidth);
 
-      if (isDesktop) {
-        // Desktop: continuous scroll mapping
-        const getDistance = () =>
-          Math.max(0, trackRef.current.scrollWidth - viewportRef.current.offsetWidth);
-
-        gsap.to(trackRef.current, {
-          x: () => -getDistance(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: servicesRef.current,
-            pin: viewportRef.current,
-            start: "top top",
-            end: () => `+=${getDistance()}`,
-            scrub: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-      } else {
-        // Mobile: Distinct stops (enter, dwell, exit) per card
-        const cards = Array.from(trackRef.current.children);
-        if (cards.length === 0) return;
-
-        // Allocate ~1 vertical screen of scroll height per card
-        // to ensure enough scroll distance to play the pauses smoothly.
-        const getCustomEnd = () => window.innerHeight * cards.length;
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: servicesRef.current,
-            pin: viewportRef.current,
-            start: "top top",
-            end: () => `+=${getCustomEnd()}`,
-            scrub: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        cards.forEach((card, index) => {
-          // Dynamically find the translateX target so the card is exactly centered in the viewport
-          const getCenterTarget = () => {
-            const viewportW = viewportRef.current.offsetWidth;
-            const cardW = card.offsetWidth;
-            const cardLeft = card.offsetLeft;
-            const maxScroll = Math.max(0, trackRef.current.scrollWidth - viewportW);
-
-            let targetX = (viewportW / 2) - (cardLeft + cardW / 2);
-            // Don't scroll past the track container's natural left/right bounds
-            return Math.max(-maxScroll, Math.min(0, targetX));
-          };
-
-          if (index === 0) {
-            // Card 0: slightly coax it into dead center, then pause.
-            tl.to(trackRef.current, {
-              x: getCenterTarget,
-              duration: 1,
-              ease: "none"
-            });
-            // Dwell (pause vertical scroll effect on horizontal translation)
-            tl.to({}, { duration: 3 });
-          } else {
-            // Subsequent cards: transition in, then pause.
-            tl.to(trackRef.current, {
-              x: getCenterTarget,
-              duration: 2.5,
-              ease: "power2.inOut" // smooth transition
-            });
-            // Dwell
-            tl.to({}, { duration: 3 });
-          }
-        });
-      }
+      gsap.to(trackRef.current, {
+        x: () => -getDistance(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: servicesRef.current,
+          pin: viewportRef.current,
+          start: "top top",
+          end: () => `+=${getDistance()}`,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
     });
 
     ScrollTrigger.refresh();
@@ -182,13 +122,13 @@ const ServicesSection = () => {
       ref={servicesRef}
       className="w-full overflow-hidden bg-black section-x section-y text-white"
     >
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="services-header mb-16 md:mb-20">
           <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-teal">
             WHAT WE BUILD
           </p>
-          <h2 className="font-syne text-4xl font-extrabold uppercase leading-[0.92] tracking-tight text-white sm:text-5xl md:text-7xl">
+          <h2 className="font-syne text-3xl font-extrabold uppercase leading-[0.92] tracking-tight text-white sm:text-4xl md:text-7xl">
             Strategic <span className="text-teal">Capabilities</span>
           </h2>
           <p className="mt-4 max-w-2xl font-dm text-base leading-relaxed text-gray md:text-lg">
@@ -196,19 +136,22 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        {/* Scroll-pinned horizontal strip — the wrapper is clipped so the only
-            way the cards move is the translateX driven by vertical scroll. */}
+        {/* CSS Native scroll for mobile, GSAP for desktop */}
         <div
           ref={viewportRef}
-          className="overflow-hidden"
+          className="overflow-x-auto snap-x snap-mandatory pb-8 md:overflow-hidden md:pb-0 no-scrollbar relative"
         >
           <div
             ref={trackRef}
             className="flex w-max flex-row gap-4 will-change-transform lg:w-[500%] lg:gap-6"
           >
+            {/* Added spacer to let first card snap-center perfectly on narrow screens */}
+            <div className="md:hidden w-[10vw] flex-shrink-0" aria-hidden="true" />
             {bentoItems.map((item) => (
               <CapabilityPanel key={item.id} item={item} />
             ))}
+            {/* Large spacer ensuring the final card can scroll far enough left to snap to center */}
+            <div className="md:hidden w-[20vw] flex-shrink-0" aria-hidden="true" />
           </div>
         </div>
       </div>

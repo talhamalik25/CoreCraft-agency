@@ -19,9 +19,18 @@ export default function ServicesHero() {
     <div aria-hidden="true" className="absolute right-[-12%] top-10 h-[27rem] w-[27rem] rounded-full border border-teal/10 bg-[radial-gradient(circle,rgba(0,230,217,.12),transparent_62%)] blur-2xl" />
     <div className="relative mx-auto max-w-7xl">
       <div data-service-marker><SectionLabel text="Services / 2026" /></div>
-      <h1 className="mt-10 font-syne text-[clamp(3.2rem,9vw,8.5rem)] font-extrabold uppercase leading-[.82] tracking-[-.075em] text-white">
-        {["Precision.", "Performance.", "Polish."].map((word) => <span key={word} className="block overflow-hidden"><span data-service-word className="block origin-left">{word}</span></span>)}
-      </h1>
+     <h1 className="mt-8 w-full font-syne text-[clamp(2rem,8vw,7rem)] font-extrabold uppercase leading-[0.84] tracking-[-0.06em] text-white sm:mt-10 sm:text-[clamp(3.2rem,9vw,8.5rem)] sm:leading-[0.82] sm:tracking-[-0.075em]">
+  {["Precision.", "Performance.", "Polish."].map((word) => (
+    <span key={word} className="block overflow-hidden">
+      <span
+        data-service-word
+        className="block origin-left"
+      >
+        {word}
+      </span>
+    </span>
+  ))}
+</h1>
       <div data-service-copy className="mt-10 grid max-w-3xl grid-cols-[auto_1fr] gap-4 border-t border-white/10 pt-5"><span className="mt-2 h-2 w-2 bg-teal" aria-hidden="true" /><p className="font-dm text-base leading-relaxed text-white/65 sm:text-lg">We build clear, high-performance digital systems where architectural rigor, capable technology, and memorable interaction meet.</p></div>
     </div>
   </section>;

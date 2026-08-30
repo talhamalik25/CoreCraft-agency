@@ -80,7 +80,7 @@ const Footer = () => {
         )}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 sm:gap-10 md:gap-12 mb-12 md:mb-20">
           {/* Logo Column — full width on mobile */}
-          <div className="col-span-2 lg:col-span-2 mb-4 lg:mb-0">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-2 mb-4 lg:mb-0">
             <Link href="/" className="flex items-center group mb-4 sm:mb-6 md:mb-8">
               <SmartImage
                 src="/corecraft-logo.png"

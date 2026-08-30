@@ -1,8 +1,8 @@
 import Home from "../src/views/Home";
 
 export const metadata = {
-  title: { absolute: "CoreCraft Studio — Premium Software Agency" },
-  description: "CoreCraft Agency is a multidisciplinary creative studio based in Karachi, specializing in digital experiences, custom web applications, AI automation, and e-commerce solutions built with architectural precision.",
+  title: { absolute: "CoreCraft Agency — Premium Software Agency" },
+  description: "CoreCraft Agency employs a design-first approach to craft modern digital experiences, web applications, AI-powered solutions, and high-performance software with architectural precision.",
   alternates: { canonical: "/" },
 };
 

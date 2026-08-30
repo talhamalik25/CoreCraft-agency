@@ -79,7 +79,7 @@ export default function TechnologiesSection() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-    const handleSceneHover = (name) => {
+  const handleSceneHover = (name) => {
     // Preview description on hover; the parent combines hoveredName ||
     // selectedName so a locked selection is restored when the cursor leaves.
     setHoveredName(name || null);

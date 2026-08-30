@@ -32,7 +32,7 @@ const headlineLines = [
 
 const HeroSection = ({ fadeUp, staggerContainer }) => {
   return (
-    <section data-hero-section className="relative min-h-[100dvh] w-full overflow-hidden bg-black px-4 pt-20 pb-16 sm:px-6 lg:px-8">
+    <section data-hero-section className="relative flex min-h-[100dvh] w-full flex-col overflow-hidden bg-black px-4 pt-20 pb-16 sm:px-6 lg:px-8">
       {/* Background Video Layer — Dynamic Abstract Blue Lines */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
         <video
@@ -55,7 +55,7 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
           className="absolute inset-0 opacity-[0.04] z-[2]"
           style={{
             backgroundImage:
-              "linear-gradient(to right, #00E6D9 1px, transparent 1px), linear-gradient(to bottom, #00E6D9 1px, transparent 1px)",
+              "linear-gradient(to right, #00a896 1px, transparent 1px), linear-gradient(to bottom, #00a896 1px, transparent 1px)",
             backgroundSize: "80px 80px",
           }}
         />
@@ -75,19 +75,31 @@ const HeroSection = ({ fadeUp, staggerContainer }) => {
         </motion.div>
 
         <h1 className="mb-6 mt-8 font-syne font-extrabold uppercase leading-[0.9] tracking-tight sm:mb-8 sm:mt-12 md:mt-16">
-          {headlineLines.map((line) => (
-            <span key={line.text} className="block overflow-hidden text-[clamp(1.85rem,6.5vw,7rem)]">
-              {line.text.split("").map((character, index) => (
-                <span
-                  key={`${line.text}-${index}`}
-                  data-entrance-headline-char
-                  className={`inline-block ${line.className}`}
-                >
-                  {character === " " ? "\u00a0" : character}
-                </span>
-              ))}
+{headlineLines.map((line) => (
+  <span
+    key={line.text}
+    className="block overflow-hidden text-center text-[clamp(2rem,8vw,3.25rem)] sm:text-[clamp(2.5rem,6.5vw,5rem)] md:text-[clamp(3rem,5.5vw,6rem)] lg:text-[clamp(3.5rem,4.8vw,6.75rem)] xl:text-[clamp(4rem,4.2vw,7.5rem)] 2xl:text-[clamp(4.5rem,3.8vw,8rem)]"
+  >
+    <span className="flex flex-wrap justify-center gap-x-[0.28em] gap-y-1">
+      {line.text.split(" ").map((word, wordIndex) => (
+        <span
+          key={`${line.text}-word-${wordIndex}`}
+          className="inline-flex"
+        >
+          {word.split("").map((character, charIndex) => (
+            <span
+              key={`${line.text}-${wordIndex}-${charIndex}`}
+              data-entrance-headline-char
+              className={`inline-block ${line.className}`}
+            >
+              {character}
             </span>
           ))}
+        </span>
+      ))}
+    </span>
+  </span>
+))}
         </h1>
 
         <motion.p
