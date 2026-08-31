@@ -99,11 +99,13 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: "/icon.png", type: "image/png", sizes: "any" },
-      { url: "/corecraft-logo.png", type: "image/png" },
+      { url: "/icon.svg", sizes: "any", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any", type: "image/x-icon" },
+      { url: "/icons/favicon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/favicon-512x512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: [{ url: "/apple-icon.png", type: "image/png" }],
-    shortcut: ["/icon.png"],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/favicon.ico"],
   },
   robots: {
     index: true,
@@ -187,9 +189,9 @@ export default function RootLayout({ children }) {
             __html: `(function(){try{if(location.pathname === "/" && !sessionStorage.getItem("cc_intro")){document.documentElement.dataset.intro="1";setTimeout(function(){document.documentElement.removeAttribute("data-intro")},2500)}}catch(e){}})();`,
           }}
         />
-        <link rel="icon" href="/icon.png" type="image/png" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-icon.png" type="image/png" />
-        <link rel="shortcut icon" href="/icon.png" type="image/png" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       </head>
