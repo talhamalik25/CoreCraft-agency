@@ -38,11 +38,11 @@ export const metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: "CoreCraft Agency",
   title: {
-    default: "CoreCraft Agency — Premium Software Agency",
-    template: "%s | CoreCraft Agency",
+    default: "CoreCraft — Web Development & AI Automation Agency",
+    template: "%s — CoreCraft Agency",
   },
   description:
-    "CoreCraft Agency employs a design-first approach to craft modern digital experiences, web applications, AI-powered solutions, and high-performance software with architectural precision.",
+    "CoreCraft is a web development & AI automation agency in Karachi helping SMBs launch modern websites, custom apps, and intelligent workflows that drive growth.",
   keywords: [
     "CoreCraft Agency",
     "software agency",
@@ -64,20 +64,20 @@ export const metadata = {
   },
   openGraph: {
     siteName: "CoreCraft Agency",
-    title: "CoreCraft Agency — Premium Software Agency",
+    title: "CoreCraft — Web Development & AI Automation Agency",
     description:
-      "CoreCraft Agency employs a design-first approach to craft modern digital experiences, web applications, AI-powered solutions, and high-performance software with architectural precision.",
+      "CoreCraft is a web development & AI automation agency in Karachi helping SMBs launch modern websites, custom apps, and intelligent workflows that drive growth.",
     type: "website",
     url: siteUrl,
     locale: "en_US",
     determiner: "",
     images: [
       {
-        url: "/project1.webp",
-        width: 1902,
-        height: 948,
-        alt: "CoreCraft Agency — Premium digital product work",
-        type: "image/webp",
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "CoreCraft — Web Development & AI Automation Agency",
+        type: "image/png",
       },
     ],
   },
@@ -85,15 +85,15 @@ export const metadata = {
     card: "summary_large_image",
     site: "@corecraftagency",
     creator: "@corecraftagency",
-    title: "CoreCraft Agency — Premium Software Agency",
+    title: "CoreCraft — Web Development & AI Automation Agency",
     description:
-      "CoreCraft Agency employs a design-first approach to craft modern digital experiences, web applications, AI-powered solutions, and high-performance software with architectural precision.",
+      "CoreCraft is a web development & AI automation agency in Karachi helping SMBs launch modern websites, custom apps, and intelligent workflows that drive growth.",
     images: [
       {
-        url: "/project1.webp",
-        width: 1902,
-        height: 948,
-        alt: "CoreCraft Agency — Premium digital product work",
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "CoreCraft — Web Development & AI Automation Agency",
       },
     ],
   },
@@ -132,7 +132,7 @@ export default function RootLayout({ children }) {
     "url": siteUrl,
     "logo": `${siteUrl}/corecraft-logo.png`,
     "image": `${siteUrl}/project1.webp`,
-    "description": "CoreCraft Agency employs a design-first approach to craft modern digital experiences, web applications, AI-powered solutions, and high-performance software.",
+    "description": "CoreCraft is a web development & AI automation agency in Karachi helping SMBs launch modern websites, custom apps, and intelligent workflows that drive growth.",
     "foundingDate": "2025",
     "address": {
       "@type": "PostalAddress",
